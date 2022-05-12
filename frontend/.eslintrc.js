@@ -17,5 +17,17 @@ module.exports = {
     sourceType: "module"
   },
   plugins: ["react"],
-  rules: {}
+  rules: {},
+  settings: {
+    "import/resolver": {
+      alias: {
+        map: [
+          ["@components", "./src/components"],
+          ["@screens", "./src/screens"],
+          ["@styles", "./src/assets/styles"]
+        ],
+        extensions: [".ts", ".js", ".jsx", ".json"]
+      }
+    }
+  }
 };
