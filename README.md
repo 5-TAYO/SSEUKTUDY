@@ -1,2 +1,0 @@
-# SSEUKTUDY
-스윽터디
