@@ -1,0 +1,16 @@
+.fs-16 {
+  font-size: vw(16px);
+  color: red;
+}
+@media screen and (max-width: $TABLET-VW) {
+  .fs-16 {
+    font-size: vw-t(16px);
+    color: aqua;
+  }
+}
+@media screen and (max-width: $PHONE-VW) {
+  .fs-16 {
+    font-size: vw-p(16px);
+    color: antiquewhite;
+  }
+}
