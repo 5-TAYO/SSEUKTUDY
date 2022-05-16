@@ -1,16 +1,131 @@
+.fs-10 {
+  font-size: vw(10px);
+}
+.fs-11 {
+  font-size: vw(11px);
+}
+.fs-12 {
+  font-size: vw(12px);
+}
+.fs-13 {
+  font-size: vw(13px);
+}
+.fs-14 {
+  font-size: vw(14px);
+}
+.fs-15 {
+  font-size: vw(15px);
+}
 .fs-16 {
   font-size: vw(16px);
-  color: red;
 }
+.fs-18 {
+  font-size: vw(18px);
+}
+.fs-22 {
+  font-size: vw(22px);
+}
+.fs-24 {
+  font-size: vw(24px);
+}
+.fs-28 {
+  font-size: vw(24px);
+}
+.fs-36 {
+  font-size: vw(36px);
+}
+.fs-40 {
+  font-size: vw(40px);
+}
+.fs-60 {
+  font-size: vw(60px);
+}
+
 @media screen and (max-width: $TABLET-VW) {
+  .fs-10 {
+    font-size: vw-t(10px);
+  }
+  .fs-11 {
+    font-size: vw-t(11px);
+  }
+  .fs-12 {
+    font-size: vw-t(12px);
+  }
+  .fs-13 {
+    font-size: vw-t(13px);
+  }
+  .fs-14 {
+    font-size: vw-t(14px);
+  }
+  .fs-15 {
+    font-size: vw-t(15px);
+  }
   .fs-16 {
     font-size: vw-t(16px);
-    color: aqua;
+  }
+  .fs-18 {
+    font-size: vw-t(18px);
+  }
+  .fs-22 {
+    font-size: vw-t(22px);
+  }
+  .fs-24 {
+    font-size: vw-t(24px);
+  }
+  .fs-28 {
+    font-size: vw-t(24px);
+  }
+  .fs-36 {
+    font-size: vw-t(36px);
+  }
+  .fs-40 {
+    font-size: vw-t(40px);
+  }
+  .fs-60 {
+    font-size: vw-t(60px);
   }
 }
 @media screen and (max-width: $PHONE-VW) {
+  .fs-10 {
+    font-size: vw-p(10px);
+  }
+  .fs-11 {
+    font-size: vw-p(11px);
+  }
+  .fs-12 {
+    font-size: vw-p(12px);
+  }
+  .fs-13 {
+    font-size: vw-p(13px);
+  }
+  .fs-14 {
+    font-size: vw-p(14px);
+  }
+  .fs-15 {
+    font-size: vw-p(15px);
+  }
   .fs-16 {
     font-size: vw-p(16px);
-    color: antiquewhite;
+  }
+  .fs-18 {
+    font-size: vw-p(18px);
+  }
+  .fs-22 {
+    font-size: vw-p(22px);
+  }
+  .fs-24 {
+    font-size: vw-p(24px);
+  }
+  .fs-28 {
+    font-size: vw-p(24px);
+  }
+  .fs-36 {
+    font-size: vw-p(36px);
+  }
+  .fs-40 {
+    font-size: vw-p(40px);
+  }
+  .fs-60 {
+    font-size: vw-p(60px);
   }
 }
