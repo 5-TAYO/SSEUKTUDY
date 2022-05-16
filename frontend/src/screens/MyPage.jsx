@@ -1,8 +1,14 @@
 import React from "react";
+
+import MyPageSideBar from "@components/MyPageSideBar";
 import "./MyPage.scss";
 
 function MyPage() {
-  return <div>마이페이지 구현해주세요--!</div>;
+  return (
+    <div>
+      <MyPageSideBar />
+    </div>
+  );
 }
 
 export default MyPage;
