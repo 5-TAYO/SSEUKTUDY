@@ -40,6 +40,50 @@
 .fs-60 {
   font-size: vw(60px);
 }
+/* 폰트 타이포 */
+.notoMid {
+  font-family: "NotoSansMedium";
+}
+
+.notoBold {
+  font-family: "NotoSansBold";
+}
+
+.notoReg {
+  font-family: "NotoSansRegular";
+}
+
+.notoBlack {
+  font-family: "NotoSansBlack";
+}
+
+.notoThin {
+  font-family: "NotoSansThin";
+}
+
+.notoLight {
+  font-family: "NotoSansLight";
+}
+
+.roThin {
+  font-family: "RobotoThin";
+}
+
+.roLight {
+  font-family: "RobotoLight";
+}
+
+.roReg {
+  font-family: "RobotoRegular";
+}
+
+.roMid {
+  font-family: "RobotoMedium";
+}
+
+.roBold {
+  font-family: "RobotoBold";
+}
 
 @media screen and (max-width: $TABLET-VW) {
   .fs-10 {
