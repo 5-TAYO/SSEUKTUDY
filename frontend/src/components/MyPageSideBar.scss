@@ -12,12 +12,12 @@
     .profile-mini-img {
       height: vw(90px);
       width: vw(90px);
-      fill: $pink-sub;
+      fill: $PINK-SUB;
     }
     & :last-child {
       padding: vw(20px);
       text-decoration: underline;
-      color: $pink-sub;
+      color: $PINK-SUB;
     }
 
     * {
@@ -27,10 +27,10 @@
 
   .menu {
     .sub-menu-title {
-      color: $gray-76;
+      color: $GRAY-76;
     }
     .sub-menu-title.active {
-      color: $pink-sub;
+      color: $PINK-SUB;
     }
   }
 
