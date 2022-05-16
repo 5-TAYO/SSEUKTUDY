@@ -1,13 +1,17 @@
 import React from "react";
-
+import { Routes, Route } from "react-router-dom";
+import Recv from "@components/Recv";
 import MyPageSideBar from "@components/MyPageSideBar";
 import "./MyPage.scss";
 
 function MyPage() {
   return (
-    <div>
+    <>
       <MyPageSideBar />
-    </div>
+      <Routes>
+        <Route index path="recv" element={<Recv />} />
+      </Routes>
+    </>
   );
 }
 
