@@ -21,7 +21,8 @@ module.exports = {
           "@assets": "./src/assets",
           "@screens": "./src/screens",
           "@components": "./src/components",
-          "@styles": "./src/assets/styles"
+          "@styles": "./src/assets/styles",
+          "@images": "./src/assets/images"
         }
       }
     }

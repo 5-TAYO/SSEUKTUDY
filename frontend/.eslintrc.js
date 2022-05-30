@@ -24,9 +24,10 @@ module.exports = {
         map: [
           ["@components", "./src/components"],
           ["@screens", "./src/screens"],
-          ["@styles", "./src/assets/styles"]
+          ["@styles", "./src/assets/styles"],
+          ["@images", "./src/assets/images"]
         ],
-        extensions: [".ts", ".js", ".jsx", ".json"]
+        extensions: [".ts", ".js", ".jsx", ".json", ".svg"]
       }
     }
   }
