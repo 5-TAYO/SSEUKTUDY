@@ -78,7 +78,7 @@
 
         .desc {
           color: $GRAY_61;
-          line-height: 26px;
+          line-height: vw(26px);
         }
         & + .main__desc-card {
           margin-left: vw(30px);
