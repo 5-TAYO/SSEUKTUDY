@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import DummyImg from "@images/HomeDummy.png";
+import IconLogoImg from "@images/IconLogo.svg";
 import "./Home.scss";
 import PropTypes from "prop-types";
 
@@ -50,7 +51,9 @@ function Home() {
           />
         </div>
         <div className="logo-container flex align-center">
-          <div className="logo" />
+          <div className="logo flex align-center justify-center">
+            <img className="logo-img" src={IconLogoImg} alt="" />
+          </div>
           <div className="p-container flex column">
             <p className="logo-desc-top fs-32 notoBold">
               완벽한 스터디를 위하여

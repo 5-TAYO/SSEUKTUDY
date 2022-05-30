@@ -99,6 +99,11 @@
       background-color: $WHITE;
       box-shadow: 2px 4px 8px rgba(181, 181, 181, 0.55);
       border-radius: 25px;
+
+      &-img {
+        width: vw(50px);
+        height: vw(50px);
+      }
     }
     .p-container {
       .logo-desc-top {
