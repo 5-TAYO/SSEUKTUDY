@@ -1,0 +1,119 @@
+#Home {
+  .banner {
+    padding-top: vw(177px);
+    height: vw(917px);
+    background: linear-gradient(white, pink);
+
+    &__desc {
+      max-width: vw(423px);
+      line-height: vw(58px);
+    }
+    &__title {
+      margin-top: vw(16px);
+      margin-bottom: vw(63px);
+
+      color: $PINK_SUB;
+    }
+
+    &__btn {
+      width: vw(181px);
+      height: vw(52px);
+
+      border: 1px solid $PINK_SUB;
+      border-radius: 18px;
+
+      & + .banner__btn {
+        margin-left: vw(24px);
+        background-color: $PINK_SUB;
+        color: $WHITE;
+      }
+      &--regist {
+        color: $PINK_SUB;
+      }
+    }
+
+    &__img {
+      width: vw(451px);
+      height: vw(364px);
+
+      margin-top: vw(67px); //fix__
+    }
+  }
+  .main {
+    padding-top: vw(145px);
+
+    background-color: $BACKCOLOR;
+
+    &__desc {
+      line-height: vw(46px);
+
+      margin-bottom: vw(14px);
+
+      &--emphasis {
+        color: $PINK_SUB;
+        margin-bottom: vw(93px);
+      }
+
+      &-card {
+        width: vw(370px);
+        height: vw(292px);
+
+        padding: vw(38px) vw(69px);
+        background-color: white;
+        box-shadow: 0px 4px 10px 3px rgba(255, 156, 197, 0.11);
+        border-radius: 30px;
+
+        .title {
+          margin-bottom: vw(24px);
+        }
+
+        .line {
+          width: vw(45px);
+          height: 1px;
+
+          margin-bottom: vw(25px);
+
+          border-top: solid 1px $GRAY_CB;
+        }
+
+        .desc {
+          color: $GRAY_61;
+          line-height: vw(26px);
+        }
+        & + .main__desc-card {
+          margin-left: vw(30px);
+        }
+      }
+    }
+  }
+
+  .logo-container {
+    margin-top: vw(84px);
+    margin-bottom: vw(50px);
+
+    .logo {
+      width: vw(100px);
+      height: vw(100px);
+
+      margin-right: vw(44px);
+      background-color: $WHITE;
+      box-shadow: 2px 4px 8px rgba(181, 181, 181, 0.55);
+      border-radius: 25px;
+
+      &-img {
+        width: vw(50px);
+        height: vw(50px);
+      }
+    }
+    .p-container {
+      .logo-desc-top {
+        color: $GRAY_32;
+        margin-bottom: vw(10px);
+      }
+
+      .logo-desc-bottom {
+        color: $PINK_SUB;
+      }
+    }
+  }
+}
