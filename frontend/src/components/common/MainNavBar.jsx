@@ -15,7 +15,7 @@ function MainNavBar() {
         <nav className="left-nav notoBold">
           <NavLink
             className={({ isActive }) => activeTabClassName(isActive)}
-            to="/"
+            to="/main"
           >
             홈
           </NavLink>
