@@ -1,0 +1,14 @@
+.study-card-list {
+  margin-bottom: vw(64px);
+
+  .title {
+    margin-bottom: vw(32px);
+  }
+  .card-container {
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: space-between;
+    width: vw(1170px);
+    height: vw(430px);
+  }
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import "./Main.scss";
 import { Link } from "react-router-dom";
+import StudyCardList from "@components/Main/StudyCardList";
 
 function Main() {
   return (
@@ -34,6 +35,11 @@ function Main() {
           <div className="banner-chat-bg">STUDY</div>
         </div>
       </div>
+      <main>
+        <StudyCardList />
+        <StudyCardList />
+        <StudyCardList />
+      </main>
     </div>
   );
 }
