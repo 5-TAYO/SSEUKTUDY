@@ -19,4 +19,8 @@ public class UserServiceImpl implements UserService {
         System.out.println(request.toString());
         return " "+userMapper.registUser(request);
     }
+    @Override
+    public String modifyUser(UserRegistDto request) throws Exception{
+        return " "+userMapper.modifyUser(request);
+    }
 }
