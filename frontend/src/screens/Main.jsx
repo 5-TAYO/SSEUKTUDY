@@ -14,7 +14,7 @@ function Main() {
             스윽터디에서!
           </p>
           <Link
-            to="study/list"
+            to="/study/list"
             className="banner-info__btn--move-list notoBold flex align-center justify-center fs-22"
           >
             스터디 구경 가기
