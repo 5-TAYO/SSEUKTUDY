@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 import StudyCard from "./StudyCard";
 import "./StudyCardList.scss";
 
-function StudyCardList() {
+function StudyCardList({ title }) {
   const dummy = {
     category: "영어 / 외국어 / OPIC",
     title: "스터디이름_TAYO",
@@ -16,7 +17,7 @@ function StudyCardList() {
   };
   return (
     <div className="study-card-list fs-32 notoBold">
-      <p className="title">지금 인기있는 스터디</p>
+      {title && <p className="title">{title}</p>}
       <div className="card-container flex">
         <StudyCard data={dummy} />
         <StudyCard data={dummy} />
@@ -29,4 +30,11 @@ function StudyCardList() {
   );
 }
 
+StudyCardList.defaultProps = {
+  title: null
+};
+
+StudyCardList.propTypes = {
+  title: PropTypes.string
+};
 export default StudyCardList;

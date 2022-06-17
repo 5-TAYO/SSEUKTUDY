@@ -14,7 +14,7 @@ function Main() {
             스윽터디에서!
           </p>
           <Link
-            to="study/list"
+            to="/study/list"
             className="banner-info__btn--move-list notoBold flex align-center justify-center fs-22"
           >
             스터디 구경 가기
@@ -36,9 +36,9 @@ function Main() {
         </div>
       </div>
       <main>
-        <StudyCardList />
-        <StudyCardList />
-        <StudyCardList />
+        <StudyCardList title="지금 인기있는 스터디" />
+        <StudyCardList title="따끈따근 최근에 생성된 스터디" />
+        <StudyCardList title="내가 관심있는 (개발)스터디" />
       </main>
     </div>
   );
