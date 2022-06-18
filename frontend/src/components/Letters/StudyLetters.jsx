@@ -5,6 +5,7 @@ import LettersList from "./LettersList";
 
 function StudyLetters() {
   const headerTitle = "스터디 단체 쪽지함";
+  const listHeaderName = "스터디이름";
   const letters = [
     {
       id: "0",
@@ -23,7 +24,7 @@ function StudyLetters() {
   ];
   return (
     <WithSideLayout title={headerTitle} headerComponent={<LettersHeader />}>
-      <LettersList letters={letters} />
+      <LettersList letters={letters} listHeaderName={listHeaderName} />
     </WithSideLayout>
   );
 }

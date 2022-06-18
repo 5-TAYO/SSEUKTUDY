@@ -5,14 +5,14 @@ import Letter from "./Letter";
 
 import "./LettersList.scss";
 
-function LettersList({ letters }) {
+function LettersList({ letters, listHeaderName }) {
   return (
     <div className="letters-list">
       <div className="letters-list-header">
         <div>
           <input type="checkbox" />
         </div>
-        <p>보낸 사람</p>
+        <p>{listHeaderName}</p>
         <p>내용</p>
         <p>날짜</p>
       </div>
@@ -31,7 +31,8 @@ LettersList.propTypes = {
       content: PropTypes.string,
       date: PropTypes.string
     })
-  )
+  ),
+  listHeaderName: PropTypes.string.isRequired
 };
 LettersList.defaultProps = {
   letters: []

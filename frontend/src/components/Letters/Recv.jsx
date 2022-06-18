@@ -6,6 +6,7 @@ import LettersList from "./LettersList";
 
 function Recv() {
   const headerTitle = "받은 쪽지함";
+  const listHeaderName = "보낸 사람";
   const letters = [
     {
       id: "0",
@@ -24,7 +25,7 @@ function Recv() {
   ];
   return (
     <WithSideLayout title={headerTitle} headerComponent={<LettersHeader />}>
-      <LettersList letters={letters} />
+      <LettersList letters={letters} listHeaderName={listHeaderName} />
     </WithSideLayout>
   );
 }
