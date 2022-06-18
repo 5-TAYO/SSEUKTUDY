@@ -1,9 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Recv from "@components/Recv";
-import Send from "@components/Send";
-import StudyLetters from "@components/StudyLetters";
-import LettersSideBar from "@components/LettersSideBar";
+import Recv from "@components/Letters/Recv";
+import Send from "@components/Letters/Send";
+import StudyLetters from "@components/Letters/StudyLetters";
+import LettersSideBar from "@components/Letters/LettersSideBar";
 import "./Letters.scss";
 
 function Letters() {
