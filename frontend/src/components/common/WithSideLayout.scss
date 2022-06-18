@@ -1,0 +1,10 @@
+.with-side-layout-wrapper {
+  padding: vw(40px);
+  width: vw(870px);
+  .with-side-layout-header {
+    display: flex;
+    padding: vw(20px) 0;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
