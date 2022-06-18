@@ -1,45 +1,30 @@
 import React from "react";
-import "./Recv.scss";
+import WithSideLayout from "../common/WithSideLayout";
+import LettersHeader from "./LettersHeader";
+import LettersList from "./LettersList";
 
 function StudyLetters() {
+  const headerTitle = "스터디 단체 쪽지함";
+  const letters = [
+    {
+      id: "0",
+      name: "jmlee9707",
+      content: "lorem loremloremlorem lorem lorem",
+      date: "22-04-27 [23:22]",
+      isRead: "0"
+    },
+    {
+      id: "1",
+      name: "jmlee9707",
+      content: "lorem loremloremlorem lorem lorem",
+      date: "22-04-27 [23:22]",
+      isRead: "1"
+    }
+  ];
   return (
-    <div className="recv-wrapper">
-      <div className="recv-header">
-        <div className="recv-header-left">
-          <h2 className="notoMid fs-28">스터디 단체 쪽지함</h2>
-        </div>
-        <div className="recv-header-right">
-          <button type="button">삭제</button>
-          <button type="button">보관</button>
-        </div>
-      </div>
-      <div className="notes-list">
-        <div className="note note-list-header">
-          <div>
-            <input type="checkbox" />
-          </div>
-          <p>스터디 이름</p>
-          <p>내용</p>
-          <p>날짜</p>
-        </div>
-        <div className="note">
-          <div>
-            <input type="checkbox" />
-          </div>
-          <p>jmlee9707</p>
-          <p>lorem loremloremlorem lorem lorem</p>
-          <p>22-04-27 [23:22]</p>
-        </div>
-        <div className="note unread">
-          <div>
-            <input type="checkbox" />
-          </div>
-          <p>jmlee9707</p>
-          <p>lorem loremloremlorem lorem lorem</p>
-          <p>22-04-27 [23:22]</p>
-        </div>
-      </div>
-    </div>
+    <WithSideLayout title={headerTitle} headerComponent={<LettersHeader />}>
+      <LettersList letters={letters} />
+    </WithSideLayout>
   );
 }
 export default StudyLetters;
