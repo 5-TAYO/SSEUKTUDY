@@ -6,6 +6,7 @@ import getCounts from "@utils/getCounts";
 import ViewIcon from "@images/View.svg";
 import RedLikeIcon from "@images/Like_Red.svg";
 import { Link, useNavigate } from "react-router-dom";
+import Comment from "@components/StudyDetail/Comment";
 
 function StudyDetail() {
   const [studyInfo, setStudyInfo] = useState();
@@ -21,6 +22,24 @@ function StudyDetail() {
     });
   }, []);
   const navi = useNavigate();
+  const dummy = [
+    {
+      userName: "정민",
+      regDate: "2022-04-27 18:31:31",
+      desc: "혹시 모집완료됐나요?"
+    },
+    {
+      userName: "정민",
+      regDate: "2022-04-27 18:35:13",
+      desc: "혹시 모집완료됐나요?혹시 모집완료됐나요?혹시 모집완료됐나요?혹시 모집완료됐나요?혹시 모집완료됐나요?혹시 모집완료됐나요?혹시 모집완료됐나요?혹시 모집완료됐나요?혹시 모집완료됐나요?혹시 모집완료됐나요?"
+    },
+    {
+      userName: "정민",
+      regDate: "2022-04-27 18:55:31",
+      desc: "예?"
+    }
+  ];
+
   return (
     <div id="study-detail" className="flex">
       <aside>
@@ -110,6 +129,9 @@ function StudyDetail() {
               등록
             </button>
           </div>
+          {dummy.map(comment => (
+            <Comment data={comment} />
+          ))}
         </footer>
       </article>
       <aside>right</aside>
