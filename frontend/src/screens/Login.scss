@@ -9,7 +9,7 @@
   .login_text {
     padding: vw(64px) 0 vw(40px) vw(72px);
     text-align: left;
-    line-height: 35px;
+    line-height: vw(35px);
   }
 
   .login_social_btn {
@@ -21,6 +21,7 @@
 
       img {
         margin-right: vw(8px);
+        width: vw(16px);
       }
     }
     &_kakao {
@@ -43,7 +44,7 @@
 
   .login_or {
     &_line {
-      height: 1px;
+      height: vw(1px);
       background-color: $GRAY-CB;
       width: vw(138px);
     }
