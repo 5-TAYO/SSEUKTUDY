@@ -11,9 +11,10 @@ function Letters() {
     <div className="letters-wrapper">
       <LettersSideBar />
       <Routes>
-        <Route index path="recv" element={<Recv />} />
-        <Route index path="send" element={<Send />} />
-        <Route index path="study" element={<StudyLetters />} />
+        <Route path="/" element={<Recv />} />
+        <Route path="recv" element={<Recv />} />
+        <Route path="send" element={<Send />} />
+        <Route path="study" element={<StudyLetters />} />
       </Routes>
     </div>
   );
