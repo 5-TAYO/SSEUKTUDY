@@ -5,8 +5,10 @@ import UserDuumyIcon from "@images/Profile.svg";
 import getCounts from "@utils/getCounts";
 import ViewIcon from "@images/View.svg";
 import RedLikeIcon from "@images/Like_Red.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Comment from "@components/StudyDetail/Comment";
+import { v4 as uuid } from "uuid";
+import SideStudyList from "../components/StudyDetail/SideStudyList";
 
 function StudyDetail() {
   const [studyInfo, setStudyInfo] = useState();
@@ -22,6 +24,7 @@ function StudyDetail() {
     });
   }, []);
   const navi = useNavigate();
+  const { id: studyId } = useParams();
   const dummy = [
     {
       userName: "정민",
@@ -39,7 +42,37 @@ function StudyDetail() {
       desc: "예?"
     }
   ];
-
+  const sideDummy = [
+    {
+      title: "개발",
+      studyList: [
+        { id: 1, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
+        { id: 2, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
+        { id: 3, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
+        { id: 4, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
+        { id: 5, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
+        { id: 6, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
+        { id: 7, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
+        {
+          id: 8,
+          name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?11132131111321311113213111132131"
+        }
+      ]
+    },
+    {
+      title: "최근 가장",
+      studyList: [
+        { id: 1, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
+        { id: 2, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
+        { id: 3, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
+        { id: 4, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
+        { id: 5, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
+        { id: 6, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
+        { id: 7, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
+        { id: 8, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" }
+      ]
+    }
+  ];
   return (
     <div id="study-detail" className="flex">
       <aside>
@@ -52,7 +85,7 @@ function StudyDetail() {
           <p className="title notoBold fs-24">
             네카라쿠배
             네카라쿠배네카라쿠배네카라쿠배네카라쿠배네카라쿠배네카라쿠배
-            네카라쿠배네카라쿠배네카라쿠배
+            네카라쿠배네카라쿠배네카라쿠배 ----{studyId}번째글!!
           </p>
           <div className="info flex align-center">
             <div className="user flex align-center">
@@ -130,11 +163,15 @@ function StudyDetail() {
             </button>
           </div>
           {dummy.map(comment => (
-            <Comment data={comment} />
+            <Comment data={comment} key={uuid()} />
           ))}
         </footer>
       </article>
-      <aside>right</aside>
+      <aside>
+        {sideDummy.map(studyDummy => (
+          <SideStudyList data={studyDummy} key={uuid()} />
+        ))}
+      </aside>
     </div>
   );
 }
