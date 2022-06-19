@@ -24,4 +24,10 @@ public class UserServiceImpl implements UserService {
         int result = userMapper.modifyUser(request);
         return resultType[result];
     }
+    @Override
+    public String deleteUser(UserRegistDto request) throws Exception{
+        System.out.println("서비스임플");
+        int result = userMapper.deleteUser(request);
+        return resultType[result];
+    }
 }
