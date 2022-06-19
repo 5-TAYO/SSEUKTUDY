@@ -83,6 +83,29 @@ public class UserController {
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
+    @PutMapping("/logout/{userid}")
+    public ResponseEntity<?> logoutUser(@PathVariable("userid") String userid){
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+
+        try {
+            if(userService.deleteRefreshToken(userid).equals("success")){
+                logger.info("refresh token 삭제 성공");
+            }else{
+                logger.info("refresh token 삭제 실패");
+            }
+
+            resultMap.put("message", "SUCCESS");
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            logger.error("로그아웃 실패 : {}", e);
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+
+    }
+
     @GetMapping("/user/{userid}")
     public ResponseEntity<Map<String, Object>> getInfo(@PathVariable("userid") String userid,
                                                        HttpServletRequest request) {

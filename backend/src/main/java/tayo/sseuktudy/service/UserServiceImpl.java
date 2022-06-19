@@ -52,8 +52,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public String saveRefreshToken(String userid, String refreshToken) throws Exception {
         Map<String, String> map = new HashMap<>();
-        map.put("user_id", userid);
-        map.put("user_refresh_token", refreshToken);
+        map.put("userId", userid);
+        map.put("userRefreshToken", refreshToken);
         int result =  userMapper.saveRefreshToken(map);
         return resultType[result];
 
@@ -65,10 +65,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String deleRefreshToken(String userid) throws Exception {
+    public String deleteRefreshToken(String userid) throws Exception {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("userid", userid);
-        map.put("token", null);
+        map.put("userId", userid);
+        map.put("userRefreshToken", null);
         int result = userMapper.deleteRefreshToken(map);
 
         return resultType[result];

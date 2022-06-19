@@ -29,14 +29,14 @@
 
     <update id="saveRefreshToken" parameterType = "Map">
         update user
-        set user_refresh_token = #{user_refresh_token}
-        where user_id = #{user_id}
+        set user_refresh_token = #{userRefreshToken}
+        where user_id = #{userId}
     </update>
 
     <update id="deleteRefreshToken" parameterType = "Map">
         update user
-        set user_refresh_token = #{user_refresh_token, jdbcType=VARCHAR}
-        where user_id = #{user_id}
+        set user_refresh_token = #{userRefreshToken, jdbcType=VARCHAR}
+        where user_id = #{userId}
     </update>
     <select id="idcheck" parameterType="String" resultType="int">
         SELECT COUNT(user_id) FROM user WHERE userid = #{userId}
