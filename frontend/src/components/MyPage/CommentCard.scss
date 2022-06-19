@@ -1,0 +1,25 @@
+.comment-card {
+  display: flex;
+  flex-direction: column;
+  margin-top: vw(30px);
+  padding: vw(15px) vw(20px);
+  border-radius: 10px;
+  box-shadow: 5px 0 10px 5px rgba(0, 0, 0, 0.1),
+    2px 2px 2px 0 rgba(0, 0, 0, 0.19);
+
+  p {
+    padding: 5px;
+  }
+  .post-card-footer {
+    display: flex;
+    margin-top: 15px;
+
+    .post-card-footer-item {
+      display: flex;
+      margin-right: 15px;
+      .avatar {
+        fill: $SKYBLUE;
+      }
+    }
+  }
+}
