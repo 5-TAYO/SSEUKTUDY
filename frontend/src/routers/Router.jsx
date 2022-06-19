@@ -5,6 +5,8 @@ import Login from "@screens/Login";
 import Join from "@screens/Join";
 import JoinMail from "@screens/JoinMail";
 import JoinUserInfo from "@screens/JoinUserInfo";
+import JoinAdd from "@screens/JoinAdd";
+import JoinFinish from "@screens/JoinFinish";
 import MyPage from "@screens/MyPage";
 import Main from "@screens/Main";
 import StudyList from "@screens/StudyList";
@@ -26,6 +28,8 @@ function Router() {
         <Route path="/join" element={<Join />} />
         <Route path="/join/mail" element={<JoinMail />} />
         <Route path="/join/userinfo" element={<JoinUserInfo />} />
+        <Route path="/join/finish" element={<JoinFinish />} />
+        <Route path="/join/add" element={<JoinAdd />} />
         <Route path="/find/pw" element={<FindPw />} />
       </Routes>
     </BrowserRouter>
