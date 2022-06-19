@@ -9,7 +9,7 @@ import tayo.sseuktudy.mapper.UserMapper;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-
+    public String []resultType = {"fail","success"};
     @Autowired
     private UserMapper userMapper;
 
@@ -18,5 +18,10 @@ public class UserServiceImpl implements UserService {
         System.out.println("service");
         System.out.println(request.toString());
         return " "+userMapper.registUser(request);
+    }
+    @Override
+    public String modifyUser(UserRegistDto request) throws Exception{
+        int result = userMapper.modifyUser(request);
+        return resultType[result];
     }
 }

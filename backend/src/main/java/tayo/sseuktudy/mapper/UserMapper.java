@@ -7,4 +7,5 @@ import tayo.sseuktudy.dto.UserRegistDto;
 public interface UserMapper {
 
     int registUser(UserRegistDto request)throws Exception;
+    int modifyUser(UserRegistDto request)throws Exception;
 }

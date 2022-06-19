@@ -25,4 +25,10 @@ public class UserController {
 
         return result;
     }
+    @PutMapping("/user")
+    public String modifyUser(@RequestBody @Validated UserRegistDto request) throws Exception{
+        String result = userService.modifyUser(request);
+
+        return result;
+    }
 }
