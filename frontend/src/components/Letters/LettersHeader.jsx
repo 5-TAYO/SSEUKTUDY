@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./LettersHeader.scss";
-
 function LettersHeader() {
   return (
     <div className="letters-header-right">
