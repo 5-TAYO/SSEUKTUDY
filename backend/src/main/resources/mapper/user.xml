@@ -16,6 +16,11 @@
         from user
         where user_id = #{user_id} and user_pw = #{user_pw}
     </select>
+    <select id="userInfo" parameterType="String" resultType="userInfoDto">
+        select user_id, user_pw, user_nickname, user_age, user_address, user_social
+        from user
+        where user_id = #{userId}
+    </select>
     <select id = "getRefreshToken" parameterType = "String" resultType = "String">
         select user_refresh_token
         from user
@@ -34,6 +39,6 @@
         where user_id = #{user_id}
     </update>
     <select id="idcheck" parameterType="String" resultType="int">
-        SELECT COUNT(user_id) FROM user WHERE userid = #{user_id}
+        SELECT COUNT(user_id) FROM user WHERE userid = #{userId}
     </select>
     </mapper>

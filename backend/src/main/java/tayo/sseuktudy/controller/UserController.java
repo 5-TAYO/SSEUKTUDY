@@ -7,11 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import tayo.sseuktudy.dto.UserInfoDto;
 import tayo.sseuktudy.dto.UserLoginDto;
 import tayo.sseuktudy.dto.UserRegistDto;
 import tayo.sseuktudy.service.UserService;
 import tayo.sseuktudy.service.jwtServiceImpl;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,6 +79,33 @@ public class UserController {
             logger.error("로그인 실패 : {}", e);
             resultMap.put("message", e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+    }
+
+    @GetMapping("/user/{userid}")
+    public ResponseEntity<Map<String, Object>> getInfo(@PathVariable("userid") String userid,
+                                                       HttpServletRequest request) {
+//		logger.debug("userid : {} ", userid);
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.UNAUTHORIZED;
+        if (jwtService.checkToken(request.getHeader("access-token"))) {
+            logger.info("사용 가능한 토큰!!!");
+            try {
+//				로그인 사용자 정보.
+                UserInfoDto userInfoDto = userService.userInfo(userid);
+                resultMap.put("userInfo", userInfoDto);
+                resultMap.put("message", "SUCCESS");
+                status = HttpStatus.ACCEPTED;
+            } catch (Exception e) {
+                logger.error("정보조회 실패 : {}", e);
+                resultMap.put("message", e.getMessage());
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        } else {
+            logger.error("사용 불가능 토큰!!!");
+            resultMap.put("message", "FAIL");
+            status = HttpStatus.UNAUTHORIZED;
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }

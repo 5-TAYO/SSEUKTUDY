@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tayo.sseuktudy.dto.UserInfoDto;
 import tayo.sseuktudy.dto.UserLoginDto;
 import tayo.sseuktudy.dto.UserRegistDto;
 import tayo.sseuktudy.mapper.UserMapper;
@@ -39,8 +40,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserInfoDto userInfo(String userid) throws Exception {
+        return userMapper.userInfo(userid);
+    }
+
+    @Override
     public String getRefreshToken(String userid) throws Exception {
-        return sqlSession.getMapper(UserMapper.class).getRefreshToken(userid);
+        return userMapper.getRefreshToken(userid);
     }
 
     @Override
@@ -63,7 +69,7 @@ public class UserServiceImpl implements UserService {
         Map<String, String> map = new HashMap<String, String>();
         map.put("userid", userid);
         map.put("token", null);
-        int result = sqlSession.getMapper(UserMapper.class).deleteRefreshToken(map);
+        int result = userMapper.deleteRefreshToken(map);
 
         return resultType[result];
 
