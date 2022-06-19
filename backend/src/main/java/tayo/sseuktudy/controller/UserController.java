@@ -15,12 +15,7 @@ public class UserController {
 
     @PostMapping("/regist")
     public String registUser(@RequestBody @Validated UserRegistDto request) throws Exception{
-        System.out.println("야호");
-        System.out.println(request.toString());
         String result = userService.registUser(request);
-
-        System.out.println(result);
-
         return result;
     }
     @PutMapping("user")
