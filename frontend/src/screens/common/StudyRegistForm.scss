@@ -51,8 +51,6 @@
 
     width: 100%;
     height: vw(200px);
-
-    line-height: vw(22px);
     resize: none;
   }
 
@@ -67,6 +65,43 @@
     border: 1px solid $PINK-SUB;
   }
   textarea {
+    border: 1px solid $GRAY-DB;
+    border-radius: 4px;
+
+    line-height: vw(22px);
     outline-color: $PINK-SUB;
+  }
+
+  .question-title {
+    margin-bottom: vw(20px);
+  }
+
+  #pre-question + #pre-question {
+    margin-top: vw(16px);
+  }
+
+  .btn {
+    margin-top: vw(40px);
+    width: vw(329px);
+    height: vw(48px);
+
+    border-radius: 4px;
+    color: $WHITE;
+  }
+
+  .btn + .btn {
+    margin-top: vw(16px);
+  }
+
+  .accept-btn {
+    background-color: $PINK-LIGHT;
+  }
+
+  .refuse-btn {
+    background-color: #9a9a9a;
+  }
+
+  .apply-btn {
+    background-color: $PINK-MAIN;
   }
 }
