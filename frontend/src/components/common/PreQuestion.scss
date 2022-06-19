@@ -1,0 +1,23 @@
+#pre-question {
+  width: 100%;
+  .question {
+    margin-bottom: vw(16px);
+
+    &__order {
+      color: $PINK-SUB;
+      margin-right: vw(8px);
+    }
+
+    &__name {
+      color: $GRAY-9E;
+    }
+  }
+
+  .answer {
+    padding: vw(12px);
+
+    min-height: vw(112px);
+    width: 100%;
+    resize: none;
+  }
+}
