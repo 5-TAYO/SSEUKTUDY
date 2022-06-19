@@ -54,9 +54,14 @@ public class UserController {
             String loginUser = userService.loginUser(request);
             System.out.println(loginUser);
             if (loginUser.equals("success")) {
-                String accessToken = jwtService.createAccessToken("userid", request.getUserId());// key, data
-                String refreshToken = jwtService.createRefreshToken("userid", request.getUserId());
-                userService.saveRefreshToken(request.getUserId(), refreshToken);
+                String accessToken = jwtService.createAccessToken("user_id", request.getUserId());// key, data
+                String refreshToken = jwtService.createRefreshToken("user_id", request.getUserId());
+                if(userService.saveRefreshToken(request.getUserId(), refreshToken).equals("success")){
+                    logger.info("refreshtoken 저장 완료");
+                }else{
+                    logger.info("refreshtoken 저장 실패");
+                }
+
                 logger.debug("access토큰정보 : {}", accessToken);
                 logger.debug("refresh 토큰정보 : {}", refreshToken);
                 resultMap.put("access-token", accessToken);

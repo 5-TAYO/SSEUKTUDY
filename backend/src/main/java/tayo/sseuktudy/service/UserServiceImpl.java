@@ -44,11 +44,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveRefreshToken(String userid, String refreshToken) throws Exception {
+    public String saveRefreshToken(String userid, String refreshToken) throws Exception {
         Map<String, String> map = new HashMap<>();
-        map.put("userid", userid);
-        map.put("token", refreshToken);
-        sqlSession.getMapper(UserMapper.class).saveRefreshToken(map);
+        map.put("user_id", userid);
+        map.put("user_refresh_token", refreshToken);
+        int result =  userMapper.saveRefreshToken(map);
+        return resultType[result];
 
     }
 
@@ -58,11 +59,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleRefreshToken(String userid) throws Exception {
+    public String deleRefreshToken(String userid) throws Exception {
         Map<String, String> map = new HashMap<String, String>();
         map.put("userid", userid);
         map.put("token", null);
-        sqlSession.getMapper(UserMapper.class).deleteRefreshToken(map);
+        int result = sqlSession.getMapper(UserMapper.class).deleteRefreshToken(map);
+
+        return resultType[result];
+
 
     }
 }

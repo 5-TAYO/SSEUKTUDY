@@ -9,7 +9,7 @@ public interface UserService {
     String modifyUser(UserRegistDto request) throws Exception;
     String loginUser(UserLoginDto request) throws Exception;
     public String getRefreshToken(String userid) throws Exception;
-    public void deleRefreshToken(String userid) throws Exception;
-    public void saveRefreshToken(String userid, String refreshToken) throws Exception;
+    public String deleRefreshToken(String userid) throws Exception;
+    public String saveRefreshToken(String userid, String refreshToken) throws Exception;
     public int idcheck(String userid) throws Exception;
 }

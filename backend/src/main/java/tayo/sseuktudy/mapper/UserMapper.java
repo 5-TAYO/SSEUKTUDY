@@ -13,8 +13,8 @@ public interface UserMapper {
     int registUser(UserRegistDto request)throws Exception;
     int modifyUser(UserRegistDto request)throws Exception;
     UserLoginDto loginUser(UserLoginDto request) throws Exception;
-    public void saveRefreshToken(Map<String, String> map) throws SQLException;
-    public void deleteRefreshToken(Map<String, String> map) throws SQLException;
+    public int saveRefreshToken(Map<String, String> map) throws SQLException;
+    public int deleteRefreshToken(Map<String, String> map) throws SQLException;
     public String getRefreshToken(String userid) throws SQLException;
     int idcheck(String userid) throws SQLException;
 }
