@@ -60,7 +60,7 @@ function StudyManagement() {
             </div>
             {studyList.map(study =>
               study.members.map(member => (
-                <div className="member">
+                <div className="member" key={member.id}>
                   <p>{study.name}</p>
                   <p>{member.id}</p>
                   <p>{member.role}</p>
