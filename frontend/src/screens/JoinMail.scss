@@ -3,7 +3,7 @@
 
   border-radius: vw(20px);
   width: vw(473px);
-  height: vw(700px);
+  height: vw(680px);
   border: solid 1px $GRAY-DB;
 
   .mail_text {
@@ -29,11 +29,10 @@
       height: vw(48px);
       width: vw(329px);
       border-radius: vw(4px);
-      margin-bottom: vw(8px);
     }
 
     &_box {
-      margin-bottom: vw(13px);
+      margin-bottom: vw(12px);
     }
 
     &_failed {
@@ -59,6 +58,10 @@
       line-height: vw(17px);
     }
     margin-bottom: vw(41px);
+
+    a {
+      text-decoration: underline;
+    }
   }
 
   .notice_mail {

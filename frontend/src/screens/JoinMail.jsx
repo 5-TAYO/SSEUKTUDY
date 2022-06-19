@@ -10,7 +10,7 @@ function JoinMail() {
           인증 이메일을 보냈습니다.
         </p>
         <p className="mail_text_desc_small notoReg fs-16">
-          메일함에서 인증 이메일을 확인 후 인증코드를 입력해주세요!
+          메일함에서 인증 이메일을 확인 후 받은 인증코드를 입력해주세요!
         </p>
       </div>
 

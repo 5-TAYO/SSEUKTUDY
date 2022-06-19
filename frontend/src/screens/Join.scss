@@ -3,7 +3,7 @@
 
   border-radius: vw(20px);
   width: vw(473px);
-  height: vw(740px);
+  height: vw(720px);
   border: solid 1px $GRAY-DB;
 
   .join_text {
@@ -76,7 +76,7 @@
     }
 
     &_box {
-      margin-bottom: vw(20px);
+      margin-bottom: vw(12px);
     }
 
     &_failed {
@@ -98,6 +98,9 @@
     &_title {
       margin: vw(4px) vw(8px) vw(4px) 0;
       line-height: vw(17px);
+    }
+    a {
+      text-decoration: underline;
     }
   }
 }

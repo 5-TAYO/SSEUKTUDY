@@ -3,6 +3,20 @@ import "./JoinAdd.scss";
 import { Link } from "react-router-dom";
 
 function JoinAdd() {
+  const categoryList = [
+    "관심X",
+    "IT",
+    "프론트",
+    "백엔드",
+    "IT1",
+    "프론트1",
+    "백엔드1",
+    "IT2",
+    "프론트2",
+    "백엔드2",
+    "IT3",
+    "프론트3"
+  ];
   return (
     <div id="join_add">
       <div className="add_text">
@@ -51,11 +65,23 @@ function JoinAdd() {
         </div>
       </div>
       {/* site add input end */}
-      {/* catagory again input start */}
-      <div className="add_catagory">
-        <p className="add_catagory_title notoMid fs-16">관심 카테고리</p>
+      {/* category again input start */}
+      <div className="add_category">
+        <p className="add_category_title notoMid fs-16">관심 카테고리</p>
+        <div className="add_category_options flex">
+          {categoryList.map(category => (
+            <button
+              type="button"
+              name="category"
+              className="add_category_options_btn notoReg fs-11 flex align-center justify-center"
+            >
+              {category}
+            </button>
+          ))}
+        </div>
       </div>
-      {/* catagory again input end  */}
+      {/* category again input end  */}
+
       {/* add btn start */}
       <div className="flex align-center justify-center">
         <Link
