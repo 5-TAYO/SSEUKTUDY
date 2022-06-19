@@ -16,4 +16,24 @@
         from user
         where user_id = #{user_id} and user_pw = #{user_pw}
     </select>
+    <select id = "getRefreshToken" parameterType = "String" resultType = "String">
+        select user_refresh_token
+        from user
+        where user_id = #{user_id}
+    </select>
+
+    <update id="saveRefreshToken" parameterType = "Map">
+        update user
+        set user_refresh_token = #{user_refresh_token}
+        where user_id = #{user_id}
+    </update>
+
+    <update id="deleteRefreshToken" parameterType = "Map">
+        update user
+        set user_refresh_token = #{user_refresh_token, jdbcType=VARCHAR}
+        where user_id = #{user_id}
+    </update>
+    <select id="idcheck" parameterType="String" resultType="int">
+        SELECT COUNT(user_id) FROM user WHERE userid = #{user_id}
+    </select>
     </mapper>
