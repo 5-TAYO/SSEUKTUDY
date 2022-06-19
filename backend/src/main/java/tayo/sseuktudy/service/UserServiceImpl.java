@@ -26,7 +26,6 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public String deleteUser(UserRegistDto request) throws Exception{
-        System.out.println("서비스임플");
         int result = userMapper.deleteUser(request);
         return resultType[result];
     }
