@@ -3,6 +3,7 @@ package tayo.sseuktudy.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import tayo.sseuktudy.dto.UserLoginDto;
 import tayo.sseuktudy.dto.UserRegistDto;
 import tayo.sseuktudy.service.UserService;
 
@@ -28,6 +29,13 @@ public class UserController {
     @PutMapping("/user")
     public String modifyUser(@RequestBody @Validated UserRegistDto request) throws Exception{
         String result = userService.modifyUser(request);
+
+        return result;
+    }
+
+    @PostMapping("/login")
+    public String loginUser(@RequestBody @Validated UserLoginDto request) throws Exception{
+        String result = userService.loginUser(request);
 
         return result;
     }
