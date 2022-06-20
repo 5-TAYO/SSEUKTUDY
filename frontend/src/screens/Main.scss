@@ -1,0 +1,58 @@
+#main {
+  .banner {
+    width: vw(1440px);
+    height: vw(428px);
+
+    background-color: $GRAY_32;
+    &-info {
+      margin: vw(130px) 0 0 vw(230px);
+      color: $WHITE;
+      &__desc {
+        margin-bottom: vw(30px);
+        line-height: vw(58px);
+      }
+      &__btn--move-list {
+        width: vw(232px);
+        height: vw(64px);
+
+        border-radius: 16px;
+        background-color: $PINK_SUB;
+      }
+    }
+    &-chat {
+      margin: vw(81px) 0 0 vw(210px);
+
+      width: vw(460px);
+      height: vw(260px);
+      .banner-chats {
+        align-items: flex-end;
+        &__item {
+          padding: 0vw (32px);
+          z-index: 1;
+          height: vw(69px);
+
+          background-color: $KAKAO-YELLOW;
+          border-radius: 8px;
+
+          & + .banner-chats__item {
+            margin-top: vw(16px);
+          }
+        }
+      }
+
+      &-bg {
+        position: absolute;
+
+        font-size: vw(115px);
+        font-weight: 900;
+        color: rgba($color: #ffffff, $alpha: 0.26);
+        transform: rotate(-15.87deg);
+      }
+    }
+  }
+  main {
+    padding: vw(88px) vw(135px);
+
+    background-color: $BACKCOLOR;
+  }
+}
