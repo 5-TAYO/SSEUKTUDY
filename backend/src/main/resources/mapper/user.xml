@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="tayo.sseuktudy.mapper.UserMapper">
+
+    <insert id="registUser" parameterType="UserRegistDto">
+        insert into user (user_id, user_pw, user_nickname, user_age, user_address, user_social)
+        value (#{userId}, #{userPw}, #{userNickname}, #{userAge}, #{userAddress}, #{userSocial});
+    </insert>
+    <update id="modifyUser" parameterType="UserRegistDto">
+        update user set user_pw = #{userPw}, user_nickname = #{userNickname}, user_age = #{userAge}, user_address = #{userAddress}
+        where user_id = #{userId}
+    </update>
+
+    <insert id="mailSend" parameterType="MailDto">
+        insert into mail (user_id, auth_key, delete_date)
+            value (#{userId}, #{authKey}, now());
+    </insert>
+    </mapper>

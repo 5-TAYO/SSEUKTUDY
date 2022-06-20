@@ -1,0 +1,28 @@
+$DESKTOP-VW: 1440;
+$DESKTOP-VH: 1024;
+
+$TABLET-VW: 1200px;
+$TABLET-VH: 1024px;
+
+$PHONE-VW: 600px;
+$PHONE-VH: 600px;
+
+@function vw($size) {
+  $vw-context: $DESKTOP-VW * 0.01 * 1px;
+  @return $size / $vw-context * 1vw;
+}
+
+@function vh($size) {
+  $vh-context: $DESKTOP-VW * 0.01 * 1px;
+  @return $size / $vh-context * 1vh;
+}
+
+@function vw-t($size) {
+  $vw-context: $TABLET-VW * 0.01;
+  @return $size / $vw-context * 1vw;
+}
+
+@function vw-p($size) {
+  $vw-context: $PHONE-VW * 0.01;
+  @return $size / $vw-context * 1vw;
+}
