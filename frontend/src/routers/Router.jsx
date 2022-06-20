@@ -1,7 +1,8 @@
 import React from "react";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "@screens/Home";
 import Login from "@screens/Login";
+import Letters from "@screens/Letters";
 import Join from "@screens/Join";
 import JoinMail from "@screens/JoinMail";
 import JoinUserInfo from "@screens/JoinUserInfo";
@@ -17,7 +18,7 @@ import StudyRegistForm from "@screens/common/StudyRegistForm";
 
 function Router() {
   return (
-    <BrowserRouter>
+    <>
       <MainNavBar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -33,7 +34,8 @@ function Router() {
           element={<StudyRegistForm type="read" />}
         />
         <Route path="/login" element={<Login />} />
-        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage/*" element={<MyPage />} />
+        <Route path="/letters/*" element={<Letters />} />
         <Route path="/join" element={<Join />} />
         <Route path="/join/mail" element={<JoinMail />} />
         <Route path="/join/userinfo" element={<JoinUserInfo />} />
@@ -41,7 +43,7 @@ function Router() {
         <Route path="/join/add" element={<JoinAdd />} />
         <Route path="/find/pw" element={<FindPw />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 

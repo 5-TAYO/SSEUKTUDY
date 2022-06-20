@@ -1,0 +1,45 @@
+.my-study-header {
+  display: flex;
+  .my-study-header-item {
+    padding: 10px;
+    color: $GRAY-9E;
+    &.active {
+      color: $BLACK;
+      border-bottom: 2px solid $PINK-SUB;
+    }
+  }
+}
+
+.my-study-list {
+  display: flex;
+  flex-direction: column;
+
+  .my-study-card {
+    margin-top: vw(30px);
+    padding: vw(15px) vw(20px);
+    border-radius: 10px;
+    box-shadow: 5px 0 10px 5px rgba(0, 0, 0, 0.1),
+      2px 2px 2px 0 rgba(0, 0, 0, 0.19);
+    color: $GRAY-9E;
+    display: flex;
+    justify-content: space-around;
+
+    .title {
+      color: $BLACK;
+    }
+    .state {
+      color: $PINK-SUB;
+    }
+    .divider {
+      border: 1px solid $PINK-SUB;
+    }
+    .my-study-card-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .my-study-card-info > * {
+      padding: 5px;
+    }
+  }
+}
