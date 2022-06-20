@@ -1,10 +1,7 @@
 package tayo.sseuktudy.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import tayo.sseuktudy.dto.UserInfoDto;
-import tayo.sseuktudy.dto.UserLoginDto;
-import tayo.sseuktudy.dto.MailDto;
-import tayo.sseuktudy.dto.UserRegistDto;
+import tayo.sseuktudy.dto.*;
 
 import java.sql.SQLException;
 import java.util.Map;
@@ -13,7 +10,7 @@ import java.util.Map;
 public interface UserMapper {
 
     int registUser(UserRegistDto request)throws Exception;
-    int modifyUser(UserRegistDto request)throws Exception;
+    int modifyUser(UserModifyDto request)throws Exception;
     UserLoginDto loginUser(UserLoginDto request) throws Exception;
     public UserInfoDto userInfo(String userId) throws SQLException;
     public int saveRefreshToken(Map<String, String> map) throws SQLException;

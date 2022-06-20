@@ -7,9 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tayo.sseuktudy.dto.UserInfoDto;
-import tayo.sseuktudy.dto.UserLoginDto;
-import tayo.sseuktudy.dto.UserRegistDto;
+import tayo.sseuktudy.dto.*;
 import tayo.sseuktudy.service.UserService;
 import tayo.sseuktudy.service.jwtServiceImpl;
 
@@ -17,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-import tayo.sseuktudy.dto.MailDto;
 import tayo.sseuktudy.dto.UserRegistDto;
 
 import tayo.sseuktudy.service.UserService;
@@ -34,6 +31,7 @@ public class UserController {
 
     @Autowired
     private jwtServiceImpl jwtService;
+    @Autowired
     private MailService mailService;
 
     @PostMapping("/regist")
@@ -41,9 +39,13 @@ public class UserController {
         String result = userService.registUser(request);
         return result;
     }
-    @PutMapping("user")
-    public String modifyUser(@RequestBody @Validated UserRegistDto request) throws Exception{
-        String result = userService.modifyUser(request);
+    @PutMapping("/user")
+    public String modifyUser(@RequestBody @Validated UserModifyDto userModifyDto, HttpServletRequest request) throws Exception{
+        String result = "fail";
+        if(jwtService.checkToken(request.getHeader("access-token"))){
+            result = userService.modifyUser(userModifyDto);
+        }
+
         return result;
     }
 

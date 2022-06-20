@@ -8,7 +8,7 @@
         value (#{userId}, #{userPw}, #{userNickname}, #{userAge}, #{userAddress}, #{userSocial});
     </insert>
 
-    <update id="modifyUser" parameterType="UserRegistDto">
+    <update id="modifyUser" parameterType="UserModifyDto">
         update user set user_pw = #{userPw}, user_nickname = #{userNickname}, user_age = #{userAge}, user_address = #{userAddress}
         where user_id = #{userId} and user_refresh_token = #{userRefreshToken} ;
     </update>
