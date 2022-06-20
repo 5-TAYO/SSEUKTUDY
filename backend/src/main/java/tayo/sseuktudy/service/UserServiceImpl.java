@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
 
         return resultType[result];
 
-
+    }
 
     @Override
     public String deleteUser(UserRegistDto request) throws Exception{

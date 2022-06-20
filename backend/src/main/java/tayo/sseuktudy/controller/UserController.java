@@ -131,7 +131,9 @@ public class UserController {
             status = HttpStatus.UNAUTHORIZED;
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
-      
+    }
+
+
     @DeleteMapping("user")
     public String deleteUser(@RequestBody @Validated UserRegistDto request) throws Exception{
         String result = userService.deleteUser(request);
