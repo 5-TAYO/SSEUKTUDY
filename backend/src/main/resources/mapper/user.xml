@@ -7,8 +7,15 @@
         insert into user (user_id, user_pw, user_nickname, user_age, user_address, user_social)
         value (#{userId}, #{userPw}, #{userNickname}, #{userAge}, #{userAddress}, #{userSocial});
     </insert>
+
     <update id="modifyUser" parameterType="UserRegistDto">
         update user set user_pw = #{userPw}, user_nickname = #{userNickname}, user_age = #{userAge}, user_address = #{userAddress}
-        where user_id = #{userId}
+        where user_id = #{userId} and user_refresh_token = #{userRefreshToken} ;
     </update>
+
+    <delete id="deleteUser" parameterType="UserRegistDto">
+        delete from user
+        where user_id = #{userId} and user_refresh_token = #{userRefreshToken} ;
+    </delete>
+
     </mapper>

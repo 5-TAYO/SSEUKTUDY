@@ -8,4 +8,5 @@ public interface UserMapper {
 
     int registUser(UserRegistDto request)throws Exception;
     int modifyUser(UserRegistDto request)throws Exception;
+    int deleteUser(UserRegistDto request)throws Exception;
 }
