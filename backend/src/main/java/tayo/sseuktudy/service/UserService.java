@@ -14,4 +14,6 @@ public interface UserService {
     public String deleteRefreshToken(String userid) throws Exception;
     public String saveRefreshToken(String userid, String refreshToken) throws Exception;
     public int idcheck(String userid) throws Exception;
+    String deleteUser(UserRegistDto request) throws Exception;
+
 }

@@ -17,6 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+import tayo.sseuktudy.dto.MailDto;
+import tayo.sseuktudy.dto.UserRegistDto;
+
+import tayo.sseuktudy.service.UserService;
+import tayo.sseuktudy.service.MailService;
 @RestController
 @CrossOrigin("*")
 public class UserController {
@@ -29,21 +34,16 @@ public class UserController {
 
     @Autowired
     private jwtServiceImpl jwtService;
+    private MailService mailService;
 
     @PostMapping("/regist")
     public String registUser(@RequestBody @Validated UserRegistDto request) throws Exception{
-        System.out.println("야호");
-        System.out.println(request.toString());
         String result = userService.registUser(request);
-
-        System.out.println(result);
-
         return result;
     }
-    @PutMapping("/user")
+    @PutMapping("user")
     public String modifyUser(@RequestBody @Validated UserRegistDto request) throws Exception{
         String result = userService.modifyUser(request);
-
         return result;
     }
 
@@ -131,5 +131,21 @@ public class UserController {
             status = HttpStatus.UNAUTHORIZED;
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
+      
+    @DeleteMapping("user")
+    public String deleteUser(@RequestBody @Validated UserRegistDto request) throws Exception{
+        String result = userService.deleteUser(request);
+        return result;
+    }
+// 인증번호 체크를 위한 곳
+//    @GetMapping("/mail")
+//    public String checkMail(@PathVariable("userid"){
+//        return "mail";
+//    }
+
+
+    @PostMapping("/mail")
+    public String execMail(@RequestBody @Validated MailDto request) throws Exception{
+        return mailService.mailSend(request);
     }
 }

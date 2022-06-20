@@ -3,6 +3,7 @@ package tayo.sseuktudy.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import tayo.sseuktudy.dto.UserInfoDto;
 import tayo.sseuktudy.dto.UserLoginDto;
+import tayo.sseuktudy.dto.MailDto;
 import tayo.sseuktudy.dto.UserRegistDto;
 
 import java.sql.SQLException;
@@ -19,4 +20,9 @@ public interface UserMapper {
     public int deleteRefreshToken(Map<String, String> map) throws SQLException;
     public String getRefreshToken(String userId) throws SQLException;
     int idcheck(String userId) throws SQLException;
+
+    int mailSend(MailDto mailDto)throws Exception;
+
+    int deleteUser(UserRegistDto request)throws Exception;
+
 }
