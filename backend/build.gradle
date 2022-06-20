@@ -18,6 +18,8 @@ dependencies {
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
 	runtimeOnly 'mysql:mysql-connector-java:8.0.29'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	compileOnly 'org.projectlombok:lombok' //메일 롬북
+	annotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('test') {

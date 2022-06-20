@@ -11,4 +11,9 @@
         update user set user_pw = #{userPw}, user_nickname = #{userNickname}, user_age = #{userAge}, user_address = #{userAddress}
         where user_id = #{userId}
     </update>
+
+    <insert id="mailSend" parameterType="MailDto">
+        insert into mail (user_id, auth_key, delete_date)
+            value (#{userId}, #{authKey}, now());
+    </insert>
     </mapper>
