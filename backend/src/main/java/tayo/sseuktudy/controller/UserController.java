@@ -14,24 +14,25 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
     @Autowired
     private MailService mailService;
 
 
+
     @PostMapping("/regist")
     public String registUser(@RequestBody @Validated UserRegistDto request) throws Exception{
-        System.out.println("야호");
-        System.out.println(request.toString());
         String result = userService.registUser(request);
-
-        System.out.println(result);
-
         return result;
     }
-    @PutMapping("/user")
+    @PutMapping("user")
     public String modifyUser(@RequestBody @Validated UserRegistDto request) throws Exception{
         String result = userService.modifyUser(request);
-
+        return result;
+    }
+    @DeleteMapping("user")
+    public String deleteUser(@RequestBody @Validated UserRegistDto request) throws Exception{
+        String result = userService.deleteUser(request);
         return result;
     }
 // 인증번호 체크를 위한 곳
