@@ -34,21 +34,6 @@ public class UserController {
     @Autowired
     private MailService mailService;
 
-    @PostMapping("/regist")
-    public String registUser(@RequestBody @Validated UserRegistDto request) throws Exception{
-        String result = userService.registUser(request);
-        return result;
-    }
-    @PutMapping("/user")
-    public String modifyUser(@RequestBody @Validated UserModifyDto userModifyDto, HttpServletRequest request) throws Exception{
-        String result = "fail";
-        if(jwtService.checkToken(request.getHeader("access-token"))){
-            result = userService.modifyUser(userModifyDto);
-        }
-
-        return result;
-    }
-
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> loginUser(@RequestBody UserLoginDto request) {
         Map<String, Object> resultMap = new HashMap<>();
@@ -136,9 +121,27 @@ public class UserController {
     }
 
 
-    @DeleteMapping("user")
-    public String deleteUser(@RequestBody @Validated UserRegistDto request) throws Exception{
-        String result = userService.deleteUser(request);
+    @PostMapping("/regist")
+    public String registUser(@RequestBody @Validated UserRegistDto request) throws Exception{
+        String result = userService.registUser(request);
+        return result;
+    }
+    @PutMapping("/user")
+    public String modifyUser(@RequestBody @Validated UserModifyDto userModifyDto, HttpServletRequest request) throws Exception{
+        String result = "fail";
+        if(jwtService.checkToken(request.getHeader("access-token"))){
+            result = userService.modifyUser(userModifyDto);
+        }
+
+        return result;
+    }
+
+    @DeleteMapping("/user")
+    public String deleteUser(@RequestBody @Validated UserDeleteDto userDeleteDto, HttpServletRequest request) throws Exception{
+        String result = "fail";
+        if(jwtService.checkToken(request.getHeader("access-token"))){
+            result = userService.deleteUser(userDeleteDto);
+        }
         return result;
     }
 // 인증번호 체크를 위한 곳

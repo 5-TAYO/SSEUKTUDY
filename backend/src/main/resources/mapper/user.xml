@@ -10,8 +10,13 @@
 
     <update id="modifyUser" parameterType="UserModifyDto">
         update user set user_pw = #{userPw}, user_nickname = #{userNickname}, user_age = #{userAge}, user_address = #{userAddress}
-        where user_id = #{userId} and user_refresh_token = #{userRefreshToken} ;
+        where user_id = #{userId};
     </update>
+
+    <delete id="deleteUser" parameterType="UserDeleteDto">
+        delete from user
+        where user_id = #{userId} ;
+    </delete>
     <select id="loginUser" parameterType="UserLoginDto" resultType="UserLoginDto">
         select user_id, user_pw
         from user
@@ -47,9 +52,5 @@
             value (#{userId}, #{authKey}, now());
     </insert>
 
-    <delete id="deleteUser" parameterType="UserRegistDto">
-        delete from user
-        where user_id = #{userId} and user_refresh_token = #{userRefreshToken} ;
-    </delete>
 
     </mapper>

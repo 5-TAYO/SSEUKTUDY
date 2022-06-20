@@ -10,7 +10,9 @@ import java.util.Map;
 public interface UserMapper {
 
     int registUser(UserRegistDto request)throws Exception;
-    int modifyUser(UserModifyDto request)throws Exception;
+    int modifyUser(UserModifyDto userDeleteDto)throws Exception;
+
+    int deleteUser(UserDeleteDto userDeleteDto)throws Exception;
     UserLoginDto loginUser(UserLoginDto request) throws Exception;
     public UserInfoDto userInfo(String userId) throws SQLException;
     public int saveRefreshToken(Map<String, String> map) throws SQLException;
@@ -20,6 +22,5 @@ public interface UserMapper {
 
     int mailSend(MailDto mailDto)throws Exception;
 
-    int deleteUser(UserRegistDto request)throws Exception;
 
 }
