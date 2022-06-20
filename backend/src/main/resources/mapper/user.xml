@@ -13,6 +13,12 @@
         where user_id = #{userId} and user_refresh_token = #{userRefreshToken} ;
     </update>
 
+
+    <insert id="mailSend" parameterType="MailDto">
+        insert into mail (user_id, auth_key, delete_date)
+            value (#{userId}, #{authKey}, now());
+    </insert>
+
     <delete id="deleteUser" parameterType="UserRegistDto">
         delete from user
         where user_id = #{userId} and user_refresh_token = #{userRefreshToken} ;
