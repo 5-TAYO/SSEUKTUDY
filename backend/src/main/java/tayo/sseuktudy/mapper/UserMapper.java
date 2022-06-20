@@ -1,14 +1,25 @@
 package tayo.sseuktudy.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import tayo.sseuktudy.dto.UserInfoDto;
+import tayo.sseuktudy.dto.UserLoginDto;
 import tayo.sseuktudy.dto.MailDto;
 import tayo.sseuktudy.dto.UserRegistDto;
+
+import java.sql.SQLException;
+import java.util.Map;
 
 @Mapper
 public interface UserMapper {
 
     int registUser(UserRegistDto request)throws Exception;
     int modifyUser(UserRegistDto request)throws Exception;
+    UserLoginDto loginUser(UserLoginDto request) throws Exception;
+    public UserInfoDto userInfo(String userId) throws SQLException;
+    public int saveRefreshToken(Map<String, String> map) throws SQLException;
+    public int deleteRefreshToken(Map<String, String> map) throws SQLException;
+    public String getRefreshToken(String userId) throws SQLException;
+    int idcheck(String userId) throws SQLException;
 
     int mailSend(MailDto mailDto)throws Exception;
 
