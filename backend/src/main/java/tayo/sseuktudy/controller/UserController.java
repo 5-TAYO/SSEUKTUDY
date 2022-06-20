@@ -7,9 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tayo.sseuktudy.dto.UserInfoDto;
-import tayo.sseuktudy.dto.UserLoginDto;
-import tayo.sseuktudy.dto.UserRegistDto;
+import tayo.sseuktudy.dto.*;
 import tayo.sseuktudy.service.UserService;
 import tayo.sseuktudy.service.jwtServiceImpl;
 
@@ -17,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-import tayo.sseuktudy.dto.MailDto;
 import tayo.sseuktudy.dto.UserRegistDto;
 
 import tayo.sseuktudy.service.UserService;
@@ -45,6 +42,29 @@ public class UserController {
     public String modifyUser(@RequestBody @Validated UserRegistDto request) throws Exception{
         String result = userService.modifyUser(request);
         return result;
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<?> refreshToken(@RequestBody @Validated String userId, HttpServletRequest request) throws Exception{
+        System.out.println(userId);
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        String token = request.getHeader("refresh-token");
+        System.out.println(token);
+        jwtService.checkToken(token);
+
+        System.out.println(userService.getRefreshToken((userId)));
+        if(token.equals(userService.getRefreshToken(userId))) {
+
+            String accessToken= jwtService.createAccessToken("userid", userId);
+            resultMap.put("access-token", accessToken);
+            System.out.println(accessToken);
+            resultMap.put("message", "SUCCESS");
+            status = HttpStatus.ACCEPTED;
+        }else {
+            status = HttpStatus.UNAUTHORIZED;
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
     @PostMapping("/login")
@@ -106,6 +126,7 @@ public class UserController {
 
     }
 
+
     @GetMapping("/user/{userid}")
     public ResponseEntity<Map<String, Object>> getInfo(@PathVariable("userid") String userid,
                                                        HttpServletRequest request) {
@@ -150,4 +171,5 @@ public class UserController {
     public String execMail(@RequestBody @Validated MailDto request) throws Exception{
         return mailService.mailSend(request);
     }
+
 }
