@@ -15,8 +15,6 @@ public class UserServiceImpl implements UserService {
     public String []resultType = {"fail","success"};
     @Autowired
     private UserMapper userMapper;
-    @Autowired
-    private SqlSession sqlSession;
 
     @Override
     public String registUser(UserRegistDto request) throws Exception{

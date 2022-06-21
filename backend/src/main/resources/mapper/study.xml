@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tayo.sseuktudy.mapper.StudyMapper">
+
+    <insert id="registStudy" parameterType="StudyRegistDto">
+        insert into study (study_title, study_leader_id, study_status, study_introduction, study_startdate, study_enddate, study_goals, study_type, study_user_min, study_user_max, study_content, study_place, study_category_id, study_view)
+            value (#{studyTitle}, #{studyLeaderId}, #{studyStatus}, #{studyIntroduction}, #{studyStartdate}, #{studyEnddate}, #{studyGoals}, #{studyType}, #{studyUserMin}, #{studyUserMax},#{studyContent}, #{studyPlace},#{studyCategoryId}, #{studyView});
+    </insert>
+
+
+
+</mapper>
