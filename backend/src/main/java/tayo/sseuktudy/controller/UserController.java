@@ -7,9 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tayo.sseuktudy.dto.UserInfoDto;
-import tayo.sseuktudy.dto.UserLoginDto;
-import tayo.sseuktudy.dto.UserRegistDto;
+import tayo.sseuktudy.dto.*;
 import tayo.sseuktudy.service.UserService;
 import tayo.sseuktudy.service.jwtServiceImpl;
 
@@ -17,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-import tayo.sseuktudy.dto.MailDto;
 import tayo.sseuktudy.dto.UserRegistDto;
 
 import tayo.sseuktudy.service.UserService;
@@ -34,20 +31,10 @@ public class UserController {
 
     @Autowired
     private jwtServiceImpl jwtService;
+    @Autowired
     private MailService mailService;
 
-    @PostMapping("/regist")
-    public String registUser(@RequestBody @Validated UserRegistDto request) throws Exception{
-        String result = userService.registUser(request);
-        return result;
-    }
-    @PutMapping("user")
-    public String modifyUser(@RequestBody @Validated UserRegistDto request) throws Exception{
-        String result = userService.modifyUser(request);
-        return result;
-    }
-
-    @PostMapping("/login")
+    @PostMapping("/user/login")
     public ResponseEntity<Map<String, Object>> loginUser(@RequestBody UserLoginDto request) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = null;
@@ -83,7 +70,7 @@ public class UserController {
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
-    @PutMapping("/logout/{userid}")
+    @PutMapping("/user/logout/{userid}")
     public ResponseEntity<?> logoutUser(@PathVariable("userid") String userid){
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.ACCEPTED;
@@ -106,7 +93,7 @@ public class UserController {
 
     }
 
-    @GetMapping("/user/{userid}")
+    @GetMapping("/user/info/{userid}")
     public ResponseEntity<Map<String, Object>> getInfo(@PathVariable("userid") String userid,
                                                        HttpServletRequest request) {
 //		logger.debug("userid : {} ", userid);
@@ -132,21 +119,46 @@ public class UserController {
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
-
-
-    @DeleteMapping("user")
-    public String deleteUser(@RequestBody @Validated UserRegistDto request) throws Exception{
-        String result = userService.deleteUser(request);
+    ////////////////////////////////////////////////////////////
+    // 회원가입 동작방식 : 이메일 유효한지 체크 -> 인증번호 발송 ->인증번호 체크 -> 회원가입
+    ////////////////////////////////////////////////////////////
+    @PostMapping("/user/regist")
+    public String registUser(@RequestBody @Validated UserRegistDto request) throws Exception {
+        String result = userService.registUser(request);
         return result;
     }
-// 인증번호 체크를 위한 곳
-//    @GetMapping("/mail")
+//API DOCS 5 : 가입 가능한 회원 ID 조회
+//    @GetMapping("user/regist")
+//    public String registUser(@RequestBody @Validated UserRegistDto request) throws Exception{
+//        String result = userService.registUser(request);
+//        return result;
+//    }
+    @PutMapping("/user/modify")
+    public String modifyUser(@RequestBody @Validated UserModifyDto userModifyDto, HttpServletRequest request) throws Exception{
+        String result = "fail";
+        if(jwtService.checkToken(request.getHeader("access-token"))){
+            result = userService.modifyUser(userModifyDto);
+        }
+
+        return result;
+    }
+
+    @DeleteMapping("/user/delete/{userId}")
+    public String deleteUser(@RequestBody @Validated UserDeleteDto userDeleteDto, HttpServletRequest request) throws Exception{
+        String result = "fail";
+        if(jwtService.checkToken(request.getHeader("access-token"))){
+            result = userService.deleteUser(userDeleteDto);
+        }
+        return result;
+    }
+//API DOCS 12 : 메일 인증 체크
+//    @GetMapping("/email/check")
 //    public String checkMail(@PathVariable("userid"){
 //        return "mail";
 //    }
 
 
-    @PostMapping("/mail")
+    @PostMapping("/email/send")
     public String execMail(@RequestBody @Validated MailDto request) throws Exception{
         return mailService.mailSend(request);
     }
