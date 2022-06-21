@@ -12,7 +12,7 @@ public interface jwtService {
 	<T> String create(String key, T data, String subject, long expir);
 	Map<String, Object> get(String key);
 	String getUserId();
-	boolean checkToken(String jwt, String userId);
+	boolean checkToken(String jwt);
 	
 
 }

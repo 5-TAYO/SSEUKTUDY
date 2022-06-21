@@ -99,7 +99,7 @@ public class UserController {
         HttpStatus status = HttpStatus.ACCEPTED;
         String token = request.getHeader("refresh-token");
         System.out.println(token);
-        jwtService.checkToken(token, userId);
+        jwtService.checkToken(token);
 
         System.out.println(userService.getRefreshToken((userId)));
         if(token.equals(userService.getRefreshToken(userId))) {
@@ -120,7 +120,7 @@ public class UserController {
 //		logger.debug("userid : {} ", userid);
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.UNAUTHORIZED;
-        if (jwtService.checkToken(request.getHeader("access-token"), userId)) {
+        if (jwtService.checkToken(request.getHeader("access-token"))) {
             logger.info("사용 가능한 토큰!!!");
             try {
 //				로그인 사용자 정보.
@@ -157,7 +157,7 @@ public class UserController {
     @PutMapping("/user/modify")
     public String modifyUser(@RequestBody @Validated UserModifyDto userModifyDto, HttpServletRequest request) throws Exception{
         String result = "fail";
-        if(jwtService.checkToken(request.getHeader("access-token"), userModifyDto.getUserId())){
+        if(jwtService.checkToken(request.getHeader("access-token"))){
             result = userService.modifyUser(userModifyDto);
         }
 
@@ -167,7 +167,7 @@ public class UserController {
     @DeleteMapping("/user/delete/{userId}")
     public String deleteUser(@RequestBody @Validated UserDeleteDto userDeleteDto, HttpServletRequest request) throws Exception{
         String result = "fail";
-        if(jwtService.checkToken(request.getHeader("access-token"), userDeleteDto.getUserId())){
+        if(jwtService.checkToken(request.getHeader("access-token"))){
             result = userService.deleteUser(userDeleteDto);
         }
         return result;
