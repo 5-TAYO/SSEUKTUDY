@@ -17,7 +17,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail' //메일 서버 디팬던시
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
 	implementation 'io.jsonwebtoken:jjwt:0.9.0'
-	implementation 'org.springframework.boot:spring-boot-starter-security' // spring security
 	runtimeOnly 'mysql:mysql-connector-java:8.0.29'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation group: 'org.glassfish.jaxb', name: 'jaxb-runtime', version: '2.3.2' //jwt 토큰
