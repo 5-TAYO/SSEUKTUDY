@@ -12,7 +12,7 @@ public interface UserMapper {
     int registUser(UserRegistDto request)throws Exception;
     int modifyUser(UserModifyDto userDeleteDto)throws Exception;
 
-    int deleteUser(UserDeleteDto userDeleteDto)throws Exception;
+    int deleteUser(String userId)throws Exception;
     int searchUser(MailDto mailDto) throws Exception;
     UserLoginDto loginUser(UserLoginDto request) throws Exception;
     public UserInfoDto userInfo(String userId) throws SQLException;

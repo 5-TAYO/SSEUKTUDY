@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String deleteUser(UserDeleteDto userDeleteDto) throws Exception{
-        int result = userMapper.deleteUser(userDeleteDto);
+    public String deleteUser(String userId) throws Exception{
+        int result = userMapper.deleteUser(userId);
         return resultType[result];
     }
     @Override

@@ -6,7 +6,7 @@ public interface UserService {
 
     String registUser(UserRegistDto request) throws Exception;
     String modifyUser(UserModifyDto userModifyDto) throws Exception;
-    String deleteUser(UserDeleteDto userDeleteDto) throws Exception;
+    String deleteUser(String userId) throws Exception;
     String loginUser(UserLoginDto request) throws Exception;
     public UserInfoDto userInfo(String userid) throws Exception;
     public String getRefreshToken(String userid) throws Exception;

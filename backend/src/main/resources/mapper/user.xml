@@ -13,7 +13,7 @@
         where user_id = #{userId};
     </update>
 
-    <delete id="deleteUser" parameterType="UserDeleteDto">
+    <delete id="deleteUser" parameterType="String">
         delete from user
         where user_id = #{userId} ;
     </delete>

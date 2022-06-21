@@ -147,13 +147,8 @@ public class UserController {
         String result = userService.registUser(request);
         return result;
     }
-//API DOCS 5 : 가입 가능한 회원 ID 조회
-//    @GetMapping("user/regist")
-//    public String registUser(@RequestBody @Validated UserRegistDto request) throws Exception{
-//        String result = userService.registUser(request);
-//        return result;
-//    }
-    @PutMapping("/user/modify")
+
+    @PutMapping("/user")
     public String modifyUser(@RequestBody @Validated UserModifyDto userModifyDto, HttpServletRequest request) throws Exception{
         String result = "fail";
         if(jwtService.checkToken(request.getHeader("access-token"))){
@@ -163,15 +158,14 @@ public class UserController {
         return result;
     }
 
-    @DeleteMapping("/user/delete/{userId}")
-    public String deleteUser(@RequestBody @Validated UserDeleteDto userDeleteDto, HttpServletRequest request) throws Exception{
+    @DeleteMapping("/user/{userId}")
+    public String deleteUser(@PathVariable("userId") String userId, HttpServletRequest request) throws Exception{
         String result = "fail";
-        if(jwtService.checkToken(request.getHeader("access-token"))){
-            result = userService.deleteUser(userDeleteDto);
-        }
+//        if(jwtService.checkToken(request.getHeader("access-token"))){
+            result = userService.deleteUser(userId);
+//        }
         return result;
     }
-//API DOCS 12 : 메일 인증 체크
     @GetMapping("/email")
     public String mailCheck(@RequestParam(value = "userId")String userId, @RequestParam (value= "authKey") String authKey ) throws Exception {
         MailDto mailDto = new MailDto(userId, authKey);
