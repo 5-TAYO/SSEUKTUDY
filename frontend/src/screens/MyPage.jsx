@@ -7,6 +7,7 @@ import StudyManagement from "../components/MyPage/StudyManagement";
 import MyPageSideBar from "../components/MyPage/MyPageSideBar";
 import Index from "../components/MyPage/Index";
 import "./Letters.scss";
+import ModifyPersonalInfo from "../components/MyPage/ModifyPersonalInfo";
 
 function MyPage() {
   return (
@@ -18,7 +19,7 @@ function MyPage() {
         <Route path="community" element={<CommunityActivity />} />
         <Route path="history" element={<ApplicationHistory />} />
         <Route path="management" element={<StudyManagement />} />
-        <Route path="info" element={<StudyManagement />} />
+        <Route path="info" element={<ModifyPersonalInfo />} />
       </Routes>
     </div>
   );
