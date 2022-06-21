@@ -21,6 +21,8 @@ public interface UserMapper {
     int idcheck(String userId) throws SQLException;
 
     int mailSend(MailDto mailDto)throws Exception;
+    int mailCheck(MailDto mailDto)throws Exception;
+    int mailDelete(MailDto mailDto) throws  Exception;
 
 
 }

@@ -35,12 +35,18 @@ public class MailService {
         try{
             javaMailSender.send(message); //메일 전송
             mailDto.setAuthKey(authKey);
+            userMapper.mailDelete(mailDto);
             result = userMapper.mailSend(mailDto);
         }catch (Exception e){
             e.printStackTrace();
         }
 
 
+        return resultType[result];
+    }
+    public String mailCheck(MailDto mailDto) throws Exception{
+        int result = 0;
+        result = userMapper.mailCheck(mailDto);
         return resultType[result];
     }
     public String makeAuthNumber(){

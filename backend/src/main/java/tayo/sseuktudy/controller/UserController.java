@@ -17,7 +17,6 @@ import java.util.Map;
 
 import tayo.sseuktudy.dto.UserRegistDto;
 
-import tayo.sseuktudy.service.UserService;
 import tayo.sseuktudy.service.MailService;
 @RestController
 @CrossOrigin("*")
@@ -173,14 +172,16 @@ public class UserController {
         return result;
     }
 //API DOCS 12 : 메일 인증 체크
-//    @GetMapping("/email/check")
-//    public String checkMail(@PathVariable("userid"){
-//        return "mail";
-//    }
+    @GetMapping("/email")
+    public String mailCheck(@RequestParam(value = "userId")String userId, @RequestParam (value= "authKey") String authKey ) throws Exception {
+        MailDto mailDto = new MailDto(userId, authKey);
+
+        return mailService.mailCheck(mailDto);
+    }
 
 
-    @PostMapping("/email/send")
-    public String execMail(@RequestBody @Validated MailDto request) throws Exception{
-        return mailService.mailSend(request);
+    @PostMapping("/email")
+    public String mailSend(@RequestBody @Validated MailDto mailDto) throws Exception{
+        return mailService.mailSend(mailDto);
     }
 }

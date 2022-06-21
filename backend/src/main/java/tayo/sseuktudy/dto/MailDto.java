@@ -1,19 +1,18 @@
 package tayo.sseuktudy.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class MailDto {
+
 
     private String userId;
     private String authKey;
-    public String getUserId() {
-        return userId;
-    }
-    public void setUserId(String userId) {
+    public MailDto(String userId, String authKey) {
         this.userId = userId;
-    }
-    public String getAuthKey() {
-        return authKey;
-    }
-    public void setAuthKey(String authKey) {
         this.authKey = authKey;
     }
+
 }
