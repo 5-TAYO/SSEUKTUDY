@@ -92,7 +92,28 @@ public class UserController {
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
 
     }
+    @PostMapping("/user/refresh")
+    public ResponseEntity<?> refreshToken(@RequestBody @Validated String userId, HttpServletRequest request) throws Exception{
+        System.out.println(userId);
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        String token = request.getHeader("refresh-token");
+        System.out.println(token);
+        jwtService.checkToken(token);
 
+        System.out.println(userService.getRefreshToken((userId)));
+        if(token.equals(userService.getRefreshToken(userId))) {
+
+            String accessToken= jwtService.createAccessToken("userid", userId);
+            resultMap.put("access-token", accessToken);
+            System.out.println(accessToken);
+            resultMap.put("message", "SUCCESS");
+            status = HttpStatus.ACCEPTED;
+        }else {
+            status = HttpStatus.UNAUTHORIZED;
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+    }
     @GetMapping("/user/info/{userid}")
     public ResponseEntity<Map<String, Object>> getInfo(@PathVariable("userid") String userid,
                                                        HttpServletRequest request) {

@@ -47,8 +47,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String getRefreshToken(String userid) throws Exception {
-        return userMapper.getRefreshToken(userid);
+    public String getRefreshToken(String userId) throws Exception {
+        System.out.println("getRfT : " + userId);
+        System.out.println("userMapper"+ userMapper.getRefreshToken(userId));
+        return userMapper.getRefreshToken(userId);
     }
 
     @Override
