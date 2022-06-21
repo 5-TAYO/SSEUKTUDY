@@ -31,43 +31,10 @@ public class UserController {
 
     @Autowired
     private jwtServiceImpl jwtService;
+    @Autowired
     private MailService mailService;
 
-    @PostMapping("/regist")
-    public String registUser(@RequestBody @Validated UserRegistDto request) throws Exception{
-        String result = userService.registUser(request);
-        return result;
-    }
-    @PutMapping("user")
-    public String modifyUser(@RequestBody @Validated UserRegistDto request) throws Exception{
-        String result = userService.modifyUser(request);
-        return result;
-    }
-
-    @PostMapping("/refresh")
-    public ResponseEntity<?> refreshToken(@RequestBody @Validated String userId, HttpServletRequest request) throws Exception{
-        System.out.println(userId);
-        Map<String, Object> resultMap = new HashMap<>();
-        HttpStatus status = HttpStatus.ACCEPTED;
-        String token = request.getHeader("refresh-token");
-        System.out.println(token);
-        jwtService.checkToken(token);
-
-        System.out.println(userService.getRefreshToken((userId)));
-        if(token.equals(userService.getRefreshToken(userId))) {
-
-            String accessToken= jwtService.createAccessToken("userid", userId);
-            resultMap.put("access-token", accessToken);
-            System.out.println(accessToken);
-            resultMap.put("message", "SUCCESS");
-            status = HttpStatus.ACCEPTED;
-        }else {
-            status = HttpStatus.UNAUTHORIZED;
-        }
-        return new ResponseEntity<Map<String, Object>>(resultMap, status);
-    }
-
-    @PostMapping("/login")
+    @PostMapping("/user/login")
     public ResponseEntity<Map<String, Object>> loginUser(@RequestBody UserLoginDto request) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = null;
@@ -103,7 +70,7 @@ public class UserController {
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
-    @PutMapping("/logout/{userid}")
+    @PutMapping("/user/logout/{userid}")
     public ResponseEntity<?> logoutUser(@PathVariable("userid") String userid){
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.ACCEPTED;
@@ -125,9 +92,29 @@ public class UserController {
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
 
     }
+    @PostMapping("/user/refresh")
+    public ResponseEntity<?> refreshToken(@RequestBody @Validated String userId, HttpServletRequest request) throws Exception{
+        System.out.println(userId);
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        String token = request.getHeader("refresh-token");
+        System.out.println(token);
+        jwtService.checkToken(token);
 
+        System.out.println(userService.getRefreshToken((userId)));
+        if(token.equals(userService.getRefreshToken(userId))) {
 
-    @GetMapping("/user/{userid}")
+            String accessToken= jwtService.createAccessToken("userid", userId);
+            resultMap.put("access-token", accessToken);
+            System.out.println(accessToken);
+            resultMap.put("message", "SUCCESS");
+            status = HttpStatus.ACCEPTED;
+        }else {
+            status = HttpStatus.UNAUTHORIZED;
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+    }
+    @GetMapping("/user/info/{userid}")
     public ResponseEntity<Map<String, Object>> getInfo(@PathVariable("userid") String userid,
                                                        HttpServletRequest request) {
 //		logger.debug("userid : {} ", userid);
@@ -153,23 +140,47 @@ public class UserController {
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
-
-
-    @DeleteMapping("user")
-    public String deleteUser(@RequestBody @Validated UserRegistDto request) throws Exception{
-        String result = userService.deleteUser(request);
+    ////////////////////////////////////////////////////////////
+    // 회원가입 동작방식 : 이메일 유효한지 체크 -> 인증번호 발송 ->인증번호 체크 -> 회원가입
+    ////////////////////////////////////////////////////////////
+    @PostMapping("/user/regist")
+    public String registUser(@RequestBody @Validated UserRegistDto request) throws Exception {
+        String result = userService.registUser(request);
         return result;
     }
-// 인증번호 체크를 위한 곳
-//    @GetMapping("/mail")
+//API DOCS 5 : 가입 가능한 회원 ID 조회
+//    @GetMapping("user/regist")
+//    public String registUser(@RequestBody @Validated UserRegistDto request) throws Exception{
+//        String result = userService.registUser(request);
+//        return result;
+//    }
+    @PutMapping("/user/modify")
+    public String modifyUser(@RequestBody @Validated UserModifyDto userModifyDto, HttpServletRequest request) throws Exception{
+        String result = "fail";
+        if(jwtService.checkToken(request.getHeader("access-token"))){
+            result = userService.modifyUser(userModifyDto);
+        }
+
+        return result;
+    }
+
+    @DeleteMapping("/user/delete/{userId}")
+    public String deleteUser(@RequestBody @Validated UserDeleteDto userDeleteDto, HttpServletRequest request) throws Exception{
+        String result = "fail";
+        if(jwtService.checkToken(request.getHeader("access-token"))){
+            result = userService.deleteUser(userDeleteDto);
+        }
+        return result;
+    }
+//API DOCS 12 : 메일 인증 체크
+//    @GetMapping("/email/check")
 //    public String checkMail(@PathVariable("userid"){
 //        return "mail";
 //    }
 
 
-    @PostMapping("/mail")
+    @PostMapping("/email/send")
     public String execMail(@RequestBody @Validated MailDto request) throws Exception{
         return mailService.mailSend(request);
     }
-
 }

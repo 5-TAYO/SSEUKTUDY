@@ -4,9 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tayo.sseuktudy.dto.UserInfoDto;
-import tayo.sseuktudy.dto.UserLoginDto;
-import tayo.sseuktudy.dto.UserRegistDto;
+import tayo.sseuktudy.dto.*;
 import tayo.sseuktudy.mapper.UserMapper;
 
 import java.util.HashMap;
@@ -26,11 +24,16 @@ public class UserServiceImpl implements UserService {
         return resultType[result];
     }
     @Override
-    public String modifyUser(UserRegistDto request) throws Exception{
-        int result = userMapper.modifyUser(request);
+    public String modifyUser(UserModifyDto userModifyDto) throws Exception{
+        int result = userMapper.modifyUser(userModifyDto);
         return resultType[result];
     }
 
+    @Override
+    public String deleteUser(UserDeleteDto userDeleteDto) throws Exception{
+        int result = userMapper.deleteUser(userDeleteDto);
+        return resultType[result];
+    }
     @Override
     public String loginUser(UserLoginDto request) throws Exception {
         UserLoginDto result = userMapper.loginUser(request);
@@ -76,9 +79,4 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    @Override
-    public String deleteUser(UserRegistDto request) throws Exception{
-        int result = userMapper.deleteUser(request);
-        return resultType[result];
-    }
 }
