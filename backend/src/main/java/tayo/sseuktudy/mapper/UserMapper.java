@@ -13,6 +13,7 @@ public interface UserMapper {
     int modifyUser(UserModifyDto userDeleteDto)throws Exception;
 
     int deleteUser(UserDeleteDto userDeleteDto)throws Exception;
+    int searchUser(MailDto mailDto) throws Exception;
     UserLoginDto loginUser(UserLoginDto request) throws Exception;
     public UserInfoDto userInfo(String userId) throws SQLException;
     public int saveRefreshToken(Map<String, String> map) throws SQLException;
@@ -20,9 +21,6 @@ public interface UserMapper {
     public String getRefreshToken(String userId) throws SQLException;
     int idcheck(String userId) throws SQLException;
 
-    int mailSend(MailDto mailDto)throws Exception;
-    int mailCheck(MailDto mailDto)throws Exception;
-    int mailDelete(MailDto mailDto) throws  Exception;
 
 
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="tayo.sseuktudy.mapper.MailMapper">
+
+    <insert id="mailSend" parameterType="MailDto">
+        insert into mail (user_id, auth_key, delete_date)
+            value (#{userId}, #{authKey}, now());
+    </insert>
+    <delete id="mailDelete" parameterType="MailDto">
+        delete from mail
+        where user_id = #{userId};
+    </delete>
+    <select id="mailCheck" parameterType="MailDto" resultType="int">
+        <![CDATA[
+        select COUNT(user_id) from mail
+         where TIMESTAMPDIFF(SECOND, delete_date, now()) < 180 and user_id = #{userId} and auth_key = #{authKey} ;
+        ]]>
+
+    </select>
+
+    </mapper>
