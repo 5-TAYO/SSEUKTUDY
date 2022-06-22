@@ -92,9 +92,7 @@
         height: vw(38px);
       }
       &__input {
-        width: vw(800px);
-        font-family: "NotoSansMedium";
-
+        width: vw(200px);
         &:focus {
           border-bottom: 1px solid $PINK-SUB;
         }
