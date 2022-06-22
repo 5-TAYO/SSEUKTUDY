@@ -1,0 +1,44 @@
+.letters-sidebar {
+  padding: vw(40px);
+  width: vw(270px);
+
+  .profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: vw(40px);
+
+    .profile-mini-img {
+      height: vw(90px);
+      width: vw(90px);
+      fill: $PINK-SUB;
+    }
+    .edit:hover {
+      cursor: pointer;
+    }
+    & :last-child {
+      margin: vw(20px);
+      text-decoration: underline;
+      color: $GRAY-76;
+    }
+
+    * {
+      margin: vw(5px);
+    }
+  }
+
+  .menu {
+    .sub-menu-title {
+      color: $GRAY-76;
+    }
+    .sub-menu-title.active {
+      color: $PINK-SUB;
+    }
+  }
+
+  a {
+    display: block;
+    margin: vw(14px) vw(5px);
+  }
+}

@@ -1,0 +1,107 @@
+#study-regist-form {
+  padding: vw(70px) vw(435px) vw(400px) vw(435px);
+
+  .back-btn {
+    margin-right: auto;
+    &__img {
+      width: vw(24px);
+      height: vw(24px);
+    }
+  }
+  .title {
+    padding-bottom: vw(20px);
+    margin-bottom: vw(60px);
+
+    width: vw(241px);
+
+    border-bottom: 2px solid $PINK-SUB;
+  }
+  .user {
+    margin-bottom: vw(16px);
+
+    &__img {
+      margin-bottom: vw(12px);
+
+      width: vw(64px);
+      height: vw(64px);
+    }
+  }
+  .type {
+    margin-right: auto;
+    margin-bottom: vw(8px);
+  }
+
+  input {
+    margin-bottom: vw(16px);
+
+    width: 100%;
+    height: vw(48px);
+
+    text-indent: vw(12px);
+    border: 1px solid $GRAY-DB;
+    border-radius: 4px;
+  }
+  input:disabled {
+    background-color: $GRAY-DB;
+  }
+
+  .self-intro {
+    padding: vw(12px) vw(14px) 0 vw(14px);
+    margin-bottom: vw(16px);
+
+    width: 100%;
+    height: vw(200px);
+    resize: none;
+  }
+
+  .self-intro-cnt {
+    margin-right: vw(10px);
+    margin-bottom: vw(16px);
+
+    margin-left: auto;
+  }
+
+  input:focus {
+    border: 1px solid $PINK-SUB;
+  }
+  textarea {
+    border: 1px solid $GRAY-DB;
+    border-radius: 4px;
+
+    line-height: vw(22px);
+    outline-color: $PINK-SUB;
+  }
+
+  .question-title {
+    margin-bottom: vw(20px);
+  }
+
+  #pre-question + #pre-question {
+    margin-top: vw(16px);
+  }
+
+  .btn {
+    margin-top: vw(40px);
+    width: vw(329px);
+    height: vw(48px);
+
+    border-radius: 4px;
+    color: $WHITE;
+  }
+
+  .btn + .btn {
+    margin-top: vw(16px);
+  }
+
+  .accept-btn {
+    background-color: $PINK-LIGHT;
+  }
+
+  .refuse-btn {
+    background-color: #9a9a9a;
+  }
+
+  .apply-btn {
+    background-color: $PINK-MAIN;
+  }
+}

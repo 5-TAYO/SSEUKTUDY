@@ -1,0 +1,22 @@
+.with-side-layout-wrapper {
+  padding: vw(40px);
+  width: vw(870px);
+  .with-side-layout-header {
+    display: flex;
+    padding: vw(20px) 0;
+    align-items: flex-end;
+    justify-content: space-between;
+    button {
+      width: vw(42px);
+      height: vw(26px);
+      border: 1px solid $GRAY-CB;
+      border-radius: 5px;
+      font-size: vw(13px);
+      color: $GRAY-9E;
+      margin: 0 vw(8px);
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2),
+        0 2px 2px 0 rgba(0, 0, 0, 0.19);
+      text-align: center;
+    }
+  }
+}

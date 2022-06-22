@@ -1,4 +1,5 @@
 import React from "react";
+
 import "./Main.scss";
 import { Link } from "react-router-dom";
 import StudyCardList from "@components/Main/StudyCardList";

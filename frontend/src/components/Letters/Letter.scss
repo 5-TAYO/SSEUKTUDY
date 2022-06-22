@@ -1,0 +1,16 @@
+.letter {
+  display: grid;
+  padding: vw(5px);
+  grid-template-columns: 1fr 4fr 10fr 5fr;
+  vertical-align: middle;
+  color: $GRAY-9E;
+  border-bottom: 1px solid $GRAY-DB;
+  & > * {
+    padding: vw(5px);
+    padding-left: vw(10px);
+    position: relative;
+  }
+  &.unread {
+    color: $BLUE;
+  }
+}
