@@ -42,7 +42,7 @@ function MainNavBar() {
           <Link className="right-nav__link fs-16" to="/login">
             로그인
           </Link>
-          <Link className="right-nav__link fs-16" to="/">
+          <Link className="right-nav__link fs-16" to="/join">
             회원가입
           </Link>
         </nav>
