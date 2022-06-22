@@ -3,11 +3,15 @@
 
 <mapper namespace="tayo.sseuktudy.mapper.QuestionMapper">
 
-    <insert id="registQuestion" parameterType="QuestionDto">
+    <insert id="registQuestion" parameterType="QuestionRegistDto">
         insert into question (study_id, question_content)
             value (#{studyId}, #{questionContent});
     </insert>
 
+    <update id="modifyQuestion" parameterType="QuestionModifyDto">
+        update question set question_content = #{questionContent}
+        where question_id = #{questionId}
+    </update>
 
 
 </mapper>
