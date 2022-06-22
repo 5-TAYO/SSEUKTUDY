@@ -139,11 +139,11 @@ function StudyDetail() {
               신청하기
             </Link>
           </div>
-          <div className="icon-container flex align-center fs-12">
+          <div className="icon-container flex align-center">
             <img className="icon" src={RedLikeIcon} alt="좋아요수" />
-            <div className="icon-cnt">{getCounts(1231231213)}</div>
+            <div className="icon-cnt fs-12 roReg">{getCounts(1231231213)}</div>
             <img className="icon" src={ViewIcon} alt="조회수" />
-            <div className="icon-cnt">{getCounts(9999999)}</div>
+            <div className="icon-cnt fs-12 roReg">{getCounts(9999999)}</div>
           </div>
         </main>
         <footer>
