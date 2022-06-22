@@ -107,9 +107,9 @@ function StudyList() {
         <header className="flex align-center notoMid">
           <img className="list-up__icon" src={StudyListUpIcon} alt="" />
           <p className="list-up__title fs-20">스터디 모아보기</p>
-          <p className="list-up__cnt">총</p>
-          <p className="list-up__cnt--emp">27859603</p>
-          <p className="list-up__cnt">개</p>
+          <p className="list-up__cnt fs-16 notoMid">총</p>
+          <p className="list-up__cnt--emp fs-16 notoMid">27859603</p>
+          <p className="list-up__cnt fs-16 notoMid">개</p>
           <select
             className="list-up__selector notoMid fs-16"
             name="selector"
