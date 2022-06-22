@@ -56,7 +56,6 @@ public class StudyController {
         logger.info("스터디 수정 요청");
 
         int result = studyService.modifyStudy(studyModifyDto); // 스터디 테이블에 집어넣기
-        // 사전질문 테이블에도 집어넣는 서비스 필요
 
         if(result == 0){
             resultMap.put("message", "FAIL");
