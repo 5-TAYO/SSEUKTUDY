@@ -6,7 +6,7 @@
     width: vw(1170px);
     height: vw(360px);
 
-    background-color: $GRAY_CB;
+    background-color: $GRAY-CB;
 
     color: $WHITE;
     font-size: vw(128px); //__fix
@@ -16,17 +16,17 @@
     width: vw(1170px);
     height: vw(371px);
 
-    border-top: 2px solid $PINK_SUB;
-    border-bottom: 2px solid $PINK_SUB;
+    border-top: 2px solid $PINK-SUB;
+    border-bottom: 2px solid $PINK-SUB;
 
     @mixin conditionBox {
       display: flex;
       align-items: center;
 
       font-size: vw(20px);
-      color: $GRAY_61;
+      color: $GRAY-61;
 
-      border-bottom: 1px solid $GRAY_DB;
+      border-bottom: 1px solid $GRAY-DB;
 
       .options {
         flex-wrap: wrap;
@@ -49,7 +49,7 @@
         width: vw(17px);
         height: vw(17px);
 
-        accent-color: $PINK_SUB;
+        accent-color: $PINK-SUB;
       }
     }
 
@@ -73,7 +73,7 @@
 
       input[type="date"] {
         font-size: vw(15px);
-        color: $GRAY_61;
+        color: $GRAY-61;
       }
 
       .tilde {
@@ -96,7 +96,7 @@
         font-family: "NotoSansMedium";
 
         &:focus {
-          border-bottom: 1px solid $PINK_SUB;
+          border-bottom: 1px solid $PINK-SUB;
         }
       }
 
@@ -109,7 +109,7 @@
         border-radius: 4px;
 
         color: $WHITE;
-        background-color: $PINK_SUB;
+        background-color: $PINK-SUB;
       }
     }
   }
@@ -117,7 +117,7 @@
     header {
       margin-bottom: vw(36px);
     }
-    color: $GRAY_61;
+    color: $GRAY-61;
     &__icon {
       width: vw(32px);
       height: vw(32px);
@@ -127,19 +127,19 @@
       margin-right: vw(14px);
       min-width: vw(148px);
 
-      border-right: 1px solid $GRAY_CB;
+      border-right: 1px solid $GRAY-CB;
     }
     &__cnt {
       margin-right: vw(6px);
     }
     &__cnt--emp {
       margin-right: vw(6px);
-      color: $PINK_SUB;
+      color: $PINK-SUB;
     }
 
     &__selector {
       margin-left: auto;
-      color: $GRAY_61;
+      color: $GRAY-61;
       border: none;
     }
   }
