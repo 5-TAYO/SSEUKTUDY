@@ -109,6 +109,8 @@
 
           border: 1px solid $GRAY-DB;
           border-radius: 4px;
+
+          text-indent: vw(8px);
         }
 
         &__input:focus {

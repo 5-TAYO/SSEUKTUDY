@@ -154,7 +154,7 @@ function StudyDetail() {
               alt="유저더미"
               className="comment__user-img"
             />
-            <input type="text" className="comment__input" />
+            <input type="text" className="comment__input fs-16 notoMid" />
             <button
               type="button"
               className="comment__regist-btn notoBold fs-16 "
