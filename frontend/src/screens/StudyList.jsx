@@ -7,7 +7,7 @@ import StudyListUpIcon from "@images/StudyListUp.svg";
 function StudyList() {
   const [listUpCon, setListUpcon] = useState("likes");
 
-  const placeList = ["온라인", "오프라인", "온/오프라인"];
+  const placeList = ["전체", "온라인", "오프라인", "온/오프라인"];
   const categoryList = [
     "전체",
     "IT",
