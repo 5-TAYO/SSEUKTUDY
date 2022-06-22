@@ -13,8 +13,11 @@
     width: vw(670px);
 
     .header {
+      .title {
+        line-height: vw(35px);
+      }
       .info {
-        margin-top: vw(16px);
+        margin-top: vw(18px);
         padding-bottom: vw(25px);
         justify-content: space-between;
 
@@ -42,6 +45,7 @@
       }
       .study-info {
         .info-line {
+          // margin-bottom: vw(8px);
           &__title {
             margin-right: vw(22px);
             color: $GRAY-9E;
