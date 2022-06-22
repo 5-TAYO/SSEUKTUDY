@@ -24,7 +24,7 @@ import tayo.sseuktudy.service.MailService;
 public class UserController {
 
 
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+            private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -115,7 +115,7 @@ public class UserController {
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
     @GetMapping("/user/info/{userid}")
-    public ResponseEntity<Map<String, Object>> getInfo(@PathVariable("userid") String userid,
+    public ResponseEntity<Map<String, Object>> getInfo(@PathVariable("userid") String userId,
                                                        HttpServletRequest request) {
 //		logger.debug("userid : {} ", userid);
         Map<String, Object> resultMap = new HashMap<>();
@@ -124,13 +124,13 @@ public class UserController {
             logger.info("사용 가능한 토큰!!!");
             try {
 //				로그인 사용자 정보.
-                UserInfoDto userInfoDto = userService.userInfo(userid);
+                UserInfoDto userInfoDto = userService.userInfo(userId);
                 resultMap.put("userInfo", userInfoDto);
                 resultMap.put("message", "SUCCESS");
                 status = HttpStatus.ACCEPTED;
             } catch (Exception e) {
                 logger.error("정보조회 실패 : {}", e);
-                resultMap.put("message", e.getMessage());
+                    resultMap.put("message", e.getMessage());
                 status = HttpStatus.INTERNAL_SERVER_ERROR;
             }
         } else {

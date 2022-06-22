@@ -94,8 +94,8 @@ public class jwtServiceImpl implements jwtService {
 			//setSigningKey : JWS 서명 검증을 위한  secretkey 셋팅
 			//parseClaimsJws : 파싱하여 원본 jws 만들기
 			Jws<Claims> claims = Jwts.parser().setSigningKey(this.generateKey()).parseClaimsJws(jwt);
-			//Claims 는 Map의 구현체 형태
-			logger.info("claims: {}", claims);
+
+			logger.debug("claim : ", claims);
 			return true;
 		} catch (Exception e) {
 				logger.error(e.getMessage());
