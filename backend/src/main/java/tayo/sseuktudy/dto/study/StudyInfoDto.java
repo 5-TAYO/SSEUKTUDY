@@ -3,11 +3,10 @@ package tayo.sseuktudy.dto.study;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
 
 @Getter
 @Setter
-public class StudyRegistDto {
+public class StudyInfoDto {
     int studyId;
     String studyTitle;
     String studyIntroduction;
@@ -22,6 +21,5 @@ public class StudyRegistDto {
     String studyStatus;
     String studyLeaderId;
     String studyContent;
-    List<String> studyPrequestion;
     int studyView;
 }
