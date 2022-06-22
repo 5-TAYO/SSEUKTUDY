@@ -26,10 +26,13 @@ function StudyList() {
     "프론트4",
     "백엔드4"
   ];
-
   const handleListUpCon = e => {
     console.log(listUpCon);
     setListUpcon(e.target.value);
+  };
+
+  const showCalPicker = e => {
+    e.target.showPicker();
   };
 
   return (
@@ -72,9 +75,9 @@ function StudyList() {
         </div>
         <div className="condition__period">
           <p className="title">스터디기간</p>
-          <input type="date" />
+          <input type="date" onClick={showCalPicker} />
           <p className="tilde">~</p>
-          <input type="date" />
+          <input type="date" onClick={showCalPicker} />
         </div>
         <div className="condition__search flex align-center">
           <img
