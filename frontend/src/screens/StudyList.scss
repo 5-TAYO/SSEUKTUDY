@@ -14,7 +14,7 @@
   .condition {
     margin-bottom: vw(33px);
     width: vw(1170px);
-    height: vw(327px);
+    height: vw(371px);
 
     border-top: 2px solid $PINK_SUB;
     border-bottom: 2px solid $PINK_SUB;
@@ -23,17 +23,15 @@
       display: flex;
       align-items: center;
 
-      height: vw(78px);
-
       font-size: vw(20px);
       color: $GRAY_61;
 
       border-bottom: 1px solid $GRAY_DB;
 
       .options {
-        height: 100%;
-        overflow-x: scroll;
+        flex-wrap: wrap;
       }
+
       .title {
         min-width: vw(173px);
         font-family: "NotoSansMedium";
@@ -41,27 +39,38 @@
         margin-left: vw(28px);
       }
       label {
+        margin-right: vw(15px);
         white-space: nowrap;
-      }
-      label + label {
-        margin-left: vw(15px);
       }
 
       input[type="radio"] {
+        margin-right: vw(6px);
+
+        width: vw(17px);
+        height: vw(17px);
+
         accent-color: $PINK_SUB;
       }
     }
 
     &__place {
       @include conditionBox();
+      height: vw(78px);
     }
 
     &__category {
       @include conditionBox();
+      height: vw(120px);
+
+      .options {
+        height: vw(60px);
+      }
     }
 
     &__period {
       @include conditionBox();
+      height: vw(78px);
+
       input[type="date"] {
         font-size: vw(15px);
         color: $GRAY_61;
