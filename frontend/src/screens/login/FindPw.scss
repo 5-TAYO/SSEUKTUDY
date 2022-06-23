@@ -1,13 +1,12 @@
 #find_pw {
   margin: vw(100px) vw(483px);
-
+  padding: vw(64px) vw(72px);
   border-radius: vw(20px);
   width: vw(473px);
-  height: vw(780px);
   border: solid 1px $GRAY-DB;
 
-  .mail_text {
-    margin: vw(64px) vw(70px) vw(36px) vw(72px);
+  .pw_text {
+    padding-bottom: vw(40px);
     text-align: left;
     &_desc {
       line-height: vw(35px);
@@ -18,13 +17,13 @@
     }
   }
 
-  .mail_input {
-    // margin: 0 0 vw(16px) 0;
+  .pw_input {
+    margin-bottom: vw(36px);
     &_title {
-      margin: 0 0 vw(19px) 0;
+      margin-bottom: vw(12px);
     }
     input {
-      border: solid vw(1px) $GRAY-DB;
+      border: solid 1px $GRAY-DB;
       padding-left: vw(12px);
       height: vw(48px);
       width: vw(329px);
@@ -38,11 +37,11 @@
     &_failed {
       color: $RED;
       line-height: vw(17px);
-      margin: 0 0 vw(16px) 0;
+      margin-bottom: vw(12px);
     }
   }
 
-  .join_mail_next_btn {
+  .join_pw_next_btn {
     width: vw(329px);
     height: vw(48px);
     border-radius: vw(4px);
@@ -64,7 +63,7 @@
     }
   }
 
-  .notice_mail {
+  .notice_pw {
     height: vw(160px);
     width: vw(329px);
     background-color: $GRAY-F3;
