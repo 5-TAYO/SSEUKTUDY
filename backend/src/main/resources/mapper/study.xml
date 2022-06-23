@@ -7,11 +7,22 @@
             value (#{studyTitle}, #{studyLeaderId}, #{studyStatus}, #{studyIntroduction}, #{studyStartdate}, #{studyEnddate}, #{studyGoals}, #{studyType}, #{studyUserMin}, #{studyUserMax},#{studyContent}, #{studyPlace},#{studyCategoryId}, #{studyView});
     </insert>
 
+    <insert id="joinStudy" parameterType="StudyJoinDto">
+        insert into user_join_study (user_id, study_id, user_status)
+            value (#{userId}, #{studyId}, #{userStatus})
+    </insert>
+
+
     <update id="modifyStudy" parameterType="StudyModifyDto">
         update study set study_title = #{studyTitle}, study_leader_id= #{studyLeaderId}, study_status = #{studyStatus}, study_introduction = #{studyIntroduction}, study_startdate = #{studyStartdate},
         study_enddate = #{studyEnddate}, study_goals = #{studyGoals}, study_type = #{studyType}, study_user_min = #{studyUserMin}, study_user_max = #{studyUserMax}, study_content = #{studyContent},
         study_place = #{studyPlace}, study_category_id = #{studyCategoryId}
         where study_id = #{studyId}
     </update>
+
+    <delete id="deleteStudy" parameterType="StudyDeleteDto">
+        delete from study
+        where study_id=#{studyId}
+    </delete>
 
 </mapper>
