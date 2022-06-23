@@ -93,19 +93,14 @@ public class UserController {
     }
     @PostMapping("/user/refresh")
     public ResponseEntity<?> refreshToken(@RequestBody @Validated String userId, HttpServletRequest request) throws Exception{
-        System.out.println(userId);
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.ACCEPTED;
         String token = request.getHeader("refresh-token");
-        System.out.println(token);
-        jwtService.checkToken(token);
 
-        System.out.println(userService.getRefreshToken((userId)));
         if(token.equals(userService.getRefreshToken(userId))) {
 
             String accessToken= jwtService.createAccessToken("userid", userId);
             resultMap.put("access-token", accessToken);
-            System.out.println(accessToken);
             resultMap.put("message", "SUCCESS");
             status = HttpStatus.ACCEPTED;
         }else {
@@ -113,23 +108,23 @@ public class UserController {
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
-    @GetMapping("/user/info/{userid}")
-    public ResponseEntity<Map<String, Object>> getInfo(@PathVariable("userid") String userId,
-                                                       HttpServletRequest request) {
+    @GetMapping("/user/info")
+    public ResponseEntity<Map<String, Object>> getInfo(HttpServletRequest request) {
 //		logger.debug("userid : {} ", userid);
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.UNAUTHORIZED;
-        if (jwtService.checkToken(request.getHeader("access-token"))) {
+        String decodeUserId = jwtService.decodeToken(request.getHeader("access-token"));
+        if (! decodeUserId.equals("access token timeout")) {
             logger.info("사용 가능한 토큰!!!");
             try {
 //				로그인 사용자 정보.
-                UserInfoDto userInfoDto = userService.userInfo(userId);
+                UserInfoDto userInfoDto = userService.userInfo(decodeUserId);
                 resultMap.put("userInfo", userInfoDto);
                 resultMap.put("message", "SUCCESS");
                 status = HttpStatus.ACCEPTED;
             } catch (Exception e) {
                 logger.error("정보조회 실패 : {}", e);
-                    resultMap.put("message", e.getMessage());
+                    resultMap.put("message", "FAIL");
                 status = HttpStatus.INTERNAL_SERVER_ERROR;
             }
         } else {
@@ -151,9 +146,7 @@ public class UserController {
     @PutMapping("/user")
     public String modifyUser(@RequestBody @Validated UserModifyDto userModifyDto, HttpServletRequest request) throws Exception{
         String result = "fail";
-        if(jwtService.checkToken(request.getHeader("access-token"))){
-            result = userService.modifyUser(userModifyDto);
-        }
+        result = userService.modifyUser(userModifyDto);
 
         return result;
     }
@@ -161,9 +154,8 @@ public class UserController {
     @DeleteMapping("/user/{userId}")
     public String deleteUser(@PathVariable("userId") String userId, HttpServletRequest request) throws Exception{
         String result = "fail";
-//        if(jwtService.checkToken(request.getHeader("access-token"))){
-            result = userService.deleteUser(userId);
-//        }
+        result = userService.deleteUser(userId);
+//
         return result;
     }
     @GetMapping("/email")
