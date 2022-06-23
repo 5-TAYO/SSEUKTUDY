@@ -4,7 +4,7 @@
 <mapper namespace="tayo.sseuktudy.mapper.NoteMapper">
     <insert id="registNote" parameterType="NoteRegistDto">
         insert into note (user_id_send, user_id_receive, note_is_read, note_send_time, note_content)
-            value (#{userIdSend},#{userIdReceive},'F',now(),#{noteContent});
+            value (#{userIdSend},#{userIdReceive},FALSE,now(),#{noteContent});
     </insert>
 
 
