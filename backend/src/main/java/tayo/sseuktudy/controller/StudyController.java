@@ -38,12 +38,12 @@ public class StudyController {
         int result = studyService.registStudy(studyRegistDto); // 스터디 테이블에 집어넣기
         // 사전질문 테이블에도 집어넣는 서비스 필요
 
-        if(result == 0){
-            resultMap.put("message", "FAIL");
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }else{
+        if(result != 0){
             resultMap.put("message", "SUCCESS");
             status = HttpStatus.ACCEPTED;
+        }else{
+            resultMap.put("message", "FAIL");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
 
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
@@ -58,12 +58,13 @@ public class StudyController {
 
         int result = studyService.modifyStudy(studyModifyDto); // 스터디 테이블에 집어넣기
 
-        if(result == 0){
-            resultMap.put("message", "FAIL");
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }else{
+        if(result != 0){
             resultMap.put("message", "SUCCESS");
             status = HttpStatus.ACCEPTED;
+        }else{
+            resultMap.put("message", "FAIL");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+
         }
 
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
@@ -78,12 +79,13 @@ public class StudyController {
 
         int result = studyService.deleteStudy(studyDeleteDto);
 
-        if(result == 0){
-            resultMap.put("message", "FAIL");
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }else{
+        if(result != 0){
             resultMap.put("message", "SUCCESS");
             status = HttpStatus.ACCEPTED;
+
+        }else{
+            resultMap.put("message", "FAIL");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
 
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
