@@ -5,13 +5,13 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Getter
 @Setter
-public class StudyRegistDto {
+@Getter
+public class StudyModifyDto {
     int studyId;
     String studyTitle;
     String studyIntroduction;
-    int studyCategoryId;
+    String studyCategoryId;
     String studyGoals;
     String studyType;
     String studyPlace;
@@ -22,6 +22,6 @@ public class StudyRegistDto {
     String studyStatus;
     String studyLeaderId;
     String studyContent;
-    List<String> studyPrequestion;
     int studyView;
+    List<String> questions;
 }
