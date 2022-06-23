@@ -8,4 +8,5 @@ import java.util.List;
 public interface NoteService {
     public int registNote(NoteRegistDto noteRegistDto);
     public List<NoteInfoDto> listSendNote(String userId);
+    public List<NoteInfoDto> listReciveNote(String userId);
 }

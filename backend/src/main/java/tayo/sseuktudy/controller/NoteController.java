@@ -52,4 +52,21 @@ public class NoteController {
         }
         return new ResponseEntity<Map<String, Object>>(resultMap,status);
     }
+
+    @GetMapping ("/note/receive")
+    public ResponseEntity<Map<String, Object>> listReciveNote(HttpServletRequest request){
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = null;
+        String accessToken = request.getHeader("access-token");
+        String userId = "ssafy";
+        try{
+            resultMap.put("list",noteService.listReciveNote(userId));
+            resultMap.put("message", "SUCCESS");
+            status = HttpStatus.ACCEPTED;
+        }catch (Exception e){
+            resultMap.put("message", "FAIL");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap,status);
+    }
 }

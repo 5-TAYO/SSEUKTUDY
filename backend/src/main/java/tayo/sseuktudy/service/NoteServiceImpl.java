@@ -26,5 +26,9 @@ public class NoteServiceImpl implements NoteService{
     public List<NoteInfoDto> listSendNote(String userId) {
         return noteMapper.listSendNote(userId);
     }
+    @Override
+    public List<NoteInfoDto> listReciveNote(String userId) {
+        return noteMapper.listReciveNote(userId);
+    }
 
 }
