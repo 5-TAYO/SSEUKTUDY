@@ -5,8 +5,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class NoteRegistDto {
+public class NoteInfoDto {
+    int noteId;
     String userIdSend;
     String userIdReceive;
+    boolean noteIsRead;
+    String noteSendTime;
     String noteContent;
 }

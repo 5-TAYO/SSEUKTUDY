@@ -3,13 +3,12 @@ package tayo.sseuktudy.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import tayo.sseuktudy.dto.note.NoteInfoDto;
 import tayo.sseuktudy.dto.note.NoteRegistDto;
 import tayo.sseuktudy.service.NoteServiceImpl;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,5 +36,20 @@ public class NoteController {
         }
         return new ResponseEntity<Map<String, Object>>(resultMap,status);
     }
-
+    @GetMapping ("/note/send")
+    public ResponseEntity<Map<String, Object>> listSendNote(HttpServletRequest request){
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = null;
+        String accessToken = request.getHeader("access-token");
+        String userId = "ssafy";
+        try{
+            resultMap.put("list",noteService.listSendNote(userId));
+            resultMap.put("message", "SUCCESS");
+            status = HttpStatus.ACCEPTED;
+        }catch (Exception e){
+            resultMap.put("message", "FAIL");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap,status);
+    }
 }
