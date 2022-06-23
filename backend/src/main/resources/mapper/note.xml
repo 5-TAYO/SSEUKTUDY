@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tayo.sseuktudy.mapper.NoteMapper">
+    <insert id="registNote" parameterType="NoteRegistDto">
+        insert into note (user_id_send, user_id_receive, note_is_read, note_send_time, note_content)
+            value (#{userIdSend},#{userIdReceive},'F',now(),#{noteContent});
+    </insert>
+
+
+</mapper>
