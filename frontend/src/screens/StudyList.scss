@@ -43,8 +43,9 @@
         white-space: nowrap;
       }
 
-      input[type="radio"] {
-        margin-right: vw(6px);
+      input[type="radio"],
+      input[type="checkbox"] {
+        margin-right: vw(4px);
 
         width: vw(17px);
         height: vw(17px);
