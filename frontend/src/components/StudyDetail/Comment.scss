@@ -1,7 +1,7 @@
 #comment {
   padding-top: vw(32px);
   width: 100%;
-  border-bottom: 1px solid $GRAY_DB;
+  border-bottom: 1px solid $GRAY-DB;
 
   header {
     margin-bottom: vw(24px);
@@ -17,7 +17,7 @@
       justify-content: space-around;
 
       &__reg-date {
-        color: $GRAY_61;
+        color: $GRAY-61;
       }
     }
   }
@@ -25,14 +25,14 @@
     margin-bottom: vw(32px);
     min-height: vw(22px);
 
-    color: $GRAY_61;
+    color: $GRAY-61;
   }
   #tooltip {
     display: none;
     position: absolute;
     width: vw(80px);
     height: vw(28px);
-    background-color: $GRAY_ED;
+    background-color: $GRAY-ED;
 
     border-radius: 4px;
     &:hover {
