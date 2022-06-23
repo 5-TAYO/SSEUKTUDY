@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { ReactComponent as Avatar } from "@images/Avatar.svg";
 import { ReactComponent as Heart } from "@images/Heart.svg";
 import { ReactComponent as Eye } from "@images/Eye.svg";
+import getCounts from "@utils/getCounts";
 import "./PostCard.scss";
 
 function PostCard({
@@ -12,7 +13,7 @@ function PostCard({
     <div className="post-card">
       <p className="notoMid fs-12 category">{category.join(" / ")}</p>
       <p className="notoMid fs-22 title">{name}</p>
-      <p className="notoMid fs-16 content">{content}</p>
+      <p className="notoMid fs-16 notoReg content">{content}</p>
       <div className="post-card-footer roReg fs-12">
         <div className="post-card-footer-item">
           <Avatar className="avatar" />
@@ -21,11 +22,11 @@ function PostCard({
         </div>
         <div className="post-card-footer-item">
           <Eye className="eye" />
-          <p>{hitCount}</p>
+          <p>{getCounts(hitCount)}</p>
         </div>
         <div className="post-card-footer-item">
           <Heart className="heart" />
-          <p>{likeCount}</p>
+          <p>{getCounts(likeCount)}</p>
         </div>
       </div>
     </div>
