@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.0'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'war'
 }
 
 group = 'tayo'
@@ -16,7 +17,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-mail' //메일 서버 디팬던시
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
-	implementation 'io.jsonwebtoken:jjwt:0.9.0'
+	implementation 'io.jsonwebtoken:jjwt:0.9.0' //jwt 토큰
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat' //배포
 	runtimeOnly 'mysql:mysql-connector-java:8.0.29'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation group: 'org.glassfish.jaxb', name: 'jaxb-runtime', version: '2.3.2' //jwt 토큰
