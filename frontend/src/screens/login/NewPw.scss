@@ -25,6 +25,10 @@
       width: vw(329px);
       border-radius: vw(4px);
     }
+    input:focus {
+      border: 1px solid $PINK-SUB;
+      box-shadow: 0px 0px 4px #ff3387;
+    }
 
     &_box {
       margin-bottom: vw(16px);

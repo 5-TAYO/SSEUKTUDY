@@ -21,6 +21,7 @@ function JoinUserInfo() {
               type="email"
               placeholder="jmlee9707@naver.com"
               className="info_input_email notoReg fs-15"
+              disabled
             />
           </div>
         </div>
