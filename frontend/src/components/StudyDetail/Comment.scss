@@ -27,4 +27,18 @@
 
     color: $GRAY_61;
   }
+  #tooltip {
+    display: none;
+    position: absolute;
+    width: vw(80px);
+    height: vw(28px);
+    background-color: $GRAY_ED;
+
+    border-radius: 4px;
+    &:hover {
+      background-color: $PINK-SUB;
+      color: $WHITE;
+      cursor: pointer;
+    }
+  }
 }
