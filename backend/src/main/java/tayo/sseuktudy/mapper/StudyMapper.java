@@ -11,6 +11,8 @@ import java.util.Optional;
 public interface StudyMapper {
 
     public int registStudy(StudyRegistDto studyRegistDto);
+
     public int modifyStudy(StudyModifyDto studyModifyDto);
 //    public StudyInfoDto getStudyInfo()
+
 }

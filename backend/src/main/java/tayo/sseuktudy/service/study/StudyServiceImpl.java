@@ -15,7 +15,6 @@ import java.util.Optional;
 @Service
 public class StudyServiceImpl implements StudyService{
 
-
     private final StudyMapper studyMapper;
     private final QuestionMapper questionMapper;
 

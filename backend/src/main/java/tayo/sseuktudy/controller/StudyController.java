@@ -47,6 +47,7 @@ public class StudyController {
 
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
+<<<<<<< F04_BE_정현명
 
     @PutMapping("/study")
     public ResponseEntity<Map<String, Object>> modifyStudy(@RequestBody StudyModifyDto studyModifyDto){
@@ -67,4 +68,6 @@ public class StudyController {
 
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
+=======
+>>>>>>> back
 }
