@@ -21,12 +21,18 @@ function JoinFinish() {
           목표까지, 스윽터디가 함께 할게요!
         </div>
       </div>
-      <div className="flex align-center justify-center">
+      <div className="flex column align-center justify-center">
         <Link
-          to="/"
+          to="/main"
           className="finish_btn notoMid fs-15 flex align-center justify-center"
         >
           스윽터디 하러가기
+        </Link>
+        <Link
+          to="/join/add"
+          className="more_info_btn notoMid fs-15 flex align-center justify-center"
+        >
+          추가 정보 작성하기
         </Link>
       </div>
     </div>

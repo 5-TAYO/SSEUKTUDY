@@ -85,10 +85,10 @@ function JoinAdd() {
       {/* add btn start */}
       <div className="flex align-center justify-center">
         <Link
-          to="/join/finish"
+          to="/mypage"
           className="join_add_next_btn notoMid fs-15 flex align-center justify-center"
         >
-          다음
+          작성 완료
         </Link>
       </div>
       {/* add btn end */}
