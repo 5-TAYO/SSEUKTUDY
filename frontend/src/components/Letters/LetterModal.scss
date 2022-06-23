@@ -1,0 +1,22 @@
+.letter-modal {
+  & > * {
+    margin-bottom: 16px;
+  }
+  .content {
+    padding: 12px 14px 0 14px;
+    width: 100%;
+    height: 200px;
+    resize: none;
+    font-family: "NotoSansRegular";
+    &:focus {
+      outline: none;
+      border: 1px solid $PINK-SUB;
+    }
+  }
+
+  .content-cnt {
+    font-size: 10px;
+    text-align: right;
+    color: $GRAY-9E;
+  }
+}
