@@ -33,6 +33,13 @@
         border-radius: vw(4px);
         margin-bottom: vw(8px);
       }
+      input:focus {
+        border: 1px solid $PINK-SUB;
+        box-shadow: 0px 0px 4px #ff3387;
+      }
+      input:disabled {
+        background-color: $GRAY-DB;
+      }
       &_failed {
         color: $RED;
         line-height: vw(17px);
@@ -44,10 +51,6 @@
       color: $GRAY-76;
       line-height: vw(17px);
       margin: vw(8px) 0 vw(16px);
-    }
-
-    &_email {
-      background-color: $GRAY-DB;
     }
 
     .edit_address_btn {
