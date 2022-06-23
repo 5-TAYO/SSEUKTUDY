@@ -1,0 +1,52 @@
+#join_info {
+  margin: vw(100px) vw(483px);
+  padding: vw(64px) vw(72px);
+  border-radius: vw(20px);
+  width: vw(473px);
+  border: solid 1px $GRAY-DB;
+
+  .info_text {
+    padding-bottom: vw(40px);
+
+    &_title {
+      line-height: vw(35px);
+    }
+  }
+
+  .info_input {
+    &_title {
+      margin-bottom: vw(12px);
+      line-height: 23px;
+    }
+    input {
+      border: solid vw(1px) $GRAY-DB;
+      padding-left: vw(12px);
+      height: vw(48px);
+      width: vw(329px);
+      border-radius: vw(4px);
+    }
+
+    &_box {
+      margin-bottom: vw(16px);
+    }
+
+    &_failed {
+      color: $RED;
+      line-height: vw(17px);
+      margin-top: vw(8px);
+    }
+
+    &_email {
+      background-color: $GRAY-DB;
+    }
+  }
+
+  .join_info_next_btn {
+    width: vw(329px);
+    height: vw(48px);
+    border-radius: vw(4px);
+    background-color: $PINK-SUB;
+    color: $WHITE;
+    margin-top: vw(22px);
+  }
+}
