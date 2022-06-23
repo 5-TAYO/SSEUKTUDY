@@ -1,0 +1,49 @@
+#new_pw {
+  margin: vw(100px) vw(483px);
+
+  border-radius: vw(20px);
+  width: vw(473px);
+  height: vw(530px);
+  border: solid 1px $GRAY-DB;
+
+  .info_text {
+    margin: vw(64px) vw(70px) vw(32px) vw(72px);
+
+    &_title {
+      line-height: vw(35px);
+    }
+  }
+
+  .info_input {
+    &_title {
+      margin: 0 0 vw(8px) 0;
+      line-height: 23px;
+    }
+    input {
+      border: solid vw(1px) $GRAY-DB;
+      padding-left: vw(12px);
+      height: vw(48px);
+      width: vw(329px);
+      border-radius: vw(4px);
+    }
+
+    &_box {
+      margin-bottom: vw(16px);
+    }
+
+    &_failed {
+      color: $RED;
+      line-height: vw(17px);
+      margin-top: vw(8px);
+    }
+  }
+
+  .join_info_next_btn {
+    width: vw(329px);
+    height: vw(48px);
+    border-radius: vw(4px);
+    background-color: $PINK-SUB;
+    color: $WHITE;
+    margin-top: vw(22px);
+  }
+}
