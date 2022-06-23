@@ -26,8 +26,8 @@ function ApplicationHistory() {
         </div>
       }
     >
-      <div className="application-list">
-        <div className="application-list-header">
+      <div className="application-list ">
+        <div className="application-list-header notoMid fs-14">
           <div>
             <input type="checkbox" />
           </div>
@@ -35,7 +35,7 @@ function ApplicationHistory() {
           <p>신청 날짜</p>
         </div>
         {applicationList.map(application => (
-          <div className="application" key={application.id}>
+          <div className="application notoReg fs-13" key={application.id}>
             <div>
               <input type="checkbox" />
             </div>
