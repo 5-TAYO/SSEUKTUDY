@@ -6,6 +6,14 @@
         insert into note (user_id_send, user_id_receive, note_is_read, note_send_time, note_content)
             value (#{userIdSend},#{userIdReceive},FALSE,now(),#{noteContent});
     </insert>
+    <select id="listSendNote" parameterType="String" resultType="NoteInfoDto">
+        select note_id as noteId, user_id_send as userIdSend, user_id_receive as userIdReceive, note_is_read as noteIsRead, note_send_time as noteSendTime, note_content as noteContent from note
+        where user_id_send = #{userId};
+    </select>
 
+    <select id="listReciveNote" parameterType="String" resultType="NoteInfoDto">
+        select note_id as noteId, user_id_send as userIdSend, user_id_receive as userIdReceive, note_is_read as noteIsRead, note_send_time as noteSendTime, note_content as noteContent from note
+        where user_id_receive= #{userId};
+    </select>
 
 </mapper>
