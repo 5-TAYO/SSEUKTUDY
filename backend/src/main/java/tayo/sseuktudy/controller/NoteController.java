@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import tayo.sseuktudy.dto.note.NoteInfoDto;
 import tayo.sseuktudy.dto.note.NoteRegistDto;
 import tayo.sseuktudy.service.NoteServiceImpl;
+import tayo.sseuktudy.service.jwtServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -15,12 +16,14 @@ import java.util.Map;
 @RestController
 @CrossOrigin("*")
 public class NoteController {
-    public String []resultType = {"fail","success"};
     private final NoteServiceImpl noteService;
+    private final jwtServiceImpl jwtService;
     @Autowired
-    NoteController(NoteServiceImpl noteService){
+    NoteController(NoteServiceImpl noteService, jwtServiceImpl jwtService){
         this.noteService = noteService;
+        this.jwtService = jwtService;
     }
+
 
     @PostMapping("/note")
     public ResponseEntity<Map<String, Object>> registNote(@RequestBody NoteRegistDto noteRegistDto){
@@ -41,7 +44,8 @@ public class NoteController {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = null;
         String accessToken = request.getHeader("access-token");
-        String userId = "ssafy";
+        String userId = jwtService.decodeToken(accessToken);
+        System.out.println(userId);
         try{
             resultMap.put("list",noteService.listSendNote(userId));
             resultMap.put("message", "SUCCESS");
@@ -58,7 +62,7 @@ public class NoteController {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = null;
         String accessToken = request.getHeader("access-token");
-        String userId = "ssafy";
+        String userId = jwtService.decodeToken(accessToken);
         try{
             resultMap.put("list",noteService.listReciveNote(userId));
             resultMap.put("message", "SUCCESS");
