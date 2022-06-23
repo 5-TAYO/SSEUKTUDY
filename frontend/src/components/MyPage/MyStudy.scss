@@ -1,11 +1,11 @@
 .my-study-header {
   display: flex;
   .my-study-header-item {
-    padding: 10px;
+    padding: vw(10px);
     color: $GRAY-9E;
     &.active {
       color: $BLACK;
-      border-bottom: 2px solid $PINK-SUB;
+      border-bottom: vw(2px) solid $PINK-SUB;
     }
   }
 }
@@ -18,20 +18,20 @@
     margin-top: vw(30px);
     padding: vw(15px) vw(20px);
     border-radius: 10px;
-    box-shadow: 5px 0 10px 5px rgba(0, 0, 0, 0.1),
-      2px 2px 2px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0px 0px 10px 2px rgba(169, 169, 169, 0.29);
     color: $GRAY-9E;
     display: flex;
     justify-content: space-around;
 
     .title {
-      color: $BLACK;
+      color: $GRAY-32;
     }
     .state {
       color: $PINK-SUB;
     }
     .divider {
-      border: 1px solid $PINK-SUB;
+      border: none;
+      border-right: 1px solid $PINK-SUB;
     }
     .my-study-card-info {
       display: flex;

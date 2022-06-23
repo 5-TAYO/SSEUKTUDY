@@ -3,9 +3,10 @@
   height: vw(100px);
   display: flex;
   justify-content: space-around;
-
+  margin-top: vw(42px);
   .divider {
-    border: 1px solid $GRAY-DB;
+    border: none;
+    border-right: 1px solid $GRAY-DB;
   }
   .activity-item {
     display: flex;
