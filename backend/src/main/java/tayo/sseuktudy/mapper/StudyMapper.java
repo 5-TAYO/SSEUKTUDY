@@ -1,10 +1,7 @@
 package tayo.sseuktudy.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import tayo.sseuktudy.dto.study.StudyInfoDto;
-import tayo.sseuktudy.dto.study.StudyJoinDto;
-import tayo.sseuktudy.dto.study.StudyModifyDto;
-import tayo.sseuktudy.dto.study.StudyRegistDto;
+import tayo.sseuktudy.dto.study.*;
 
 import java.util.Optional;
 
@@ -15,6 +12,8 @@ public interface StudyMapper {
 
     public int joinStudy(StudyJoinDto studyJoinDto);
     public int modifyStudy(StudyModifyDto studyModifyDto);
+    public int deleteStudy(StudyDeleteDto studyDeleteDto);
+
 //    public StudyInfoDto getStudyInfo()
 
 }

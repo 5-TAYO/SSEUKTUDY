@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tayo.sseuktudy.dto.question.QuestionModifyDto;
 import tayo.sseuktudy.dto.question.QuestionRegistDto;
+import tayo.sseuktudy.dto.study.StudyDeleteDto;
 import tayo.sseuktudy.dto.study.StudyJoinDto;
 import tayo.sseuktudy.dto.study.StudyModifyDto;
 import tayo.sseuktudy.dto.study.StudyRegistDto;
@@ -48,7 +49,7 @@ public class StudyServiceImpl implements StudyService{
 
         studyJoinDto.setStudyId(studyRegistDto.getStudyId());
         studyJoinDto.setUserId(studyRegistDto.getStudyLeaderId());
-        studyJoinDto.setUserStatus("leader");
+        studyJoinDto.setUserStatus("member");
 
         if(studyMapper.joinStudy(studyJoinDto) != 1){
             return 0;
@@ -73,4 +74,10 @@ public class StudyServiceImpl implements StudyService{
 
         return studyMapper.modifyStudy(studyModifyDto);
     }
+
+    @Override
+    public int deleteStudy(StudyDeleteDto studyDeleteDto) {
+        return studyMapper.deleteStudy(studyDeleteDto);
+    }
+
 }

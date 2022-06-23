@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tayo.sseuktudy.dto.study.StudyDeleteDto;
 import tayo.sseuktudy.dto.study.StudyModifyDto;
 import tayo.sseuktudy.dto.study.StudyRegistDto;
 import tayo.sseuktudy.service.study.StudyService;
@@ -56,6 +57,26 @@ public class StudyController {
         logger.info("스터디 수정 요청");
 
         int result = studyService.modifyStudy(studyModifyDto); // 스터디 테이블에 집어넣기
+
+        if(result == 0){
+            resultMap.put("message", "FAIL");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }else{
+            resultMap.put("message", "SUCCESS");
+            status = HttpStatus.ACCEPTED;
+        }
+
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+    }
+
+    @DeleteMapping("/study")
+    public ResponseEntity<Map<String, Object>> deleteStudy(@RequestBody StudyDeleteDto studyDeleteDto){
+        Map<String, Object> resultMap = new HashMap<>();
+
+        HttpStatus status = null;
+        logger.info("스터디 삭제 요청");
+
+        int result = studyService.deleteStudy(studyDeleteDto);
 
         if(result == 0){
             resultMap.put("message", "FAIL");

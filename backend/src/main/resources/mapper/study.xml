@@ -20,4 +20,9 @@
         where study_id = #{studyId}
     </update>
 
+    <delete id="deleteStudy" parameterType="StudyDeleteDto">
+        delete from study
+        where study_id=#{studyId}
+    </delete>
+
 </mapper>
