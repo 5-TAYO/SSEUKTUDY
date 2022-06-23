@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tayo.sseuktudy.mapper.StudyMapper">
+    <insert id="registStudy" parameterType="StudyRegistDto" useGeneratedKeys="true" keyProperty="studyId">
+        insert into study (study_title, study_leader_id, study_status, study_introduction, study_startdate, study_enddate, study_goals, study_type, study_user_min, study_user_max, study_content, study_place, study_category_id, study_view)
+            value (#{studyTitle}, #{studyLeaderId}, #{studyStatus}, #{studyIntroduction}, #{studyStartdate}, #{studyEnddate}, #{studyGoals}, #{studyType}, #{studyUserMin}, #{studyUserMax},#{studyContent}, #{studyPlace},#{studyCategoryId}, #{studyView});
+    </insert>
+
+    <update id="modifyStudy" parameterType="StudyModifyDto">
+        update study set study_title = #{studyTitle}, study_leader_id= #{studyLeaderId}, study_status = #{studyStatus}, study_introduction = #{studyIntroduction}, study_startdate = #{studyStartdate},
+        study_enddate = #{studyEnddate}, study_goals = #{studyGoals}, study_type = #{studyType}, study_user_min = #{studyUserMin}, study_user_max = #{studyUserMax}, study_content = #{studyContent},
+        study_place = #{studyPlace}, study_category_id = #{studyCategoryId}
+        where study_id = #{studyId}
+    </update>
+
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tayo.sseuktudy.mapper.QuestionMapper">
+
+    <insert id="registQuestion" parameterType="QuestionRegistDto">
+        insert into question (study_id, question_content)
+            value (#{studyId}, #{questionContent});
+    </insert>
+
+    <update id="modifyQuestion" parameterType="QuestionModifyDto">
+        update question set question_content = #{questionContent}
+        where question_id = #{questionId}
+    </update>
+
+
+</mapper>
