@@ -14,21 +14,20 @@
       width: vw(90px);
       fill: $PINK-SUB;
     }
-    .edit:hover {
-      cursor: pointer;
-    }
-    & :last-child {
+    .edit {
       margin: vw(20px);
       text-decoration: underline;
-      color: $GRAY-76;
-    }
-
-    * {
-      margin: vw(5px);
+      color: $GRAY-9E;
+      :hover {
+        cursor: pointer;
+      }
     }
   }
 
   .menu {
+    .menu-title {
+      margin-bottom: vw(16px);
+    }
     .sub-menu-title {
       color: $GRAY-76;
     }
@@ -40,5 +39,10 @@
   a {
     display: block;
     margin: vw(14px) vw(5px);
+  }
+
+  hr {
+    border: none;
+    border-bottom: 1px solid $PINK-SUB;
   }
 }

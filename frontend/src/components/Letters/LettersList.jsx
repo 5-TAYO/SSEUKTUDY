@@ -7,7 +7,7 @@ import "./LettersList.scss";
 
 function LettersList({ letters, listHeaderName }) {
   return (
-    <div className="letters-list">
+    <div className="letters-list notoMid fs-14">
       <div className="letters-list-header">
         <div>
           <input type="checkbox" />
