@@ -10,7 +10,7 @@ function JoinMail() {
           인증 이메일을 보냈습니다.
         </p>
         <p className="mail_text_desc_small notoReg fs-16">
-          메일함에서 인증 이메일을 확인 후 받은 인증코드를 입력해주세요!
+          jmlee9707@naver.com 에서 이메일을 확인 후 인증코드를 입력해주세요!
         </p>
       </div>
 
@@ -21,7 +21,7 @@ function JoinMail() {
           <div className="mail_input_box flex align-center justify-center">
             <input
               type="email"
-              placeholder="이메일을 입력하세요"
+              placeholder="인증코드를 입력하세요"
               className="mail_input_email notoReg fs-15"
             />
           </div>
@@ -51,9 +51,9 @@ function JoinMail() {
           <p className="if_text_title notoMid fs-12">
             인증 이메일을 받지 못하셨나요?
           </p>
-          <Link to="/login" classname="if_text_login_move">
+          <Link to="/login" className="if_text_login_move">
             {/* email 재전송 링크 수정하기 */}
-            <p className="notoMid fs-12"> 이메일 재전송</p>
+            <p className="notoMid fs-12"> 코드 재전송</p>
           </Link>
         </div>
       </div>
