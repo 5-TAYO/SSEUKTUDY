@@ -2,6 +2,7 @@ package tayo.sseuktudy.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import tayo.sseuktudy.dto.study.StudyInfoDto;
+import tayo.sseuktudy.dto.study.StudyJoinDto;
 import tayo.sseuktudy.dto.study.StudyModifyDto;
 import tayo.sseuktudy.dto.study.StudyRegistDto;
 
@@ -12,6 +13,7 @@ public interface StudyMapper {
 
     public int registStudy(StudyRegistDto studyRegistDto);
 
+    public int joinStudy(StudyJoinDto studyJoinDto);
     public int modifyStudy(StudyModifyDto studyModifyDto);
 //    public StudyInfoDto getStudyInfo()
 
