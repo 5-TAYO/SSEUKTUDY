@@ -19,6 +19,9 @@
   .user {
     margin-bottom: vw(16px);
 
+    &__name {
+      line-height: vw(35px);
+    }
     &__img {
       margin-bottom: vw(12px);
 
