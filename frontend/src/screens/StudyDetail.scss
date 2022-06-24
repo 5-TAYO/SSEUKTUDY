@@ -44,8 +44,11 @@
         margin-bottom: vw(8px);
       }
       .study-info {
+        &-title {
+          line-height: vw(29px);
+        }
         .info-line {
-          // margin-bottom: vw(8px);
+          line-height: vw(20px);
           &__title {
             margin-right: vw(22px);
             color: $GRAY-9E;
