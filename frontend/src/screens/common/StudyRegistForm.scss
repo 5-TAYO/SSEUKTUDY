@@ -61,15 +61,17 @@
     margin-left: auto;
   }
 
-  input:focus {
+  input:focus,
+  textarea:focus {
+    outline: none;
     border: 1px solid $PINK-SUB;
+    box-shadow: 0px 0px 4px $PINK-SUB;
   }
   textarea {
     border: 1px solid $GRAY-DB;
     border-radius: 4px;
 
     line-height: vw(22px);
-    outline-color: $PINK-SUB;
   }
 
   .question-title {
