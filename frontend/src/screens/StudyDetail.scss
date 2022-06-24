@@ -110,14 +110,15 @@
 
         &__input {
           margin-right: vw(20px);
+          padding: vw(8px);
 
+          resize: none;
           width: vw(508px);
           height: vw(42px);
 
           border: 1px solid $GRAY-DB;
           border-radius: 4px;
-
-          text-indent: vw(8px);
+          outline: none;
         }
 
         &__input:focus {
