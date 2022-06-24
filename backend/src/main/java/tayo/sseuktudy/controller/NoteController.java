@@ -29,14 +29,23 @@ public class NoteController {
 
     @PostMapping("/note")
     public ResponseEntity<Map<String, Object>> registNote(@RequestBody NoteRegistDto noteRegistDto, HttpServletRequest request){
+
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = null;
-        int result = noteService.registNote(noteRegistDto);
-        if(result != 0){
-            resultMap.put("message", "SUCCESS");
-            status = HttpStatus.ACCEPTED;
-        }else{
-            resultMap.put("message", "FAIL");
+        String accessToken = request.getHeader("access-token");
+        String userId = jwtService.decodeToken(accessToken);
+        if(!userId.equals("access token timeout")){
+            try{
+                int result = noteService.registNote(noteRegistDto);
+                resultMap.put("message", "SUCCESS");
+                status = HttpStatus.ACCEPTED;
+            }catch (Exception e){
+                resultMap.put("message", "FAIL");
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        }
+        else{
+            resultMap.put("message", "access token timeout");
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<Map<String, Object>>(resultMap,status);
@@ -47,12 +56,18 @@ public class NoteController {
         HttpStatus status = null;
         String accessToken = request.getHeader("access-token");
         String userId = jwtService.decodeToken(accessToken);
-        try{
-            resultMap.put("list",noteService.listSendNote(userId));
-            resultMap.put("message", "SUCCESS");
-            status = HttpStatus.ACCEPTED;
-        }catch (Exception e){
-            resultMap.put("message", "FAIL");
+        if(!userId.equals("access token timeout")){
+            try{
+                resultMap.put("list",noteService.listSendNote(userId));
+                resultMap.put("message", "SUCCESS");
+                status = HttpStatus.ACCEPTED;
+            }catch (Exception e){
+                resultMap.put("message", "FAIL");
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        }
+        else{
+            resultMap.put("message", "access token timeout");
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<Map<String, Object>>(resultMap,status);
@@ -64,13 +79,17 @@ public class NoteController {
         HttpStatus status = null;
         String accessToken = request.getHeader("access-token");
         String userId = jwtService.decodeToken(accessToken);
-        try{
-            System.out.println(userId);
-            resultMap.put("list",noteService.listReciveNote(userId));
-            resultMap.put("message", "SUCCESS");
-            status = HttpStatus.ACCEPTED;
-        }catch (Exception e){
-            resultMap.put("message", "FAIL");
+        if(!userId.equals("access token timeout")){
+            try{
+                resultMap.put("list",noteService.listReciveNote(userId));
+                resultMap.put("message", "SUCCESS");
+                status = HttpStatus.ACCEPTED;
+            }catch (Exception e){
+                resultMap.put("message", "FAIL");
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        }else{
+            resultMap.put("message", "access token timeout");
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<Map<String, Object>>(resultMap,status);
@@ -81,21 +100,21 @@ public class NoteController {
         HttpStatus status = null;
         String accessToken = request.getHeader("access-token");
         String userId = jwtService.decodeToken(accessToken);
-        if(userId.equals("access token timeout")){
-            resultMap.put("message", "access token timeout");
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }else{
-            NoteReadDto noteReadDto = new NoteReadDto();
-            noteReadDto.setNoteId(noteId);
-            noteReadDto.setUserId(userId);
-            int result = noteService.readNote(noteReadDto);
-            if(result == 1){
+        if(!userId.equals("access token timeout")){
+            try{
+                NoteReadDto noteReadDto = new NoteReadDto();
+                noteReadDto.setNoteId(noteId);
+                noteReadDto.setUserId(userId);
+                int result = noteService.readNote(noteReadDto);
                 resultMap.put("message", "SUCCESS");
                 status = HttpStatus.ACCEPTED;
-            }else{
+            }catch (Exception e){
                 resultMap.put("message", "FAIL");
                 status = HttpStatus.INTERNAL_SERVER_ERROR;
             }
+        }else{
+            resultMap.put("message", "access token timeout");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<Map<String, Object>>(resultMap,status);
     }
@@ -105,21 +124,21 @@ public class NoteController {
         HttpStatus status = null;
         String accessToken = request.getHeader("access-token");
         String userId = jwtService.decodeToken(accessToken);
-        if (userId.equals("access token timeout")) {
-            resultMap.put("message", "access token timeout");
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        } else {
-            NoteDeleteDto noteDeleteDto = new NoteDeleteDto();
-            noteDeleteDto.setNoteId(noteId);
-            noteDeleteDto.setUserId(userId);
-            int result = noteService.deleteNote(noteDeleteDto);
-            if (result == 1) {
+        if (!userId.equals("access token timeout")) {
+            try{
+                NoteDeleteDto noteDeleteDto = new NoteDeleteDto();
+                noteDeleteDto.setNoteId(noteId);
+                noteDeleteDto.setUserId(userId);
+                int result = noteService.deleteNote(noteDeleteDto);
                 resultMap.put("message", "SUCCESS");
                 status = HttpStatus.ACCEPTED;
-            } else {
+            }catch (Exception e){
                 resultMap.put("message", "FAIL");
                 status = HttpStatus.INTERNAL_SERVER_ERROR;
             }
+        } else {
+            resultMap.put("message", "access token timeout");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
@@ -129,19 +148,19 @@ public class NoteController {
         HttpStatus status = null;
         String accessToken = request.getHeader("access-token");
         String userId = jwtService.decodeToken(accessToken);
-        if (userId.equals("access token timeout")) {
-            resultMap.put("message", "access token timeout");
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        } else {
-            int result = noteService.checkCountNote(userId);
-            if (result >= 1) {
+        if (!userId.equals("access token timeout")) {
+            try{
+                int result = noteService.checkCountNote(userId);
                 resultMap.put("message", "SUCCESS");
                 resultMap.put("notReadNoteCount", result);
                 status = HttpStatus.ACCEPTED;
-            } else {
+            }catch (Exception e){
                 resultMap.put("message", "FAIL");
                 status = HttpStatus.INTERNAL_SERVER_ERROR;
             }
+        } else {
+            resultMap.put("message", "access token timeout");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
