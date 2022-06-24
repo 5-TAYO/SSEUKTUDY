@@ -3,6 +3,7 @@ package tayo.sseuktudy.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tayo.sseuktudy.dto.note.NoteInfoDto;
+import tayo.sseuktudy.dto.note.NoteReadDto;
 import tayo.sseuktudy.dto.note.NoteRegistDto;
 import tayo.sseuktudy.mapper.NoteMapper;
 
@@ -29,6 +30,12 @@ public class NoteServiceImpl implements NoteService{
     @Override
     public List<NoteInfoDto> listReciveNote(String userId) {
         return noteMapper.listReciveNote(userId);
+    }
+
+    @Override
+    public int readNote(NoteReadDto noteReadDto){
+
+        return noteMapper.readNote(noteReadDto);
     }
 
 }

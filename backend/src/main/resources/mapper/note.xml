@@ -15,5 +15,8 @@
         select note_id as noteId, user_id_send as userIdSend, user_id_receive as userIdReceive, note_is_read as noteIsRead, note_send_time as noteSendTime, note_content as noteContent from note
         where user_id_receive= #{userId};
     </select>
-
+    <update id="readNote" parameterType="NoteReadDto">
+            update note set note_is_read = TRUE
+            where user_id_receive = #{userId} and note_id = #{noteId};
+    </update>
 </mapper>
