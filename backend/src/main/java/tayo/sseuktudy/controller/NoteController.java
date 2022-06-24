@@ -98,4 +98,27 @@ public class NoteController {
         }
         return new ResponseEntity<Map<String, Object>>(resultMap,status);
     }
+    @DeleteMapping("/note/{noteId}")
+    public ResponseEntity<Map<String, Object>> deleteNote(@PathVariable("noteId") int noteId, HttpServletRequest request){
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = null;
+        String accessToken = request.getHeader("access-token");
+        String userId = jwtService.decodeToken(accessToken);
+        if(userId.equals("access token timeout")){
+            resultMap.put("message", "access token timeout");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }else{
+            NoteReadDto noteReadDto = new NoteReadDto();
+            noteReadDto.setNoteId(noteId);
+            noteReadDto.setUserId(userId);
+            int result = noteService.deleteNote(noteReadDto);
+            if(result == 1){
+                resultMap.put("message", "SUCCESS");
+                status = HttpStatus.ACCEPTED;
+            }else{
+                resultMap.put("message", "FAIL");
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap,status);
 }

@@ -19,4 +19,8 @@
             update note set note_is_read = TRUE
             where user_id_receive = #{userId} and note_id = #{noteId};
     </update>
+    <delete id="deleteNote" parameterType="NoteDeleteDto">
+        delete from note
+        where user_id_receive = #{userId} ;
+    </delete>
 </mapper>

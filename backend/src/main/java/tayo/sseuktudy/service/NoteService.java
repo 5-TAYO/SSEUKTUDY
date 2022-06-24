@@ -1,5 +1,6 @@
 package tayo.sseuktudy.service;
 
+import tayo.sseuktudy.dto.note.NoteDeleteDto;
 import tayo.sseuktudy.dto.note.NoteInfoDto;
 import tayo.sseuktudy.dto.note.NoteReadDto;
 import tayo.sseuktudy.dto.note.NoteRegistDto;
@@ -11,4 +12,5 @@ public interface NoteService {
     public List<NoteInfoDto> listSendNote(String userId);
     public List<NoteInfoDto> listReciveNote(String userId);
     public int readNote(NoteReadDto noteReadDto);
+    public int deleteNote(NoteDeleteDto noteDeleteDto);
 }
