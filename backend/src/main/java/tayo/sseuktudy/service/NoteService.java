@@ -13,4 +13,5 @@ public interface NoteService {
     public List<NoteInfoDto> listReciveNote(String userId);
     public int readNote(NoteReadDto noteReadDto);
     public int deleteNote(NoteDeleteDto noteDeleteDto);
+    public int checkCountNote(String userId);
 }

@@ -38,4 +38,6 @@ public class NoteServiceImpl implements NoteService{
 
     @Override
     public int deleteNote(NoteDeleteDto noteDeleteDto){return noteMapper.deleteNote(noteDeleteDto);    }
+    @Override
+    public int checkCountNote(String userId) {return noteMapper.checkCountNote(userId);}
 }
