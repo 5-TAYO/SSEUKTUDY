@@ -97,12 +97,8 @@
         height: vw(38px);
       }
       &__input {
-        width: vw(200px);
+        width: vw(950px);
         color: $GRAY-9E;
-
-        &:focus {
-          border-bottom: 1px solid $PINK-SUB;
-        }
       }
 
       &__btn {

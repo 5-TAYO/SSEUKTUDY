@@ -26,6 +26,7 @@ function StudyList() {
     console.log(listUpCon);
     setListUpcon(e.target.value);
   };
+
   const handleSetCategory = e => {
     if (e.target.checked) {
       setSearchCategory([...searchCategory, e.target.value]);
@@ -35,6 +36,7 @@ function StudyList() {
       );
     }
   };
+
   const handleAllCategory = e => {
     if (e.target.checked) {
       setSearchCategory([...categoryList]);
@@ -42,11 +44,7 @@ function StudyList() {
       setSearchCategory([]);
     }
   };
-  const autoResizeInput = e => {
-    e.target.style.width = "0px";
-    const width = e.target.scrollWidth;
-    e.target.style.width = `${width + 2}px`; // fix__
-  };
+
   const showCalPicker = e => {
     e.target.showPicker();
   };
@@ -121,7 +119,6 @@ function StudyList() {
             type="text"
             className="condition__search__input notoMid fs-20"
             placeholder="스터디를 찾아보세요"
-            onChange={autoResizeInput}
           />
           <button
             type="button"
