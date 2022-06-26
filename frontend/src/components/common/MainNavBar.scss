@@ -15,7 +15,7 @@
 
   .nav-container {
     width: 100%;
-    color: $GRAY_61;
+    color: $GRAY-61;
 
     .left-nav {
       &__link + .left-nav__link {
@@ -23,16 +23,16 @@
       }
 
       .btn--active {
-        color: $PINK_SUB;
+        color: $PINK-SUB;
       }
 
       .btn--unactive {
-        color: $GRAY_61;
+        color: $GRAY-61;
       }
     }
 
     .right-nav {
-      color: $GRAY_76;
+      color: $GRAY-76;
       &__link + .right-nav__link {
         margin-left: vw(24px);
       }

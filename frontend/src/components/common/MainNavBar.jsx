@@ -10,7 +10,9 @@ function MainNavBar() {
   };
   return (
     <nav id="MainNavBar" className="flex align-center">
-      <img className="title" alt="스윽터디로고" src={HeaderLogoImg} />
+      <Link to="/">
+        <img className="title" alt="스윽터디로고" src={HeaderLogoImg} />
+      </Link>
       <div className="nav-container flex justify-space-between">
         <nav className="left-nav notoBold">
           <NavLink
@@ -33,7 +35,7 @@ function MainNavBar() {
           </NavLink>
           <NavLink
             className={({ isActive }) => activeTabClassName(isActive)}
-            to="/mypage"
+            to="/guide"
           >
             가이드
           </NavLink>
