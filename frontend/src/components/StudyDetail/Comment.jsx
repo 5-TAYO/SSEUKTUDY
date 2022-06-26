@@ -43,7 +43,7 @@ function Comment({ data: { userName, regDate, desc } }) {
       <p className="desc notoMid fs-15">{desc}</p>
       <div
         id="tooltip"
-        className="flex align-center justify-center fs-14"
+        className="flex align-center justify-center notoMid fs-14"
         ref={tooltipRef}
       >
         쪽지보내기
