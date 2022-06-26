@@ -25,4 +25,6 @@
         where study_id=#{studyId}
     </delete>
 
+
+
 </mapper>
