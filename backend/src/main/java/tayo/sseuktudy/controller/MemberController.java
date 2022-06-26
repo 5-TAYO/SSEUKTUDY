@@ -5,17 +5,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import tayo.sseuktudy.dto.apply.ApplyDto;
+import tayo.sseuktudy.dto.member.MemberApplyDto;
 import tayo.sseuktudy.service.JwtService;
-import tayo.sseuktudy.service.JwtServiceImpl;
-import tayo.sseuktudy.service.apply.ApplyService;
-import tayo.sseuktudy.service.apply.ApplyServiceImpl;
+import tayo.sseuktudy.service.member.MemberService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -23,20 +19,20 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin("*")
-public class ApplyController {
+public class MemberController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final JwtService jwtService;
-    private final ApplyService applyService;
+    private final MemberService memberService;
 
     @Autowired
-    ApplyController(JwtService jwtService, ApplyService applyService){
+    MemberController(JwtService jwtService, MemberService memberService){
         this.jwtService = jwtService;
-        this.applyService = applyService;
+        this.memberService = memberService;
     }
 
     @PostMapping("/apply")
-    public ResponseEntity<Map<String, Object>> applyStudy(@RequestBody ApplyDto applyDto, HttpServletRequest request, Model model){
+    public ResponseEntity<Map<String, Object>> applyStudy(@RequestBody MemberApplyDto memberApplyDto, HttpServletRequest request){
         logger.info("스터디 신청 API 실행");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.UNAUTHORIZED;
@@ -44,9 +40,9 @@ public class ApplyController {
         if(!decodeUserId.equals("access token timeout")){
             logger.info("사용 가능한 토큰!!");
             try{
-                applyDto.setUserId(decodeUserId);
+                memberApplyDto.setUserId(decodeUserId);
 
-                int result = applyService.applyStudy(applyDto);
+                int result = memberService.applyStudy(memberApplyDto);
 
                 if(result != 0){
                     resultMap.put("message", "SUCCESS");
@@ -67,5 +63,6 @@ public class ApplyController {
         }
         return new ResponseEntity<>(resultMap, status);
     }
+
 
 }
