@@ -1,6 +1,36 @@
 .study-regist-form {
   padding: vw(70px) vw(435px) vw(400px) vw(435px);
+  .edit_category {
+    margin: vw(8px) 0;
+    text-align: left;
+    padding: 0 0 vw(12px) 0;
 
+    &_title {
+      line-height: vw(23px);
+      margin: vw(8px) 0 vw(20px) 0;
+    }
+
+    &_options {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    button {
+      width: vw(64px);
+      height: vw(32px);
+      margin: 0 vw(12px) vw(8px) 0;
+
+      border: 1px solid #ff79ab;
+      border-radius: 10px;
+
+      &:hover,
+      &:active {
+        color: $WHITE;
+        background-color: $PINK-LIGHT;
+      }
+    }
+  }
   .back-btn {
     margin-right: auto;
     &__img {

@@ -7,6 +7,20 @@ import { useNavigate } from "react-router-dom";
 import "./StudyCreateForm.scss";
 
 function StudyForm({ type }) {
+  const categoryList = [
+    "관심X",
+    "IT",
+    "프론트",
+    "백엔드",
+    "IT1",
+    "프론트1",
+    "백엔드1",
+    "IT2",
+    "프론트2",
+    "백엔드2",
+    "IT3",
+    "프론트3"
+  ];
   const navi = useNavigate();
   const placeList = ["온라인", "오프라인", "온/오프라인"];
   const [placeOption, setPlaceOption] = useState("온라인");
@@ -39,6 +53,21 @@ function StudyForm({ type }) {
         placeholder="스터디의 카테고리를 설정해주세요"
         maxLength={15}
       />
+      <div className="edit_category">
+        <p className="edit_category_title notoMid fs-16">관심 카테고리</p>
+        <div className="edit_category_options flex">
+          {categoryList.map(category => (
+            <button
+              key={uuid()}
+              type="button"
+              name="category"
+              className="edit_category_options_btn notoReg fs-11 flex align-center justify-center"
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      </div>
       <p className="type notoBold fs-16">목표</p>
       <input
         className="notoReg fs-15"
