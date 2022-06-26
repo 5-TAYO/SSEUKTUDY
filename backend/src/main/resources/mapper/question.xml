@@ -13,5 +13,10 @@
         where question_id = #{questionId}
     </update>
 
+    <insert id="registQuestionAnswer" parameterType="QuestionAnswerRegistDto">
+        insert into user_answer_question(user_id, study_id, question_id, question_answer)
+        values (#{userId}, #{studyId}, #{questionId}, #{questionAnswer})
+    </insert>
+
 
 </mapper>

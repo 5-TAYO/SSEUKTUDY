@@ -90,4 +90,5 @@ public class StudyController {
 
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
+
 }
