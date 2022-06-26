@@ -2,10 +2,8 @@ package tayo.sseuktudy.service;
 
 import java.util.Map;
 
-import org.springframework.stereotype.Service;
 
-
-public interface jwtService {
+public interface JwtService {
 	
 	<T> String createAccessToken(String key, T data);
 	<T> String createRefreshToken(String key, T data);

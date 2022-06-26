@@ -9,7 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tayo.sseuktudy.dto.*;
 import tayo.sseuktudy.service.UserService;
-import tayo.sseuktudy.service.jwtServiceImpl;
+import tayo.sseuktudy.service.JwtServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -29,7 +29,7 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private jwtServiceImpl jwtService;
+    private JwtServiceImpl jwtService;
     @Autowired
     private MailService mailService;
 

@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tayo.sseuktudy.dto.note.*;
 import tayo.sseuktudy.service.NoteServiceImpl;
-import tayo.sseuktudy.service.jwtServiceImpl;
+import tayo.sseuktudy.service.JwtServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -16,9 +16,9 @@ import java.util.Map;
 @CrossOrigin("*")
 public class NoteController {
     private final NoteServiceImpl noteService;
-    private final jwtServiceImpl jwtService;
+    private final JwtServiceImpl jwtService;
     @Autowired
-    NoteController(NoteServiceImpl noteService, jwtServiceImpl jwtService){
+    NoteController(NoteServiceImpl noteService, JwtServiceImpl jwtService){
         this.noteService = noteService;
         this.jwtService = jwtService;
     }

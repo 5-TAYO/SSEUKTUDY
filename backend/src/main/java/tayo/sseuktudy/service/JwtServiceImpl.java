@@ -2,7 +2,6 @@ package tayo.sseuktudy.service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,10 +17,10 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 @Service
-public class jwtServiceImpl implements jwtService {
+public class JwtServiceImpl implements JwtService {
 
 
-    public static final Logger logger = LoggerFactory.getLogger(jwtServiceImpl.class);
+    public static final Logger logger = LoggerFactory.getLogger(JwtServiceImpl.class);
     
 	private static final String SALT = "sseuktudySecret";
 	private static final int EXPIRE_MINUTES = 10000; //토큰 만료 시간(분)
