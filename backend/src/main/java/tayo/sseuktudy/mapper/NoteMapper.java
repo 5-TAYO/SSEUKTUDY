@@ -12,6 +12,7 @@ public interface NoteMapper {
     public List<NoteInfoDto> listSendNote(String userId);
     public List<NoteInfoDto> listReciveNote(String userId);
     public int readNote(NoteReadDto noteReadDto);
-    public int deleteNote(NoteDeleteDto noteDeleteDto);
+    public int deleteSendNote(NoteDeleteDto noteDeleteDto);
+    public int deleteReceiveNote(NoteDeleteDto noteDeleteDto);
     public int checkCountNote(String userId);
 }

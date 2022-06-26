@@ -33,6 +33,7 @@ public class NoteController {
         String userId = jwtService.decodeToken(accessToken);
         if(!userId.equals("access token timeout")){
             try{
+                noteRegistDto.setUserIdSend(userId);
                 int result = noteService.registNote(noteRegistDto);
                 resultMap.put("message", "SUCCESS");
                 status = HttpStatus.ACCEPTED;
@@ -139,7 +140,7 @@ public class NoteController {
         return new ResponseEntity<Map<String, Object>>(resultMap,status);
     }
     @DeleteMapping("/note/receive/{noteId}")
-    public ResponseEntity<Map<String, Object>> deleteNote(@PathVariable("noteId") int noteId, HttpServletRequest request) {
+    public ResponseEntity<Map<String, Object>> deleteReceiveNote(@PathVariable("noteId") int noteId, HttpServletRequest request) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = null;
         String accessToken = request.getHeader("access-token");
@@ -149,7 +150,31 @@ public class NoteController {
                 NoteDeleteDto noteDeleteDto = new NoteDeleteDto();
                 noteDeleteDto.setNoteId(noteId);
                 noteDeleteDto.setUserId(userId);
-                int result = noteService.deleteNote(noteDeleteDto);
+                 noteService.deleteReceiveNote(noteDeleteDto);
+                resultMap.put("message", "SUCCESS");
+                status = HttpStatus.ACCEPTED;
+            }catch (Exception e){
+                resultMap.put("message", "FAIL");
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        } else {
+            resultMap.put("message", "access token timeout");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+    }
+    @DeleteMapping("/note/send/{noteId}")
+    public ResponseEntity<Map<String, Object>> deleteSendNote(@PathVariable("noteId") int noteId, HttpServletRequest request) {
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = null;
+        String accessToken = request.getHeader("access-token");
+        String userId = jwtService.decodeToken(accessToken);
+        if (!userId.equals("access token timeout")) {
+            try{
+                NoteDeleteDto noteDeleteDto = new NoteDeleteDto();
+                noteDeleteDto.setNoteId(noteId);
+                noteDeleteDto.setUserId(userId);
+                noteService.deleteSendNote(noteDeleteDto);
                 resultMap.put("message", "SUCCESS");
                 status = HttpStatus.ACCEPTED;
             }catch (Exception e){

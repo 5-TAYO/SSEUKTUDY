@@ -56,7 +56,9 @@ public class NoteServiceImpl implements NoteService{
     public int readNote(NoteReadDto noteReadDto){return noteMapper.readNote(noteReadDto);    }
 
     @Override
-    public int deleteNote(NoteDeleteDto noteDeleteDto){return noteMapper.deleteNote(noteDeleteDto);    }
+    public int deleteSendNote(NoteDeleteDto noteDeleteDto){return noteMapper.deleteSendNote(noteDeleteDto);    }
+    @Override
+    public int deleteReceiveNote(NoteDeleteDto noteDeleteDto){return noteMapper.deleteReceiveNote(noteDeleteDto);    }
     @Override
     public int checkCountNote(String userId) {return noteMapper.checkCountNote(userId);}
 }
