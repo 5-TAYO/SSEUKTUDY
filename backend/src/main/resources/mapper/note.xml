@@ -32,6 +32,6 @@
     </delete>
     <select id="checkCountNote" parameterType="String" resultType="int">
         select COUNT(note_id) from note
-        where user_id_receive = #{userId} and note_is_read = FALSE;
+        where user_id_receive = #{userId} and note_is_read = FALSE and type = 'receive';
     </select>
 </mapper>
