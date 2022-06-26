@@ -5,14 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tayo.sseuktudy.dto.question.QuestionModifyDto;
 import tayo.sseuktudy.dto.question.QuestionRegistDto;
-import tayo.sseuktudy.dto.study.StudyDeleteDto;
-import tayo.sseuktudy.dto.study.StudyJoinDto;
-import tayo.sseuktudy.dto.study.StudyModifyDto;
-import tayo.sseuktudy.dto.study.StudyRegistDto;
+import tayo.sseuktudy.dto.study.*;
 import tayo.sseuktudy.mapper.QuestionMapper;
 import tayo.sseuktudy.mapper.StudyMapper;
-
-import java.util.Optional;
 
 @Service
 public class StudyServiceImpl implements StudyService{
@@ -79,5 +74,7 @@ public class StudyServiceImpl implements StudyService{
     public int deleteStudy(StudyDeleteDto studyDeleteDto) {
         return studyMapper.deleteStudy(studyDeleteDto);
     }
+
+
 
 }

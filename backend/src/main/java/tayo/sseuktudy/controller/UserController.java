@@ -23,7 +23,7 @@ import tayo.sseuktudy.service.MailService;
 public class UserController {
 
 
-            private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -34,17 +34,16 @@ public class UserController {
     private MailService mailService;
 
     @PostMapping("/user/login")
-    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody UserLoginDto request) {
+    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody UserLoginDto userLoginDto) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = null;
         logger.info("로그인 요청");
         try {
-            String loginUser = userService.loginUser(request);
-            System.out.println(loginUser);
+            String loginUser = userService.loginUser(userLoginDto);
             if (loginUser.equals("success")) {
-                String accessToken = jwtService.createAccessToken("user_id", request.getUserId());// key, data
-                String refreshToken = jwtService.createRefreshToken("user_id", request.getUserId());
-                if(userService.saveRefreshToken(request.getUserId(), refreshToken).equals("success")){
+                String accessToken = jwtService.createAccessToken("user_id", userLoginDto.getUserId());// key, data
+                String refreshToken = jwtService.createRefreshToken("user_id", userLoginDto.getUserId());
+                if(userService.saveRefreshToken(userLoginDto.getUserId(), refreshToken).equals("success")){
                     logger.info("refreshtoken 저장 완료");
                 }else{
                     logger.info("refreshtoken 저장 실패");
@@ -63,7 +62,7 @@ public class UserController {
             }
         } catch (Exception e) {
             logger.error("로그인 실패 : {}", e);
-            resultMap.put("message", e.getMessage());
+            resultMap.put("message", "FAIL");
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);

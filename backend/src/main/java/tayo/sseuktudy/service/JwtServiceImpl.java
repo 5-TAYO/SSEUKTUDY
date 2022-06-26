@@ -23,7 +23,9 @@ public class JwtServiceImpl implements JwtService {
     public static final Logger logger = LoggerFactory.getLogger(JwtServiceImpl.class);
     
 	private static final String SALT = "sseuktudySecret";
+
 	private static final int EXPIRE_MINUTES = 10000; //토큰 만료 시간(분)
+
 
 	
 	

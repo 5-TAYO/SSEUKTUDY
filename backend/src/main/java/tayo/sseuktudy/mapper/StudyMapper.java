@@ -3,8 +3,6 @@ package tayo.sseuktudy.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import tayo.sseuktudy.dto.study.*;
 
-import java.util.Optional;
-
 @Mapper
 public interface StudyMapper {
 
