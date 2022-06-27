@@ -13,7 +13,9 @@
       border: 1px solid $PINK-SUB;
     }
   }
-
+  p:first-child {
+    font-size: vw(10px);
+  }
   .content-cnt {
     font-size: 10px;
     text-align: right;

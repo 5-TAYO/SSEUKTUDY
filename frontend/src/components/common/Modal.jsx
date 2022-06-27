@@ -18,7 +18,7 @@ function Modal({ open, close, header, children, footerBtn }) {
           <footer>
             {footerBtn}
             <button type="button" className="close" onClick={close}>
-              close
+              닫기
             </button>
           </footer>
         </section>
