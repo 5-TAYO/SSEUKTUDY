@@ -18,7 +18,7 @@ function PreQuestion({ order, question, type }) {
         <p className="question__name notoReg fs-15 ">{question}</p>
       </div>
       <textarea
-        className="answer"
+        className="answer fs-15"
         rows="4"
         ref={answerInput}
         onChange={autoResizeTextarea}

@@ -36,6 +36,7 @@ function StudyRegistForm({ type }) {
         className="notoReg fs-15"
         type="text"
         defaultValue="jinhoJJANG"
+        disabled={type === "regist"}
         readOnly={type === "read"}
       />
       <p className="type notoBold fs-16">자기소개</p>
