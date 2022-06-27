@@ -6,30 +6,47 @@ import StudyListUpIcon from "@images/StudyListUp.svg";
 
 function StudyList() {
   const [listUpCon, setListUpcon] = useState("likes");
-
-  const placeList = ["온라인", "오프라인", "온/오프라인"];
+  const placeList = ["전체 ", "온라인", "오프라인", "온/오프라인"];
   const categoryList = [
-    "전체",
-    "IT",
-    "프론트",
-    "백엔드",
-    "IT1",
-    "프론트1",
-    "백엔드1",
-    "IT2",
-    "프론트2",
-    "백엔드2",
-    "IT3",
-    "프론트3",
-    "백엔드3",
-    "IT4",
-    "프론트4",
-    "백엔드4"
+    "개발",
+    "어학",
+    "자격증",
+    "공시",
+    "입시",
+    "편입",
+    "취준",
+    "면접",
+    "취미",
+    "독서",
+    "SNS",
+    "기타"
   ];
-
+  const [searchCategory, setSearchCategory] = useState(categoryList);
   const handleListUpCon = e => {
     console.log(listUpCon);
     setListUpcon(e.target.value);
+  };
+
+  const handleSetCategory = e => {
+    if (e.target.checked) {
+      setSearchCategory([...searchCategory, e.target.value]);
+    } else {
+      setSearchCategory(
+        searchCategory.filter(category => category !== e.target.value)
+      );
+    }
+  };
+
+  const handleAllCategory = e => {
+    if (e.target.checked) {
+      setSearchCategory([...categoryList]);
+    } else {
+      setSearchCategory([]);
+    }
+  };
+
+  const showCalPicker = e => {
+    e.target.showPicker();
   };
 
   return (
@@ -46,7 +63,7 @@ function StudyList() {
                   value={place}
                   name="place"
                   type="radio"
-                  defaultChecked={place === "온/오프라인"}
+                  defaultChecked={place === "전체 "}
                 />
                 {place}
               </label>
@@ -56,14 +73,30 @@ function StudyList() {
         <div className="condition__category flex">
           <p className="title">카테고리</p>
           <div className="options flex align-center">
+            <label htmlFor="전체">
+              <input
+                id="전체"
+                value="전체"
+                name="category"
+                type="checkbox"
+                checked={
+                  searchCategory.length === 0
+                    ? false
+                    : searchCategory.length === 12
+                }
+                onChange={handleAllCategory}
+              />
+              전체
+            </label>
             {categoryList.map(category => (
               <label htmlFor={category} key={category}>
                 <input
                   id={category}
                   value={category}
                   name="category"
-                  type="radio"
-                  defaultChecked={category === "전체"}
+                  type="checkbox"
+                  checked={searchCategory.includes(category)}
+                  onChange={handleSetCategory}
                 />
                 {category}
               </label>
@@ -72,9 +105,9 @@ function StudyList() {
         </div>
         <div className="condition__period">
           <p className="title">스터디기간</p>
-          <input type="date" />
+          <input type="date" onClick={showCalPicker} />
           <p className="tilde">~</p>
-          <input type="date" />
+          <input type="date" onClick={showCalPicker} />
         </div>
         <div className="condition__search flex align-center">
           <img
@@ -99,9 +132,9 @@ function StudyList() {
         <header className="flex align-center notoMid">
           <img className="list-up__icon" src={StudyListUpIcon} alt="" />
           <p className="list-up__title fs-20">스터디 모아보기</p>
-          <p className="list-up__cnt">총</p>
-          <p className="list-up__cnt--emp">27859603</p>
-          <p className="list-up__cnt">개</p>
+          <p className="list-up__cnt fs-16 notoMid">총</p>
+          <p className="list-up__cnt--emp fs-16 notoMid">27859603</p>
+          <p className="list-up__cnt fs-16 notoMid">개</p>
           <select
             className="list-up__selector notoMid fs-16"
             name="selector"
