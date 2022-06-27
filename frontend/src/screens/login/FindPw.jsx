@@ -63,10 +63,14 @@ function FindPw() {
           <p className="if_text_title notoMid fs-12">
             인증 이메일을 받지 못하셨나요?
           </p>
-          <Link to="/login" classname="if_text_login_move">
-            {/* epw 재전송 링크 수정하기 */}
+          <button
+            type="button"
+            o
+            /* onClick={} */ className="if_text_login_move"
+          >
+            {/* 재전송 링크 수정하기 */}
             <p className="notoMid fs-12">코드 재전송</p>
-          </Link>
+          </button>
         </div>
       </div>
       {/* text end */}
