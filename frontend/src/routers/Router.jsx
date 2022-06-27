@@ -34,7 +34,7 @@ function Router() {
           <Route path="detail/:id" element={<StudyDetail />} />
           <Route path="join/:id" element={<StudyRegistForm type="regist" />} />
           <Route
-            path="join/read/:id" // fix__ 진합이형이 라우팅해주세요
+            path="join/read/:id"
             element={<StudyRegistForm type="read" />}
           />
           <Route path="regist" element={<StudyForm type="create" />} />
