@@ -7,7 +7,7 @@ function LettersSideBar() {
   const { pathname } = useLocation();
   return (
     <div className="letters-sidebar notoMid">
-      <div className="profile">
+      <div className="profile notoReg">
         <Avatar className="profile-mini-img" />
         <h2 className="name fs-24 notoBold">이정민</h2>
         <p className="email fs-12">jmlee907@nate.com</p>
@@ -16,7 +16,7 @@ function LettersSideBar() {
       <div className="menu">
         <h3 className="menu-title fs-16">쪽지함</h3>
         <hr />
-        <div className="sub-menu">
+        <div className="sub-menu notoReg">
           <NavLink
             to="recv"
             className={`sub-menu-title fs-13 ${
@@ -30,7 +30,7 @@ function LettersSideBar() {
           </NavLink>
         </div>
         <hr />
-        <div className="sub-menu">
+        <div className="sub-menu notoReg">
           <NavLink to="study" className="sub-menu-title  fs-13">
             스터디 단체 쪽지함
           </NavLink>
