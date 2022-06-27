@@ -4,9 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tayo.sseuktudy.dto.member.MemberApplyDto;
+import tayo.sseuktudy.dto.member.MemberStatusChangeDto;
 import tayo.sseuktudy.dto.question.QuestionAnswerRegistDto;
-import tayo.sseuktudy.dto.study.StudyJoinDto;
-import tayo.sseuktudy.dto.study.StudyMemberDto;
+import tayo.sseuktudy.dto.member.MemberJoinDto;
+import tayo.sseuktudy.dto.member.MemberInfoDto;
 import tayo.sseuktudy.mapper.MemberMapper;
 import tayo.sseuktudy.mapper.QuestionMapper;
 
@@ -40,25 +41,27 @@ public class MemberServiceImpl implements MemberService {
             };
         }
 
-        StudyJoinDto studyJoinDto = new StudyJoinDto();
-        studyJoinDto.setStudyId(memberApplyDto.getStudyId());
-        studyJoinDto.setUserId((memberApplyDto.getUserId()));
-        studyJoinDto.setUserStatus("non member");
-        return memberMapper.applyStudy(studyJoinDto);
+        MemberJoinDto memberJoinDto = new MemberJoinDto();
+        memberJoinDto.setStudyId(memberApplyDto.getStudyId());
+        memberJoinDto.setUserId((memberApplyDto.getUserId()));
+        memberJoinDto.setUserStatus("non member");
+        memberJoinDto.setUserIntroduction(memberApplyDto.getUserIntroduction());
+        memberJoinDto.setUserNickname(memberApplyDto.getUserNickname());
+        return memberMapper.applyStudy(memberJoinDto);
     }
 
     @Override
-    public List<StudyMemberDto> findMembers(MemberApplyDto memberApplyDto) {
-        return  memberMapper.findMembers(memberApplyDto);
+    public List<MemberInfoDto> getMembers(int studyId) {
+        return  memberMapper.getMembers(studyId);
     }
 
     @Override
-    public StudyMemberDto findOne(MemberApplyDto memberApplyDto) {
-        return memberMapper.findOne(memberApplyDto);
+    public int acceptMember(MemberStatusChangeDto memberStatusChangeDto){
+        return memberMapper.acceptMember(memberStatusChangeDto);
     }
 
     @Override
-    public int removeMember(MemberApplyDto memberApplyDto) {
-        return memberMapper.removeMember(memberApplyDto);
+    public int refuseMember(MemberStatusChangeDto memberStatusChangeDto){
+        return memberMapper.refuseMember(memberStatusChangeDto);
     }
 }

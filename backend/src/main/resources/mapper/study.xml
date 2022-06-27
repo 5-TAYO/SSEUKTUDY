@@ -7,7 +7,7 @@
             value (#{studyTitle}, #{studyLeaderId}, #{studyStatus}, #{studyIntroduction}, #{studyStartdate}, #{studyEnddate}, #{studyGoals}, #{studyType}, #{studyUserMin}, #{studyUserMax},#{studyContent}, #{studyPlace},#{studyCategoryId}, #{studyView});
     </insert>
 
-    <insert id="joinStudy" parameterType="StudyJoinDto">
+    <insert id="joinStudy" parameterType="MemberJoinDto">
         insert into user_join_study (user_id, study_id, user_status)
             value (#{userId}, #{studyId}, #{userStatus})
     </insert>
