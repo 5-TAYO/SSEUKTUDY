@@ -13,14 +13,17 @@
     width: vw(670px);
 
     .header {
+      .title {
+        line-height: vw(35px);
+      }
       .info {
-        margin-top: vw(16px);
+        margin-top: vw(18px);
         padding-bottom: vw(25px);
         justify-content: space-between;
 
-        border-bottom: 1px solid $GRAY_DB;
+        border-bottom: 1px solid $GRAY-DB;
 
-        color: $GRAY_61;
+        color: $GRAY-61;
         .user {
           &__img {
             margin-right: vw(8px);
@@ -35,19 +38,23 @@
     main {
       padding: vw(37px) vw(15px) vw(11px) vw(15px);
 
-      border-bottom: 1px solid $GRAY_DB;
+      border-bottom: 1px solid $GRAY-DB;
 
       .study-info-title {
         margin-bottom: vw(8px);
       }
       .study-info {
+        &-title {
+          line-height: vw(29px);
+        }
         .info-line {
+          line-height: vw(20px);
           &__title {
             margin-right: vw(22px);
-            color: $GRAY_9E;
+            color: $GRAY-9E;
           }
           &__data {
-            color: $GRAY_61;
+            color: $GRAY-61;
           }
           & + .info-line {
             margin-top: vw(8px);
@@ -70,7 +77,7 @@
         border-radius: 4px;
 
         color: $WHITE;
-        background-color: $PINK_SUB;
+        background-color: $PINK-SUB;
       }
 
       .icon-container {
@@ -83,6 +90,8 @@
 
         .icon-cnt {
           margin-right: vw(16px);
+
+          color: $GRAY-9E;
         }
       }
     }
@@ -101,14 +110,20 @@
 
         &__input {
           margin-right: vw(20px);
+          padding: vw(8px);
 
+          resize: none;
           width: vw(508px);
           height: vw(42px);
 
-          border: 1px solid $PINK_SUB;
+          border: 1px solid $GRAY-DB;
           border-radius: 4px;
+          outline: none;
+        }
 
-          box-shadow: 0px 0px 4px $PINK_SUB;
+        &__input:focus {
+          border: 1px solid $PINK-SUB;
+          box-shadow: 0px 0px 4px $PINK-SUB;
         }
 
         &__regist-btn {
@@ -117,7 +132,7 @@
 
           border-radius: 4px;
           color: $WHITE;
-          background-color: $PINK_MAIN;
+          background-color: $PINK-MAIN;
         }
       }
     }

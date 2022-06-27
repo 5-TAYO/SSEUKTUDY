@@ -12,23 +12,23 @@
       margin-top: vw(16px);
       margin-bottom: vw(63px);
 
-      color: $PINK_SUB;
+      color: $PINK-SUB;
     }
 
     &__btn {
       width: vw(181px);
       height: vw(52px);
 
-      border: 1px solid $PINK_SUB;
+      border: 1px solid $PINK-SUB;
       border-radius: 18px;
 
       & + .banner__btn {
         margin-left: vw(24px);
-        background-color: $PINK_SUB;
+        background-color: $PINK-SUB;
         color: $WHITE;
       }
       &--regist {
-        color: $PINK_SUB;
+        color: $PINK-SUB;
       }
     }
 
@@ -48,9 +48,9 @@
       line-height: vw(46px);
 
       margin-bottom: vw(14px);
-
+      color: $GRAY-32;
       &--emphasis {
-        color: $PINK_SUB;
+        color: $PINK-SUB;
         margin-bottom: vw(93px);
       }
 
@@ -73,11 +73,11 @@
 
           margin-bottom: vw(25px);
 
-          border-top: solid 1px $GRAY_CB;
+          border-top: solid 1px $GRAY-CB;
         }
 
         .desc {
-          color: $GRAY_61;
+          color: $GRAY-61;
           line-height: vw(26px);
         }
         & + .main__desc-card {
@@ -107,12 +107,12 @@
     }
     .p-container {
       .logo-desc-top {
-        color: $GRAY_32;
+        color: $GRAY-32;
         margin-bottom: vw(10px);
       }
 
       .logo-desc-bottom {
-        color: $PINK_SUB;
+        color: $PINK-SUB;
       }
     }
   }

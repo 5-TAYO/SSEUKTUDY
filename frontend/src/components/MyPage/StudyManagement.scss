@@ -3,12 +3,12 @@
   .member-list-header {
     border-bottom: 1px solid $PINK-SUB !important;
     display: grid;
-    padding: vw(5px);
+    padding: vw(8px);
     grid-template-columns: 2.5fr 2.5fr 1.5fr 1.5fr 3fr;
     vertical-align: middle;
     color: $GRAY-9E;
     & > * {
-      padding: vw(5px);
+      padding: vw(8px);
       padding-left: vw(10px);
       position: relative;
     }
@@ -31,12 +31,13 @@
   .member {
     border-bottom: 1px solid $GRAY-CB !important;
     display: grid;
-    padding: vw(5px);
+    padding: vw(8px);
     grid-template-columns: 2.5fr 2.5fr 1.5fr 1.5fr 3fr;
     vertical-align: middle;
     color: $GRAY-61;
     .actions {
       button {
+        margin-right: vw(10px);
         font: inherit;
         word-break: keep-all;
       }
@@ -57,7 +58,7 @@
   }
   .divider {
     border: 0;
-    border-top: 3px solid $PINK-LIGHT;
+    border-top: 1px solid $PINK-LIGHT;
     margin: vw(50px) 0;
   }
   .subheader {

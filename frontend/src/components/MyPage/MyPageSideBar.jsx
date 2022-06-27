@@ -6,7 +6,7 @@ import "@components/Letters/LettersSideBar.scss";
 function MyPageSideBar() {
   return (
     <div className="letters-sidebar notoMid">
-      <div className="profile">
+      <div className="profile notoReg">
         <Avatar className="profile-mini-img" />
         <h2 className="name fs-24 notoBold">이정민</h2>
         <p className="email fs-12">jmlee907@nate.com</p>
@@ -15,7 +15,7 @@ function MyPageSideBar() {
       <div className="menu">
         <h3 className="menu-title fs-16">마이페이지</h3>
         <hr />
-        <div className="sub-menu">
+        <div className="sub-menu notoReg">
           <NavLink to="mystudy" className="sub-menu-title fs-13">
             나의 스터디
           </NavLink>
@@ -24,7 +24,7 @@ function MyPageSideBar() {
           </NavLink>
         </div>
         <hr />
-        <div className="sub-menu">
+        <div className="sub-menu notoReg">
           <NavLink to="info" className="sub-menu-title  fs-13">
             개인 정보 설정
           </NavLink>

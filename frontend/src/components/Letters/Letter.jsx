@@ -16,6 +16,7 @@ function Letter({ letter: { id, name, content, date, isRead } }) {
     setModalOpen(false);
   };
   return (
+<<<<<<< HEAD
     <>
       <div
         onClick={openModal}
@@ -27,6 +28,11 @@ function Letter({ letter: { id, name, content, date, isRead } }) {
         <p>{name}</p>
         <p className="content">{content}</p>
         <p>{date}</p>
+=======
+    <div className={`letter ${isRead === "0" ? "unread" : ""} notoReg fs-13`}>
+      <div>
+        <input type="checkbox" />
+>>>>>>> 6958a1bd9e1b6aef57ee162af28bd1f7176f01dd
       </div>
 
       <RecvLetterModal open={modalOpen} close={closeModal} letterId={id} />

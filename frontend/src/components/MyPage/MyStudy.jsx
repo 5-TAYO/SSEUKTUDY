@@ -46,7 +46,7 @@ function MyStudy() {
       </div>
 
       {studyList.length > 0 ? (
-        <div className="my-study-list">
+        <div className="my-study-list notoMid">
           {studyList.map(study => (
             <div className="my-study-card fs-12" key={study.id}>
               <div className="my-study-card-info">
