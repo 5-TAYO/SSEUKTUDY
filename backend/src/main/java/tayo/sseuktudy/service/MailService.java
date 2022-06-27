@@ -23,9 +23,8 @@ public class MailService {
     @Autowired
     private MailMapper mailMapper;
     private static final String FROM_ADDRESS = "1552419@gmail.com";
-    public static String []resultType = {"fail","success","find"};
 
-    public String mailSend(MailDto mailDto) throws Exception {
+    public int mailSend(MailDto mailDto) throws Exception {
         int result = 0;
         if(userMapper.searchUser(mailDto) == 0){ //유저 정보가 존재하지 않다면 메일 발송
             String authKey = makeAuthNumber();
@@ -47,12 +46,10 @@ public class MailService {
         }else{
             result = 2;
         }
-        return resultType[result];
+        return result;
     }
-    public String mailCheck(MailDto mailDto) throws Exception{
-        int result = 0;
-        result = mailMapper.mailCheck(mailDto);
-        return resultType[result];
+    public int mailCheck(MailDto mailDto) throws Exception{
+        return mailMapper.mailCheck(mailDto);
     }
     public String makeAuthNumber(){
         Random random = new Random();

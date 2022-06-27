@@ -1,10 +1,11 @@
 package tayo.sseuktudy.service;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import tayo.sseuktudy.dto.*;
+import tayo.sseuktudy.dto.user.UserInfoDto;
+import tayo.sseuktudy.dto.user.UserLoginDto;
+import tayo.sseuktudy.dto.user.UserModifyDto;
+import tayo.sseuktudy.dto.user.UserRegistDto;
 import tayo.sseuktudy.mapper.UserMapper;
 
 import java.util.HashMap;
@@ -12,31 +13,28 @@ import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
-    public String []resultType = {"fail","success"};
+    private final UserMapper userMapper;
     @Autowired
-    private UserMapper userMapper;
-
-    @Override
-    public String registUser(UserRegistDto request) throws Exception{
-        int result = userMapper.registUser(request);
-        return resultType[result];
-    }
-    @Override
-    public String modifyUser(UserModifyDto userModifyDto) throws Exception{
-        int result = userMapper.modifyUser(userModifyDto);
-        return resultType[result];
+    public UserServiceImpl(UserMapper userMapper){
+        this.userMapper = userMapper;
     }
 
     @Override
-    public String deleteUser(String userId) throws Exception{
-        int result = userMapper.deleteUser(userId);
-        return resultType[result];
+    public int registUser(UserRegistDto request) throws Exception{
+        return userMapper.registUser(request);
     }
     @Override
-    public String loginUser(UserLoginDto request) throws Exception {
-        UserLoginDto result = userMapper.loginUser(request);
-        if(result != null) return resultType[1];
-        else return resultType[0];
+    public int modifyUser(UserModifyDto userModifyDto) throws Exception{
+        return userMapper.modifyUser(userModifyDto);
+    }
+
+    @Override
+    public int deleteUser(String userId) throws Exception{
+        return userMapper.deleteUser(userId);
+    }
+    @Override
+    public int loginUser(UserLoginDto request) throws Exception {
+       return userMapper.loginUser(request);
     }
 
     @Override
@@ -46,34 +44,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String getRefreshToken(String userId) throws Exception {
-        System.out.println("getRfT : " + userId);
-        System.out.println("userMapper"+ userMapper.getRefreshToken(userId));
         return userMapper.getRefreshToken(userId);
     }
 
     @Override
-    public String saveRefreshToken(String userid, String refreshToken) throws Exception {
+    public int saveRefreshToken(String userid, String refreshToken) throws Exception {
         Map<String, String> map = new HashMap<>();
         map.put("userId", userid);
         map.put("userRefreshToken", refreshToken);
-        int result =  userMapper.saveRefreshToken(map);
-        return resultType[result];
-
+        return userMapper.saveRefreshToken(map);
     }
 
-    @Override
-    public int idcheck(String userid) throws Exception {
-        return userMapper.idcheck(userid);
-    }
 
     @Override
-    public String deleteRefreshToken(String userid) throws Exception {
+    public int deleteRefreshToken(String userid) throws Exception {
         Map<String, String> map = new HashMap<String, String>();
         map.put("userId", userid);
         map.put("userRefreshToken", null);
-        int result = userMapper.deleteRefreshToken(map);
 
-        return resultType[result];
+        return userMapper.deleteRefreshToken(map);
 
     }
 

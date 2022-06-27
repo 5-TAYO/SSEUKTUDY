@@ -1,4 +1,4 @@
-package tayo.sseuktudy.dto;
+package tayo.sseuktudy.dto.user;
 
 public class UserInfoDto {
     String user_id;
