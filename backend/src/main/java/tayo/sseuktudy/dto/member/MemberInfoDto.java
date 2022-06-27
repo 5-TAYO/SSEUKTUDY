@@ -2,18 +2,19 @@ package tayo.sseuktudy.dto.member;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
+import java.util.List;
 import java.util.Map;
 
-@Getter
 @Setter
-@ToString
-public class MemberApplyDto {
-    int studyId;
+@Getter
+public class MemberInfoDto {
     String userId;
-    String userStatus;
     String userNickname;
     String userIntroduction;
-    Map<String, String> preQuestions;
+    String userStatus;
+    int studyId;
+    int questionId;
+    String questionContent;
+    String questionAnswer;
 }

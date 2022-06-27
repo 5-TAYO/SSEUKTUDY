@@ -3,6 +3,7 @@ package tayo.sseuktudy.service.study;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tayo.sseuktudy.dto.member.MemberJoinDto;
 import tayo.sseuktudy.dto.question.QuestionModifyDto;
 import tayo.sseuktudy.dto.question.QuestionRegistDto;
 import tayo.sseuktudy.dto.study.*;
@@ -40,13 +41,13 @@ public class StudyServiceImpl implements StudyService{
             }
         }
 
-        StudyJoinDto studyJoinDto = new StudyJoinDto();
+        MemberJoinDto memberJoinDto = new MemberJoinDto();
 
-        studyJoinDto.setStudyId(studyRegistDto.getStudyId());
-        studyJoinDto.setUserId(studyRegistDto.getStudyLeaderId());
-        studyJoinDto.setUserStatus("member");
+        memberJoinDto.setStudyId(studyRegistDto.getStudyId());
+        memberJoinDto.setUserId(studyRegistDto.getStudyLeaderId());
+        memberJoinDto.setUserStatus("member");
 
-        if(studyMapper.joinStudy(studyJoinDto) != 1){
+        if(studyMapper.joinStudy(memberJoinDto) != 1){
             return 0;
         }
 
