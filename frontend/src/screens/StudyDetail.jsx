@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./StudyDetail.scss";
 import LeftArrowIcon from "@images/Left-Arrow.svg";
 import UserDuumyIcon from "@images/Profile.svg";
@@ -25,6 +25,14 @@ function StudyDetail() {
   }, []);
   const navi = useNavigate();
   const { id: studyId } = useParams();
+  const commentInput = useRef();
+  const autoResizeTextarea = () => {
+    if (commentInput) {
+      commentInput.current.style.height = 0;
+      const height = commentInput.current.scrollHeight;
+      commentInput.current.style.height = `${height + 2}px`; // fix__
+    }
+  };
   const dummy = [
     {
       userName: "정민",
@@ -139,11 +147,11 @@ function StudyDetail() {
               신청하기
             </Link>
           </div>
-          <div className="icon-container flex align-center fs-12">
+          <div className="icon-container flex align-center">
             <img className="icon" src={RedLikeIcon} alt="좋아요수" />
-            <div className="icon-cnt">{getCounts(1231231213)}</div>
+            <div className="icon-cnt fs-12 roReg">{getCounts(1231231213)}</div>
             <img className="icon" src={ViewIcon} alt="조회수" />
-            <div className="icon-cnt">{getCounts(9999999)}</div>
+            <div className="icon-cnt fs-12 roReg">{getCounts(9999999)}</div>
           </div>
         </main>
         <footer>
@@ -154,7 +162,11 @@ function StudyDetail() {
               alt="유저더미"
               className="comment__user-img"
             />
-            <input type="text" className="comment__input" />
+            <textarea
+              onChange={autoResizeTextarea}
+              className="comment__input fs-16 notoMid"
+              ref={commentInput}
+            />
             <button
               type="button"
               className="comment__regist-btn notoBold fs-16 "
