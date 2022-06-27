@@ -24,8 +24,9 @@
     </update>
 
     <delete id="refuseMember" parameterType="MemberStatusChangeDto">
-        delete from user_join_study
-        where user_id=#{userId} and study_id=#{studyId}
+        delete ujs, usq from user_join_study ujs inner join user_answer_question usq
+               on ujs.user_id = usq.user_id and ujs.study_id = usq.study_id
+               where ujs.user_id = #{userId} and ujs.study_id = #{studyId};
     </delete>
 
 </mapper>

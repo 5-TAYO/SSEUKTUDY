@@ -8,4 +8,5 @@ import lombok.Setter;
 public class MemberStatusChangeDto {
     int studyId;
     String userId;
+    String leaderId;
 }

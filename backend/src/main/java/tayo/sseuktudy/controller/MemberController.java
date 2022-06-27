@@ -99,8 +99,8 @@ public class MemberController {
         return new ResponseEntity<>(resultMap, status);
     }
 
-    @PutMapping("/member/accept/{studyId}")
-    public ResponseEntity<Map<String, Object>> acceptMember(@PathVariable int studyId, HttpServletRequest request){
+    @PatchMapping("/member/accept")
+    public ResponseEntity<Map<String, Object>> acceptMember(@RequestBody MemberStatusChangeDto memberStatusChangeDto, HttpServletRequest request){
         logger.info("스터디 멤버수락 API 실행");
         Map<String, Object> resultMap  = new HashMap<>();
         HttpStatus status = HttpStatus.UNAUTHORIZED;
@@ -109,9 +109,7 @@ public class MemberController {
         if(!decodeUserId.equals("access token timeout")){
             logger.info("사용 가능한 토큰!!");
             try{
-                MemberStatusChangeDto memberStatusChangeDto = new MemberStatusChangeDto();
-                memberStatusChangeDto.setStudyId(studyId);
-                memberStatusChangeDto.setUserId(decodeUserId);
+                memberStatusChangeDto.setLeaderId(decodeUserId);
 
                 int result = memberService.acceptMember(memberStatusChangeDto);
 
@@ -136,8 +134,8 @@ public class MemberController {
 
     }
 
-    @DeleteMapping("/member/delete/{studyId}")
-    public ResponseEntity<Map<String, Object>> refuseMember(@PathVariable int studyId, HttpServletRequest request){
+    @DeleteMapping("/member/refuse")
+    public ResponseEntity<Map<String, Object>> refuseMember(@RequestBody MemberStatusChangeDto memberStatusChangeDto, HttpServletRequest request){
         logger.info("스터디 멤버거절 API 실행");
         Map<String, Object> resultMap  = new HashMap<>();
         HttpStatus status = HttpStatus.UNAUTHORIZED;
@@ -146,9 +144,7 @@ public class MemberController {
         if(!decodeUserId.equals("access token timeout")){
             logger.info("사용 가능한 토큰!!");
             try{
-                MemberStatusChangeDto memberStatusChangeDto = new MemberStatusChangeDto();
-                memberStatusChangeDto.setStudyId(studyId);
-                memberStatusChangeDto.setUserId(decodeUserId);
+                memberStatusChangeDto.setLeaderId(decodeUserId);
 
                 int result = memberService.refuseMember(memberStatusChangeDto);
 
