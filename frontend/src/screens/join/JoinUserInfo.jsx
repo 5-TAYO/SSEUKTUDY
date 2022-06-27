@@ -21,6 +21,7 @@ function JoinUserInfo() {
               type="email"
               placeholder="jmlee9707@naver.com"
               className="info_input_email notoReg fs-15"
+              disabled
             />
           </div>
         </div>
@@ -79,10 +80,10 @@ function JoinUserInfo() {
       {/* info btn start */}
       <div className="flex align-center justify-center">
         <Link
-          to="/join/add"
+          to="/join/finish"
           className="join_info_next_btn notoMid fs-15 flex align-center justify-center"
         >
-          다음
+          완료
         </Link>
       </div>
       {/* info btn end */}

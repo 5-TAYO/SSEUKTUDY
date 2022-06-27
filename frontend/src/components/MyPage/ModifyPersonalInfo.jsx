@@ -48,6 +48,7 @@ function ModifyPersonalInfo() {
               type="email"
               placeholder="jmlee9707@naver.com"
               className="mypage_compo_edit_email notoReg fs-15"
+              disabled
             />
           </div>
         </div>

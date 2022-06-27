@@ -1,13 +1,12 @@
 #join_add {
   margin: vw(100px) vw(483px);
-
+  padding: vw(64px) vw(72px);
   border-radius: vw(20px);
   width: vw(473px);
-  height: vw(730px);
   border: solid 1px $GRAY-DB;
 
   .add_text {
-    margin: vw(64px) vw(70px) vw(32px) vw(72px);
+    padding-bottom: vw(40px);
 
     &_title {
       line-height: vw(35px);
@@ -26,6 +25,10 @@
       width: vw(329px);
       border-radius: vw(4px);
     }
+    input:focus {
+      border: 1px solid $PINK-SUB;
+      box-shadow: 0px 0px 4px #ff3387;
+    }
 
     &_box {
       margin-bottom: vw(16px);
@@ -35,10 +38,6 @@
       color: $GRAY-76;
       line-height: vw(17px);
       margin-top: vw(8px);
-    }
-
-    &_email {
-      background-color: $GRAY-DB;
     }
 
     .join_address_btn {
@@ -53,7 +52,7 @@
   .add_category {
     margin: vw(8px) 0;
     text-align: left;
-    padding: 0 vw(72px) vw(12px) vw(70px);
+    padding-bottom: vw(12px);
 
     &_title {
       line-height: vw(23px);
@@ -71,7 +70,7 @@
       height: vw(32px);
       margin: 0 vw(12px) vw(8px) 0;
 
-      border: 1px solid #ff79ab;
+      border: 1px solid $PINK-LIGHT;
       border-radius: 10px;
 
       &:hover,
@@ -86,7 +85,7 @@
     width: vw(329px);
     height: vw(48px);
     border-radius: vw(4px);
-    background-color: $PINK-MAIN;
+    background-color: $PINK-SUB;
     color: $WHITE;
     margin-top: vw(12px);
   }
