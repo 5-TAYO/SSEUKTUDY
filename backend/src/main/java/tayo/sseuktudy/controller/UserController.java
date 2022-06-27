@@ -33,6 +33,7 @@ public class UserController {
     private final JwtService jwtService;
     private final MailService mailService;
     private final int SERVICE_RETURN_OKAY = 1;
+    private final String ACCESS_TOKEN_TIMEOUT = "access token timeout";
     @Autowired
     UserController(JwtService jwtService, UserService userService, MailService mailService){
         this.userService = userService;
@@ -74,25 +75,31 @@ public class UserController {
         return new ResponseEntity<>(resultMap, status);
     }
 
-    @PutMapping("/user/logout/{userid}")
-    public ResponseEntity<?> logoutUser(@PathVariable("userid") String userid){
+    @PutMapping("/user/logout")
+    public ResponseEntity<?> logoutUser(HttpServletRequest request){
         Map<String, Object> resultMap = new HashMap<>();
+        String accessToken = request.getHeader("access-token");
+        String decodeUserId = jwtService.decodeToken(accessToken);
         HttpStatus status;
-
-        try {
-            if(userService.deleteRefreshToken(userid) == 1){
-                logger.info("refresh token 삭제 성공");
-            }else{
-                logger.info("refresh token 삭제 실패");
+        if(!decodeUserId.equals(ACCESS_TOKEN_TIMEOUT)){
+            try {
+                if(userService.deleteRefreshToken(decodeUserId) == 1){
+                    logger.info("refresh token 삭제 성공");
+                }else{
+                    logger.info("refresh token 삭제 실패");
+                }
+                resultMap.put("message", "SUCCESS");
+                status = HttpStatus.ACCEPTED;
+            } catch (Exception e) {
+                logger.error("로그아웃 실패 : {}", e);
+                resultMap.put("message", e.getMessage());
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
             }
-
-            resultMap.put("message", "SUCCESS");
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            logger.error("로그아웃 실패 : {}", e);
-            resultMap.put("message", e.getMessage());
+        }else{
+            resultMap.put("message", ACCESS_TOKEN_TIMEOUT);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
+
         return new ResponseEntity<>(resultMap, status);
 
     }
@@ -118,7 +125,7 @@ public class UserController {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
         String decodeUserId = jwtService.decodeToken(request.getHeader("access-token"));
-        if (! decodeUserId.equals("access token timeout")) {
+        if (! decodeUserId.equals(ACCESS_TOKEN_TIMEOUT)) {
             logger.info("사용 가능한 토큰!!!");
             try {
 //				로그인 사용자 정보.
@@ -133,7 +140,7 @@ public class UserController {
             }
         } else {
             logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message", "FAIL");
+            resultMap.put("message", ACCESS_TOKEN_TIMEOUT);
             status = HttpStatus.UNAUTHORIZED;
         }
         return new ResponseEntity<>(resultMap, status);
@@ -152,15 +159,22 @@ public class UserController {
         return new ResponseEntity<>(resultMap,status);
     }
 
-    @PutMapping("/user")
-    public ResponseEntity<?> modifyUser(@RequestBody @Validated UserModifyDto userModifyDto, HttpServletRequest request) throws Exception{
+    @PatchMapping("/user")
+    public ResponseEntity<?> modifyUser(@RequestBody UserModifyDto userModifyDto, HttpServletRequest request) throws Exception{
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        if(userService.modifyUser(userModifyDto) == SERVICE_RETURN_OKAY){
-            resultMap.put("message","SUCCESS");
-            status = HttpStatus.ACCEPTED;
+        String decodeUserId = jwtService.decodeToken(request.getHeader("access-token"));
+        if (! decodeUserId.equals(ACCESS_TOKEN_TIMEOUT)) {
+            userModifyDto.setUserId(decodeUserId);
+            if(userService.modifyUser(userModifyDto) == SERVICE_RETURN_OKAY){
+                resultMap.put("message","SUCCESS");
+                status = HttpStatus.ACCEPTED;
+            }else{
+                resultMap.put("message","FAIL");
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
         }else{
-            resultMap.put("message","FAIL");
+            resultMap.put("message", ACCESS_TOKEN_TIMEOUT);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(resultMap,status);
