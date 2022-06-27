@@ -1,18 +1,23 @@
-#login {
+#join {
   margin: vw(100px) vw(483px);
-
+  padding: vw(64px) vw(72px);
   border-radius: vw(20px);
   width: vw(473px);
-  height: vw(855px);
   border: solid 1px $GRAY-DB;
 
-  .login_text {
-    padding: vw(64px) 0 vw(40px) vw(72px);
+  .join_text {
+    padding-bottom: vw(40px);
     text-align: left;
-    line-height: vw(35px);
+    &_desc {
+      line-height: vw(35px);
+      margin-bottom: vw(16px);
+      &_small {
+        line-height: vw(23px);
+      }
+    }
   }
 
-  .login_social_btn {
+  .join_social_btn {
     button {
       width: vw(329px);
       height: vw(48px);
@@ -42,7 +47,7 @@
     margin-bottom: vw(20px);
   }
 
-  .login_or {
+  .join_or {
     &_line {
       height: vw(1px);
       background-color: $GRAY-CB;
@@ -51,15 +56,15 @@
     &_text {
       line-height: vw(20px);
       color: $GRAY-CB;
-      margin: 0 vw(13px) 0 vw(14px);
+      margin: 0 vw(10px) 0 vw(10px);
     }
   }
 
-  .login_input {
-    margin: vw(32px) 0 vw(36px) 0;
+  .join_input {
+    margin: vw(24px) 0 vw(36px) 0;
     &_title,
     &_failed {
-      margin: 0 0 vw(12px) vw(72px);
+      margin-bottom: vw(14px);
     }
     input {
       border: solid vw(1px) $GRAY-DB;
@@ -68,9 +73,13 @@
       width: vw(329px);
       border-radius: vw(4px);
     }
+    input:focus {
+      border: 1px solid $PINK-SUB;
+      box-shadow: 0px 0px 4px #ff3387;
+    }
 
     &_box {
-      margin-bottom: vw(20px);
+      margin-bottom: vw(12px);
     }
 
     &_failed {
@@ -78,11 +87,11 @@
     }
   }
 
-  .login_btn {
+  .join_main_next_btn {
     width: vw(329px);
     height: vw(48px);
     border-radius: vw(4px);
-    background-color: $PINK-MAIN;
+    background-color: $PINK-SUB;
     color: $WHITE;
     margin-bottom: vw(24px);
   }
