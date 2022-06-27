@@ -2,7 +2,6 @@
   display: grid;
   padding: vw(5px);
   grid-template-columns: 1fr 4fr 10fr 5fr;
-  vertical-align: middle;
   color: $GRAY-9E;
   border-bottom: 1px solid $GRAY-DB;
   & > * {
@@ -12,5 +11,9 @@
   }
   &.unread {
     color: $BLUE;
+  }
+  p {
+    display: flex;
+    align-self: center;
   }
 }

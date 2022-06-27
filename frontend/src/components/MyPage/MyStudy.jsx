@@ -46,13 +46,11 @@ function MyStudy() {
       </div>
 
       {studyList.length > 0 ? (
-        <div className="my-study-list">
+        <div className="my-study-list notoMid">
           {studyList.map(study => (
-            <div className="my-study-card" key={study.id}>
+            <div className="my-study-card fs-12" key={study.id}>
               <div className="my-study-card-info">
-                <p className="category notoMide fs-12">
-                  {study.category.join(" / ")}
-                </p>
+                <p className="category notoMid">{study.category.join(" / ")}</p>
                 <p className="title notoMid fs-22">{study.name}</p>
               </div>
               <div className="divider" />
@@ -64,7 +62,7 @@ function MyStudy() {
               </div>
               <div className="divider" />
               <div className="my-study-card-info">
-                <p className="headcount">참여인원 : {study.headCount}</p>
+                <p className="headcount">참여 인원 : {study.headCount}</p>
                 <div>
                   현재 상태 : <span className="state">{study.state}</span>
                 </div>

@@ -1,0 +1,223 @@
+.study-regist-form {
+  padding: vw(70px) vw(435px) vw(400px) vw(435px);
+
+  .back-btn {
+    margin-right: auto;
+    &__img {
+      width: vw(24px);
+      height: vw(24px);
+    }
+  }
+  .title {
+    padding-bottom: vw(20px);
+    margin-bottom: vw(60px);
+
+    width: vw(241px);
+
+    border-bottom: 2px solid $PINK-SUB;
+  }
+  .type {
+    margin-right: auto;
+    margin-bottom: vw(8px);
+  }
+  .options {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: vw(16px);
+    label {
+      width: vw(120px);
+      white-space: nowrap;
+      display: flex;
+    }
+    input {
+      margin: 0;
+      margin-right: vw(8px);
+      width: vw(15px);
+      height: vw(15px);
+      accent-color: $PINK-SUB;
+    }
+  }
+  .headcount {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    label {
+      width: 45%;
+      line-height: vw(30px);
+      color: $GRAY-9E;
+    }
+    select {
+      direction: rtl;
+      appearance: none;
+      -webkit-appearance: none; /* for chrome */
+      -moz-appearance: none; /*for firefox*/
+      display: block;
+      line-height: vw(30px);
+      color: $BLACK;
+      text-indent: 0;
+      padding: 0 vw(12px);
+      &::-ms-expand {
+        display: none;
+      }
+      &:focus,
+      &:active {
+        border: 1px solid $PINK-SUB;
+        outline: none;
+      }
+    }
+  }
+  input,
+  select {
+    margin-bottom: vw(16px);
+
+    width: 100%;
+    height: vw(48px);
+
+    text-indent: vw(12px);
+    border: 1px solid $GRAY-DB;
+    border-radius: 4px;
+  }
+  input:disabled {
+    background-color: $GRAY-DB;
+  }
+  .pre-questions {
+    width: 100%;
+    .question {
+      width: 100%;
+      height: vw(80px);
+      display: flex;
+      align-items: center;
+      p {
+        width: vw(50px);
+        padding: vw(5px);
+        text-align: center;
+        //   line-height: vw(40px);
+      }
+      label {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        color: $PINK-SUB;
+        white-space: nowrap;
+        align-items: center;
+      }
+      input {
+        margin: 0;
+      }
+      button {
+        padding: 5px;
+        width: vw(40px);
+      }
+    }
+    .question-plus {
+      display: flex;
+      align-items: center;
+      .button {
+        position: relative;
+        width: vw(25px);
+        height: vw(25px);
+        margin: 1rem;
+        border-radius: 50%;
+      }
+      .button > span {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .bg {
+        border-radius: 50%;
+        background-color: $PINK-SUB;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s linear;
+      }
+      .symbol::before,
+      .symbol::after {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: block;
+        margin: auto;
+        border-radius: 2px;
+        content: "";
+      }
+      .symbol::before {
+        width: vw(12px);
+        height: vw(3px);
+        background-color: $WHITE;
+      }
+      .plus .symbol::after {
+        width: vw(3px);
+        height: vw(12px);
+        background-color: $WHITE;
+      }
+      p {
+        color: $GRAY-9E;
+      }
+    }
+  }
+
+  .self-intro {
+    padding: vw(12px) vw(14px) 0 vw(14px);
+    margin-bottom: vw(16px);
+
+    width: 100%;
+    height: vw(200px);
+    resize: none;
+  }
+
+  .self-intro-cnt {
+    margin-right: vw(10px);
+    margin-bottom: vw(16px);
+
+    margin-left: auto;
+  }
+
+  input:focus {
+    border: 1px solid $PINK-SUB;
+  }
+  textarea {
+    border: 1px solid $GRAY-DB;
+    border-radius: 4px;
+
+    line-height: vw(22px);
+    outline-color: $PINK-SUB;
+  }
+
+  .question-title {
+    margin-bottom: vw(20px);
+  }
+
+  #pre-question + #pre-question {
+    margin-top: vw(16px);
+  }
+
+  .btn {
+    margin-top: vw(40px);
+    width: vw(329px);
+    height: vw(48px);
+
+    border-radius: 4px;
+    color: $WHITE;
+  }
+
+  .btn + .btn {
+    margin-top: vw(16px);
+  }
+
+  .accept-btn {
+    background-color: $PINK-LIGHT;
+  }
+
+  .refuse-btn {
+    background-color: #9a9a9a;
+  }
+
+  .apply-btn {
+    background-color: $PINK-MAIN;
+  }
+}

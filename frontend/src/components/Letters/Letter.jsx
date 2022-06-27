@@ -5,7 +5,7 @@ import "./Letter.scss";
 
 function Letter({ letter: { name, content, date, isRead } }) {
   return (
-    <div className={`letter ${isRead === "0" ? "unread" : ""}`}>
+    <div className={`letter ${isRead === "0" ? "unread" : ""} notoReg fs-13`}>
       <div>
         <input type="checkbox" />
       </div>
