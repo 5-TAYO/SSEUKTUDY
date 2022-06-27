@@ -14,4 +14,5 @@ public interface MemberMapper {
     public List<MemberInfoDto> getMembers(int studyId);
     public int acceptMember(MemberStatusChangeDto memberStatusChangeDto);
     public int refuseMember(MemberStatusChangeDto memberStatusChangeDto);
+
 }

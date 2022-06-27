@@ -5,6 +5,7 @@ import tayo.sseuktudy.dto.member.MemberApplyDto;
 import tayo.sseuktudy.dto.member.MemberInfoDto;
 import tayo.sseuktudy.dto.member.MemberStatusChangeDto;
 
+
 import java.util.List;
 
 @Service
@@ -13,4 +14,5 @@ public interface MemberService {
     public List<MemberInfoDto> getMembers(int studyId);
     public int acceptMember(MemberStatusChangeDto memberStatusChangeDto);
     public int refuseMember(MemberStatusChangeDto memberStatusChangeDto);
+
 }

@@ -3,17 +3,35 @@
 
 <mapper namespace="tayo.sseuktudy.mapper.NoteMapper">
     <insert id="registNote" parameterType="NoteRegistDto">
-        insert into note (user_id_send, user_id_receive, note_is_read, note_send_time, note_content)
-            value (#{userIdSend},#{userIdReceive},FALSE,now(),#{noteContent});
+        insert into note (user_id_send, user_id_receive, note_is_read, note_send_time, note_content, type)
+            value (#{userIdSend},#{userIdReceive},FALSE,now(),#{noteContent}, 'send'),(#{userIdSend},#{userIdReceive},FALSE,now(),#{noteContent}, 'receive');
     </insert>
     <select id="listSendNote" parameterType="String" resultType="NoteInfoDto">
         select note_id as noteId, user_id_send as userIdSend, user_id_receive as userIdReceive, note_is_read as noteIsRead, note_send_time as noteSendTime, note_content as noteContent from note
-        where user_id_send = #{userId};
+        where user_id_send = #{userId} type = 'send';
     </select>
-
+    <select id="getStudyUsers" parameterType="int" resultType="String">
+        select user_id as studyUsers from user_join_study
+        where study_id = #{studyId};
+    </select>
     <select id="listReciveNote" parameterType="String" resultType="NoteInfoDto">
         select note_id as noteId, user_id_send as userIdSend, user_id_receive as userIdReceive, note_is_read as noteIsRead, note_send_time as noteSendTime, note_content as noteContent from note
-        where user_id_receive= #{userId};
+        where user_id_receive= #{userId} type = 'receive';
     </select>
-
+    <update id="readNote" parameterType="NoteReadDto">
+            update note set note_is_read = TRUE
+            where user_id_receive = #{userId} and note_id = #{noteId} and type = 'receive';
+    </update>
+    <delete id="deleteSendNote" parameterType="NoteDeleteDto">
+        delete from note
+        where note_id = #{noteId} and user_id_send = #{userId} and type = 'send' ;
+    </delete>
+    <delete id="deleteReceiveNote" parameterType="NoteDeleteDto">
+        delete from note
+        where note_id = #{noteId} and user_id_receive = #{userId} and type = 'receive';
+    </delete>
+    <select id="checkCountNote" parameterType="String" resultType="int">
+        select COUNT(note_id) from note
+        where user_id_receive = #{userId} and note_is_read = FALSE and type = 'receive';
+    </select>
 </mapper>

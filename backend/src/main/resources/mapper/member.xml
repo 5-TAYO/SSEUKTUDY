@@ -29,4 +29,5 @@
                where ujs.user_id = #{userId} and ujs.study_id = #{studyId};
     </delete>
 
+
 </mapper>

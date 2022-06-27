@@ -25,6 +25,7 @@ public class JwtServiceImpl implements JwtService {
 	private static final String SALT = "sseuktudySecret";
 	private static final int EXPIRE_MINUTES = 10; //토큰 만료 시간
 
+
 	
 	
 	//토큰 발급 메서드를 활용한  refresh 토큰 생성

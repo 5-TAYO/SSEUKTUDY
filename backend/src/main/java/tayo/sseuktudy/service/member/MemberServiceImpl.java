@@ -8,6 +8,7 @@ import tayo.sseuktudy.dto.member.MemberStatusChangeDto;
 import tayo.sseuktudy.dto.question.QuestionAnswerRegistDto;
 import tayo.sseuktudy.dto.member.MemberJoinDto;
 import tayo.sseuktudy.dto.member.MemberInfoDto;
+
 import tayo.sseuktudy.mapper.MemberMapper;
 import tayo.sseuktudy.mapper.QuestionMapper;
 
@@ -63,5 +64,6 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public int refuseMember(MemberStatusChangeDto memberStatusChangeDto){
         return memberMapper.refuseMember(memberStatusChangeDto);
+
     }
 }

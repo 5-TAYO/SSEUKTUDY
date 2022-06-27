@@ -11,13 +11,16 @@ import tayo.sseuktudy.dto.member.MemberApplyDto;
 import tayo.sseuktudy.dto.member.MemberInfoDto;
 import tayo.sseuktudy.dto.member.MemberJoinDto;
 import tayo.sseuktudy.dto.member.MemberStatusChangeDto;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import tayo.sseuktudy.service.JwtService;
 import tayo.sseuktudy.service.member.MemberService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @CrossOrigin("*")
