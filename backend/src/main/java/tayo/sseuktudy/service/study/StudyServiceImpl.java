@@ -10,6 +10,8 @@ import tayo.sseuktudy.dto.study.*;
 import tayo.sseuktudy.mapper.QuestionMapper;
 import tayo.sseuktudy.mapper.StudyMapper;
 
+import java.util.List;
+
 @Service
 public class StudyServiceImpl implements StudyService{
 
@@ -76,6 +78,10 @@ public class StudyServiceImpl implements StudyService{
         return studyMapper.deleteStudy(studyDeleteDto);
     }
 
+    @Override
+    public List<StudyInfoDto> getStudyByFilter(StudyFilterDto studyFilterDto) {
+        return studyMapper.getStudyByFilter(studyFilterDto);
+    }
 
 
 }

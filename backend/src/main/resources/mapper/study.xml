@@ -25,6 +25,29 @@
         where study_id=#{studyId}
     </delete>
 
+    <select id="getStudyByFilter" parameterType="StudyFilterDto" resultType="StudyInfoDto">
+
+            select study_title studyTitle, study_leader_id studyLeaderId, study_status studyStatus, study_introduction studyIntroduction, study_startdate studyStartdate,
+        study_enddate studyEnddate, study_goals studyGoals, study_type studyType , study_user_min studyUserMin, study_user_max studyUserMax, study_content studyContent,
+        study_place studyPlace, study_category_id studyCategoryId
+            from study
+            <trim prefix="where" prefixOverrides="and | or">
+                <if test="studyType != null">
+                    study_type = #{studyType}
+                </if>
+                <if test="studyCategoryId != 0">
+                    and study_category_id = #{studyCategoryId}
+                </if>
+                <if test="studyStartdate != null and studyEnddate != null">
+                    <![CDATA[
+                    and study_startdate >= #{studyStartdate} and study_enddate <= #{studyEnddate}
+                     ]]>
+                </if>
+            </trim>
+
+    </select>
+
+
 
 
 </mapper>

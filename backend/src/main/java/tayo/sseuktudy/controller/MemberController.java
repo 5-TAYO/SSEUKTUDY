@@ -21,6 +21,7 @@ import tayo.sseuktudy.service.member.MemberService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin("*")
