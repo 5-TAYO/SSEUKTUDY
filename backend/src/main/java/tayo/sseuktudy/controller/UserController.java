@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tayo.sseuktudy.dto.*;
+import tayo.sseuktudy.dto.user.*;
+import tayo.sseuktudy.service.JwtService;
 import tayo.sseuktudy.service.UserService;
 import tayo.sseuktudy.service.JwtServiceImpl;
 
@@ -15,35 +17,37 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-import tayo.sseuktudy.dto.UserRegistDto;
 
 import tayo.sseuktudy.service.MailService;
+import tayo.sseuktudy.service.member.MemberService;
+
 @RestController
 @CrossOrigin("*")
 public class UserController {
-
-
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
+    private final UserService userService;
+    private final JwtService jwtService;
+    private final MailService mailService;
+    private final int SERVICE_RETURN_OKAY = 1;
+    private final String ACCESS_TOKEN_TIMEOUT = "access token timeout";
     @Autowired
-    private UserService userService;
-
-    @Autowired
-    private JwtServiceImpl jwtService;
-    @Autowired
-    private MailService mailService;
-
+    UserController(JwtService jwtService, UserService userService, MailService mailService){
+        this.userService = userService;
+        this.jwtService = jwtService;
+        this.mailService = mailService;
+    }
     @PostMapping("/user/login")
     public ResponseEntity<Map<String, Object>> loginUser(@RequestBody UserLoginDto userLoginDto) {
         Map<String, Object> resultMap = new HashMap<>();
-        HttpStatus status = null;
+        HttpStatus status;
         logger.info("로그인 요청");
         try {
-            String loginUser = userService.loginUser(userLoginDto);
-            if (loginUser.equals("success")) {
+            int result = userService.loginUser(userLoginDto);
+            if (result == 1) {
                 String accessToken = jwtService.createAccessToken("user_id", userLoginDto.getUserId());// key, data
                 String refreshToken = jwtService.createRefreshToken("user_id", userLoginDto.getUserId());
-                if(userService.saveRefreshToken(userLoginDto.getUserId(), refreshToken).equals("success")){
+                if(userService.saveRefreshToken(userLoginDto.getUserId(), refreshToken) == 1){
                     logger.info("refreshtoken 저장 완료");
                 }else{
                     logger.info("refreshtoken 저장 실패");
@@ -65,35 +69,41 @@ public class UserController {
             resultMap.put("message", "FAIL");
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+        return new ResponseEntity<>(resultMap, status);
     }
 
-    @PutMapping("/user/logout/{userid}")
-    public ResponseEntity<?> logoutUser(@PathVariable("userid") String userid){
+    @PutMapping("/user/logout")
+    public ResponseEntity<?> logoutUser(HttpServletRequest request){
         Map<String, Object> resultMap = new HashMap<>();
-        HttpStatus status = HttpStatus.ACCEPTED;
-
-        try {
-            if(userService.deleteRefreshToken(userid).equals("success")){
-                logger.info("refresh token 삭제 성공");
-            }else{
-                logger.info("refresh token 삭제 실패");
+        String accessToken = request.getHeader("access-token");
+        String decodeUserId = jwtService.decodeToken(accessToken);
+        HttpStatus status;
+        if(!decodeUserId.equals(ACCESS_TOKEN_TIMEOUT)){
+            try {
+                if(userService.deleteRefreshToken(decodeUserId) == 1){
+                    logger.info("refresh token 삭제 성공");
+                }else{
+                    logger.info("refresh token 삭제 실패");
+                }
+                resultMap.put("message", "SUCCESS");
+                status = HttpStatus.ACCEPTED;
+            } catch (Exception e) {
+                logger.error("로그아웃 실패 : {}", e);
+                resultMap.put("message", e.getMessage());
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
             }
-
-            resultMap.put("message", "SUCCESS");
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            logger.error("로그아웃 실패 : {}", e);
-            resultMap.put("message", e.getMessage());
+        }else{
+            resultMap.put("message", ACCESS_TOKEN_TIMEOUT);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+
+        return new ResponseEntity<>(resultMap, status);
 
     }
     @PostMapping("/user/refresh")
     public ResponseEntity<?> refreshToken(@RequestBody @Validated String userId, HttpServletRequest request) throws Exception{
         Map<String, Object> resultMap = new HashMap<>();
-        HttpStatus status = HttpStatus.ACCEPTED;
+        HttpStatus status;
         String token = request.getHeader("refresh-token");
 
         if(token.equals(userService.getRefreshToken(userId))) {
@@ -105,15 +115,14 @@ public class UserController {
         }else {
             status = HttpStatus.UNAUTHORIZED;
         }
-        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+        return new ResponseEntity<>(resultMap, status);
     }
     @GetMapping("/user/info")
     public ResponseEntity<Map<String, Object>> getInfo(HttpServletRequest request) {
-//		logger.debug("userid : {} ", userid);
         Map<String, Object> resultMap = new HashMap<>();
-        HttpStatus status = HttpStatus.UNAUTHORIZED;
+        HttpStatus status;
         String decodeUserId = jwtService.decodeToken(request.getHeader("access-token"));
-        if (! decodeUserId.equals("access token timeout")) {
+        if (! decodeUserId.equals(ACCESS_TOKEN_TIMEOUT)) {
             logger.info("사용 가능한 토큰!!!");
             try {
 //				로그인 사용자 정보.
@@ -128,45 +137,89 @@ public class UserController {
             }
         } else {
             logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message", "FAIL");
+            resultMap.put("message", ACCESS_TOKEN_TIMEOUT);
             status = HttpStatus.UNAUTHORIZED;
         }
-        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+        return new ResponseEntity<>(resultMap, status);
     }
-    ////////////////////////////////////////////////////////////
-    // 회원가입 동작방식 : 이메일 유효한지 체크 -> 인증번호 발송 ->인증번호 체크 -> 회원가입
-    ////////////////////////////////////////////////////////////
-    @PostMapping("/user/regist")
-    public String registUser(@RequestBody @Validated UserRegistDto request) throws Exception {
-        String result = userService.registUser(request);
-        return result;
+    @PostMapping("/user/main")
+    public ResponseEntity<?> registUserMain(@RequestBody @Validated UserMainRegistDto userMainRegistDto) throws Exception {
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+        if(userService.registUserMain(userMainRegistDto) == SERVICE_RETURN_OKAY){
+            resultMap.put("message","SUCCESS");
+            status = HttpStatus.ACCEPTED;
+        }else{
+            resultMap.put("message","FAIL");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(resultMap,status);
     }
 
-    @PutMapping("/user")
-    public String modifyUser(@RequestBody @Validated UserModifyDto userModifyDto, HttpServletRequest request) throws Exception{
-        String result = "fail";
-        result = userService.modifyUser(userModifyDto);
+    @PatchMapping("/user")
+    public ResponseEntity<?> modifyUser(@RequestBody UserModifyDto userModifyDto, HttpServletRequest request) throws Exception{
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+        String decodeUserId = jwtService.decodeToken(request.getHeader("access-token"));
+        if (! decodeUserId.equals(ACCESS_TOKEN_TIMEOUT)) {
+            userModifyDto.setUserId(decodeUserId);
+            if(userService.modifyUser(userModifyDto) == SERVICE_RETURN_OKAY){
+                resultMap.put("message","SUCCESS");
+                status = HttpStatus.ACCEPTED;
+            }else{
+                resultMap.put("message","FAIL");
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        }else{
+            resultMap.put("message", ACCESS_TOKEN_TIMEOUT);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(resultMap,status);
 
-        return result;
     }
 
     @DeleteMapping("/user/{userId}")
-    public String deleteUser(@PathVariable("userId") String userId, HttpServletRequest request) throws Exception{
-        String result = "fail";
-        result = userService.deleteUser(userId);
-//
-        return result;
+    public ResponseEntity<?> deleteUser(@PathVariable("userId") String userId, HttpServletRequest request) throws Exception{
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+        if(userService.deleteUser(userId) == SERVICE_RETURN_OKAY){
+            resultMap.put("message","SUCCESS");
+            status = HttpStatus.ACCEPTED;
+        }else{
+            resultMap.put("message","FAIL");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(resultMap,status);
     }
     @GetMapping("/email")
-    public String mailCheck(@RequestParam(value = "userId")String userId, @RequestParam (value= "authKey") String authKey ) throws Exception {
+    public ResponseEntity<?> mailCheck(@RequestParam(value = "userId")String userId, @RequestParam (value= "authKey") String authKey ) throws Exception {
         MailDto mailDto = new MailDto(userId, authKey);
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+        if(mailService.mailCheck(mailDto) == SERVICE_RETURN_OKAY){
+            resultMap.put("message","SUCCESS");
+            status = HttpStatus.ACCEPTED;
+        }else{
+            resultMap.put("message","FAIL");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(resultMap,status);
 
-        return mailService.mailCheck(mailDto);
     }
 
 
     @PostMapping("/email")
-    public String mailSend(@RequestBody @Validated MailDto mailDto) throws Exception{
-        return mailService.mailSend(mailDto);
+    public ResponseEntity<?> mailSend(@RequestBody @Validated MailDto mailDto) throws Exception{
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+        if(mailService.mailSend(mailDto) == SERVICE_RETURN_OKAY){
+            resultMap.put("message","SUCCESS");
+            status = HttpStatus.ACCEPTED;
+        }else{
+            resultMap.put("message","FAIL");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(resultMap,status);
+
     }
 }

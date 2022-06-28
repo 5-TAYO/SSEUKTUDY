@@ -1,4 +1,4 @@
-package tayo.sseuktudy.dto;
+package tayo.sseuktudy.dto.user;
 
 import lombok.Getter;
 import lombok.Setter;
