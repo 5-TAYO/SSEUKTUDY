@@ -3,11 +3,10 @@
 
     <mapper namespace="tayo.sseuktudy.mapper.UserMapper">
 
-    <insert id="registUser" parameterType="UserRegistDto">
+    <insert id="registUserMain" parameterType="UserMainRegistDto">
         insert into user (user_id, user_pw, user_nickname,user_social)
         value (#{userId}, #{userPw}, #{userNickname}, ${userSocial});
     </insert>
-
     <update id="modifyUser" parameterType="UserModifyDto">
         update user set user_pw = #{userPw}, user_nickname = #{userNickname}, user_age = #{userAge}, user_address = #{userAddress}
         where user_id = #{userId};

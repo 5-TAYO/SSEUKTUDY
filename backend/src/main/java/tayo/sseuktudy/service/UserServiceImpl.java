@@ -2,10 +2,7 @@ package tayo.sseuktudy.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tayo.sseuktudy.dto.user.UserInfoDto;
-import tayo.sseuktudy.dto.user.UserLoginDto;
-import tayo.sseuktudy.dto.user.UserModifyDto;
-import tayo.sseuktudy.dto.user.UserRegistDto;
+import tayo.sseuktudy.dto.user.*;
 import tayo.sseuktudy.mapper.UserMapper;
 
 import java.util.HashMap;
@@ -20,8 +17,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int registUser(UserRegistDto request) throws Exception{
-        return userMapper.registUser(request);
+    public int registUserMain(UserMainRegistDto userMainRegistDto) throws Exception{
+        return userMapper.registUserMain(userMainRegistDto);
     }
     @Override
     public int modifyUser(UserModifyDto userModifyDto) throws Exception{

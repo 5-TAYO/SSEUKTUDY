@@ -1,13 +1,11 @@
 package tayo.sseuktudy.service;
 
-import tayo.sseuktudy.dto.user.UserInfoDto;
-import tayo.sseuktudy.dto.user.UserLoginDto;
-import tayo.sseuktudy.dto.user.UserModifyDto;
-import tayo.sseuktudy.dto.user.UserRegistDto;
+import tayo.sseuktudy.dto.user.*;
 
 public interface UserService {
 
-    int registUser(UserRegistDto request) throws Exception;
+    int registUserMain(UserMainRegistDto userMainRegistDto) throws Exception;
+
     int modifyUser(UserModifyDto userModifyDto) throws Exception;
     int deleteUser(String userId) throws Exception;
     int loginUser(UserLoginDto request) throws Exception;

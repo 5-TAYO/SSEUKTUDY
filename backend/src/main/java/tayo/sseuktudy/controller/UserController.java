@@ -8,9 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tayo.sseuktudy.dto.*;
-import tayo.sseuktudy.dto.user.UserInfoDto;
-import tayo.sseuktudy.dto.user.UserLoginDto;
-import tayo.sseuktudy.dto.user.UserModifyDto;
+import tayo.sseuktudy.dto.user.*;
 import tayo.sseuktudy.service.JwtService;
 import tayo.sseuktudy.service.UserService;
 import tayo.sseuktudy.service.JwtServiceImpl;
@@ -19,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-import tayo.sseuktudy.dto.user.UserRegistDto;
 
 import tayo.sseuktudy.service.MailService;
 import tayo.sseuktudy.service.member.MemberService;
@@ -145,11 +142,11 @@ public class UserController {
         }
         return new ResponseEntity<>(resultMap, status);
     }
-    @PostMapping("/user/regist")
-    public ResponseEntity<?> registUser(@RequestBody @Validated UserRegistDto request) throws Exception {
+    @PostMapping("/user/main")
+    public ResponseEntity<?> registUserMain(@RequestBody @Validated UserMainRegistDto userMainRegistDto) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        if(userService.registUser(request) == SERVICE_RETURN_OKAY){
+        if(userService.registUserMain(userMainRegistDto) == SERVICE_RETURN_OKAY){
             resultMap.put("message","SUCCESS");
             status = HttpStatus.ACCEPTED;
         }else{
