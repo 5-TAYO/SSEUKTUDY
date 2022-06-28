@@ -35,13 +35,20 @@
                 <if test="studyType != null">
                     study_type = #{studyType}
                 </if>
-                <if test="studyCategoryId != 0">
-                    and study_category_id = #{studyCategoryId}
+                <if test="studyCategoryId != null">
+                    and study_category_id in
+                        <foreach collection="studyCategoryId" item="item" open="(" close=")" separator=",">
+                            #{item}
+                        </foreach>
+
                 </if>
                 <if test="studyStartdate != null and studyEnddate != null">
                     <![CDATA[
                     and study_startdate >= #{studyStartdate} and study_enddate <= #{studyEnddate}
                      ]]>
+                </if>
+                <if test="studyTitle != null">
+                    and study_title like concat("*", #{studyTitle}, "*")
                 </if>
             </trim>
 
