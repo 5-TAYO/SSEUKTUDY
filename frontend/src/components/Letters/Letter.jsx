@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import PropTypes from "prop-types";
-
-import "./Letter.scss";
-
-function Letter({ letter: { name, content, date, isRead } }) {
-  return (
-    <div className={`letter ${isRead === "0" ? "unread" : ""} notoReg fs-13`}>
-      <div>
-        <input type="checkbox" />
-      </div>
-      <p>{name}</p>
-      <p>{content}</p>
-      <p>{date}</p>
-    </div>
-=======
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from "react";
@@ -49,7 +32,6 @@ function Letter({ letter: { id, name, content, date, isRead } }) {
 
       <RecvLetterModal open={modalOpen} close={closeModal} letterId={id} />
     </>
->>>>>>> F10_FE_최진합
   );
 }
 

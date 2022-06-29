@@ -32,7 +32,7 @@ function RecvLetterModal({ open, close, letterId }) {
   return (
     <Modal open={open} close={closeModal} header={header} footerBtn={footerBtn}>
       <div className="letter-modal">
-        <p>보낸 사람 : {letter.sender}</p>
+        <p className="">보낸 사람 : {letter.sender}</p>
 
         <textarea
           className="content"
