@@ -15,7 +15,8 @@ public interface StudyMapper {
     public int modifyStudy(StudyModifyDto studyModifyDto);
     public int deleteStudy(StudyDeleteDto studyDeleteDto);
     public List<StudyInfoDto> getStudyByFilter(StudyFilterDto studyFilterDto);
-    public int likeStudy(StudyLikeDto studyLikeDto);
+    public int likeStudy(StudyUserIdDto studyUserIdDto);
+    public int leaderCheck(StudyUserIdDto studyUserIdDto);
 //    public StudyInfoDto getStudyInfo()
 
 }

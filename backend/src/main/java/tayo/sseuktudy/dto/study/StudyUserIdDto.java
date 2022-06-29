@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class StudyLikeDto {
+public class StudyUserIdDto {
     String userId;
     int studyId;
 }

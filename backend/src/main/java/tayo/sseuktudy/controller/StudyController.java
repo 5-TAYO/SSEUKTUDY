@@ -61,24 +61,41 @@ public class StudyController {
     }
 
     @PutMapping("/study")
-    public ResponseEntity<Map<String, Object>> modifyStudy(@RequestBody StudyModifyDto studyModifyDto){
+    public ResponseEntity<Map<String, Object>> modifyStudy(@RequestBody StudyModifyDto studyModifyDto, HttpServletRequest request ){
+        logger.info("스터디 수정 API 실행");
         Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
 
-        HttpStatus status = null;
-        logger.info("스터디 수정 요청");
+        String decodeUserId = jwtService.decodeToken(request.getHeader("access-token"));
+        if(!decodeUserId.equals(ACCESS_TOKEN_TIMEOUT)){
+            logger.info("사용 가능한 토큰!!!");
+            try{
 
-        int result = studyService.modifyStudy(studyModifyDto); // 스터디 테이블에 집어넣기
+                StudyUserIdDto studyUserIdDto = new StudyUserIdDto();
+                studyUserIdDto.setStudyId(studyModifyDto.getStudyId());
+                studyUserIdDto.setUserId(decodeUserId);
 
-        if(result != 0){
-            resultMap.put("message", "SUCCESS");
-            status = HttpStatus.ACCEPTED;
+                if(studyService.leaderCheck(studyUserIdDto) != 1) {
+                    resultMap.put("message", "FAIL");
+                    status = HttpStatus.UNAUTHORIZED;
+
+                }else{
+                    studyService.likeStudy(studyUserIdDto);
+                    resultMap.put("message","SUCCESS");
+                    status = HttpStatus.ACCEPTED;
+                }
+
+            }catch(Exception e){
+                logger.error("예외 발생", e);
+                resultMap.put("message", "FAIL");
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
         }else{
-            resultMap.put("message", "FAIL");
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-
+            logger.error("사용 불가능 토큰!!!");
+            resultMap.put("message","FAIL");
+            status = HttpStatus.UNAUTHORIZED;
         }
-
-        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+        return new ResponseEntity<>(resultMap, status);
     }
 
     @DeleteMapping("/study")
@@ -132,11 +149,11 @@ public class StudyController {
         if(!decodeUserId.equals(ACCESS_TOKEN_TIMEOUT)){
             logger.info("사용 가능한 토큰!!!");
             try{
-                StudyLikeDto studyLikeDto = new StudyLikeDto();
-                studyLikeDto.setUserId(decodeUserId);
-                studyLikeDto.setStudyId(studyId);
+                StudyUserIdDto studyUserIdDto = new StudyUserIdDto();
+                studyUserIdDto.setUserId(decodeUserId);
+                studyUserIdDto.setStudyId(studyId);
 
-                studyService.likeStudy(studyLikeDto);
+                studyService.likeStudy(studyUserIdDto);
                 resultMap.put("message","SUCCESS");
                 status = HttpStatus.ACCEPTED;
 
@@ -152,5 +169,6 @@ public class StudyController {
         }
         return new ResponseEntity<>(resultMap, status);
     }
+
 
 }
