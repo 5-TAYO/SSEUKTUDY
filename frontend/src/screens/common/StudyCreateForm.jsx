@@ -119,11 +119,11 @@ function StudyForm({ type }) {
             <input
               id="q1"
               type="text"
-              className="fs-15"
+              className="notoReg fs-15"
               placeholder="신청자에게 물어보고 싶은 질문을 입력해주세요"
             />
           </label>
-          <button type="button" className="fs-12">
+          <button type="button" className="notoMid fs-12">
             삭제
           </button>
         </div>
@@ -132,7 +132,7 @@ function StudyForm({ type }) {
             <span className="bg" id="plus" />
             <span className="symbol" />
           </div>
-          <p>사전 질문을 추가해주세요</p>
+          <p className="notoReg fs-15">사전 질문을 추가해주세요</p>
         </div>
       </div>
       {type === "create" ? (
