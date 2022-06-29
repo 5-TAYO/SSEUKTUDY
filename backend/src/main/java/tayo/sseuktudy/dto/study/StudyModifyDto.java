@@ -11,7 +11,7 @@ public class StudyModifyDto {
     int studyId;
     String studyTitle;
     String studyIntroduction;
-    String studyCategoryId;
+    int studyCategoryId;
     String studyGoals;
     String studyType;
     String studyPlace;

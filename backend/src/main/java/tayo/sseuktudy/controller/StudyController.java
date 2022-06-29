@@ -6,13 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tayo.sseuktudy.dto.study.StudyDeleteDto;
-import tayo.sseuktudy.dto.study.StudyModifyDto;
-import tayo.sseuktudy.dto.study.StudyRegistDto;
+import tayo.sseuktudy.dto.study.*;
 import tayo.sseuktudy.service.study.StudyService;
 import tayo.sseuktudy.service.study.StudyServiceImpl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -89,6 +88,26 @@ public class StudyController {
         }
 
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
+    }
+
+    @GetMapping("/study/list")
+    public ResponseEntity<Map<String, Object>> getStudyByFilter(@RequestBody StudyFilterDto studyFilterDto){
+        Map<String, Object> resultMap = new HashMap<>();
+
+        HttpStatus status = null;
+        logger.info("스터디 조회 요청");
+
+        List<StudyInfoDto> result = studyService.getStudyByFilter(studyFilterDto);
+        if(result != null){
+            resultMap.put("message", "SUCCESS");
+            resultMap.put("data", result);
+            status = HttpStatus.ACCEPTED;
+        }else{
+            resultMap.put("message","FAIL");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+
+        return new ResponseEntity<>(resultMap, status);
     }
 
 }
