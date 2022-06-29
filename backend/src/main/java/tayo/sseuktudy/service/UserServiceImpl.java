@@ -1,11 +1,13 @@
 package tayo.sseuktudy.service;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tayo.sseuktudy.dto.user.*;
 import tayo.sseuktudy.mapper.UserMapper;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -24,7 +26,20 @@ public class UserServiceImpl implements UserService {
     public int modifyUser(UserModifyDto userModifyDto) throws Exception{
         return userMapper.modifyUser(userModifyDto);
     }
-
+    @Override
+    public int deleteUserCategory(String userId) throws Exception{
+        return userMapper.deleteUserCategory(userId);
+    }
+    @Override
+    public int insertUserCategory(UserModifyDto userModifyDto) throws Exception{
+        return userMapper.insertUserCategory(userModifyDto);
+    }
+    @Override
+    public List<UserCategoryDto> getUserCategory(String userId) throws Exception{
+        List<UserCategoryDto> temp = userMapper.getUserCategory(userId);
+        System.out.println(temp.get(0));
+        return temp;
+    }
     @Override
     public int deleteUser(String userId) throws Exception{
         return userMapper.deleteUser(userId);

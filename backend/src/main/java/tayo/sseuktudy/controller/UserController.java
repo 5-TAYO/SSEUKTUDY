@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tayo.sseuktudy.dto.*;
@@ -15,6 +16,7 @@ import tayo.sseuktudy.service.JwtServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -118,6 +120,7 @@ public class UserController {
         return new ResponseEntity<>(resultMap, status);
     }
     @GetMapping("/user/info")
+    @Transactional
     public ResponseEntity<Map<String, Object>> getInfo(HttpServletRequest request) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
@@ -127,6 +130,8 @@ public class UserController {
             try {
 //				로그인 사용자 정보.
                 UserInfoDto userInfoDto = userService.userInfo(decodeUserId);
+                List<UserCategoryDto> temp = userService.getUserCategory(decodeUserId);
+                resultMap.put("userCategory", temp);
                 resultMap.put("userInfo", userInfoDto);
                 resultMap.put("message", "SUCCESS");
                 status = HttpStatus.ACCEPTED;
@@ -157,16 +162,20 @@ public class UserController {
     }
 
     @PatchMapping("/user")
+    @Transactional
     public ResponseEntity<?> modifyUser(@RequestBody UserModifyDto userModifyDto, HttpServletRequest request) throws Exception{
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
         String decodeUserId = jwtService.decodeToken(request.getHeader("access-token"));
         if (! decodeUserId.equals(ACCESS_TOKEN_TIMEOUT)) {
             userModifyDto.setUserId(decodeUserId);
-            if(userService.modifyUser(userModifyDto) == SERVICE_RETURN_OKAY){
+            try{
+                userService.modifyUser(userModifyDto);
+                userService.deleteUserCategory(decodeUserId);
+                userService.insertUserCategory(userModifyDto) ;
                 resultMap.put("message","SUCCESS");
                 status = HttpStatus.ACCEPTED;
-            }else{
+            }catch (Exception e){
                 resultMap.put("message","FAIL");
                 status = HttpStatus.INTERNAL_SERVER_ERROR;
             }
