@@ -73,7 +73,7 @@ function InfinityStudyCardList({ title }) {
               className="loading-spinner"
             />
           ) : (
-            <div ref={setObserverTarget} />
+            <p ref={setObserverTarget} className="observerTarget" />
           )}
         </div>
       )}
