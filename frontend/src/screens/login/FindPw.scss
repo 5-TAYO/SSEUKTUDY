@@ -1,0 +1,86 @@
+#find_pw {
+  margin: vw(100px) vw(483px);
+  padding: vw(64px) vw(72px);
+  border-radius: vw(20px);
+  width: vw(473px);
+  border: solid 1px $GRAY-DB;
+
+  .pw_text {
+    padding-bottom: vw(40px);
+    text-align: left;
+    &_desc {
+      line-height: vw(35px);
+      margin-bottom: vw(16px);
+      &_small {
+        line-height: vw(23px);
+      }
+    }
+  }
+
+  .pw_input {
+    margin-bottom: vw(36px);
+    &_title {
+      margin-bottom: vw(12px);
+    }
+    input {
+      border: solid 1px $GRAY-DB;
+      padding-left: vw(12px);
+      height: vw(48px);
+      width: vw(329px);
+      border-radius: vw(4px);
+    }
+    input:focus {
+      border: 1px solid $PINK-SUB;
+      box-shadow: 0px 0px 4px #ff3387;
+    }
+
+    &_box {
+      margin-bottom: vw(12px);
+    }
+
+    &_failed {
+      color: $RED;
+      line-height: vw(17px);
+      margin-bottom: vw(12px);
+    }
+  }
+
+  .join_pw_next_btn {
+    width: vw(329px);
+    height: vw(48px);
+    border-radius: vw(4px);
+    background-color: $PINK-SUB;
+    color: $WHITE;
+    margin-bottom: vw(24px);
+  }
+
+  .if_text {
+    color: $GRAY-76;
+    &_title {
+      margin: vw(4px) vw(8px) vw(4px) 0;
+      line-height: vw(17px);
+    }
+    margin-bottom: vw(41px);
+
+    button {
+      text-decoration: underline;
+    }
+  }
+
+  .notice_pw {
+    height: vw(160px);
+    width: vw(329px);
+    background-color: $GRAY-F3;
+    border-radius: vw(4px);
+    padding: vw(29px) vw(20px);
+    &_text {
+      color: $GRAY-61;
+      line-height: vw(17px);
+      padding-bottom: vw(17px);
+      &_em {
+        color: $GRAY-61;
+        line-height: vw(17px);
+      }
+    }
+  }
+}

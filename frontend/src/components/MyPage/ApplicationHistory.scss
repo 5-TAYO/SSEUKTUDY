@@ -1,0 +1,54 @@
+.application-list {
+  .application-list-header {
+    display: grid;
+    padding: vw(5px);
+    grid-template-columns: 1fr 10fr 4fr;
+    border-bottom: 1px solid $PINK-SUB !important;
+    color: $GRAY-9E;
+    & > * {
+      padding: vw(5px);
+      padding-left: vw(10px);
+      position: relative;
+    }
+
+    p {
+      display: flex;
+      align-self: center;
+      &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        border-left: 1px solid $GRAY-DB;
+      }
+    }
+  }
+  .application {
+    display: grid;
+    padding: vw(5px);
+    grid-template-columns: 1fr 10fr 4fr;
+    vertical-align: middle;
+    color: $GRAY-9E;
+    border-bottom: 1px solid $GRAY-DB;
+    .application-name {
+      color: $BLUE;
+    }
+    p {
+      display: flex;
+      align-self: center;
+    }
+    & > * {
+      padding: vw(5px);
+      padding-left: vw(10px);
+      position: relative;
+    }
+  }
+
+  input {
+    display: block;
+    width: vw(16px);
+    height: vw(16px);
+  }
+}

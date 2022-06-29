@@ -1,0 +1,51 @@
+.letters-sidebar {
+  padding: vw(40px);
+  width: vw(270px);
+
+  .profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: vw(40px);
+
+    .profile-mini-img {
+      height: vw(90px);
+      width: vw(90px);
+      fill: $PINK-SUB;
+    }
+    .name {
+      margin-bottom: vw(4px);
+    }
+    .edit {
+      margin: vw(20px) 0 vw(40px);
+      text-decoration: underline;
+      color: $GRAY-9E;
+      :hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .menu {
+    .menu-title {
+      margin-bottom: vw(16px);
+    }
+    .sub-menu-title {
+      color: $GRAY-76;
+    }
+    .sub-menu-title.active {
+      color: $PINK-SUB;
+    }
+  }
+
+  a {
+    display: block;
+    margin: vw(14px) vw(5px);
+  }
+
+  hr {
+    border: none;
+    border-bottom: 1px solid $PINK-F3;
+  }
+}

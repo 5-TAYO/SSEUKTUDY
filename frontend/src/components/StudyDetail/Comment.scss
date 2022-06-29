@@ -1,0 +1,44 @@
+#comment {
+  padding-top: vw(32px);
+  width: 100%;
+  border-bottom: 1px solid $GRAY-DB;
+
+  header {
+    margin-bottom: vw(24px);
+
+    .user-img {
+      margin-right: vw(12px);
+
+      width: vw(42px);
+      height: vw(42px);
+    }
+
+    .user-info {
+      justify-content: space-around;
+
+      &__reg-date {
+        color: $GRAY-61;
+      }
+    }
+  }
+  .desc {
+    margin-bottom: vw(32px);
+    min-height: vw(22px);
+
+    color: $GRAY-61;
+  }
+  #tooltip {
+    display: none;
+    position: absolute;
+    width: vw(80px);
+    height: vw(28px);
+    background-color: $GRAY-ED;
+
+    border-radius: 4px;
+    &:hover {
+      background-color: $PINK-LIGHT;
+      color: $WHITE;
+      cursor: pointer;
+    }
+  }
+}

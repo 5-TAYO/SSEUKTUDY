@@ -1,0 +1,202 @@
+.fs-10 {
+  font-size: vw(10px);
+}
+.fs-11 {
+  font-size: vw(11px);
+}
+.fs-12 {
+  font-size: vw(12px);
+}
+.fs-13 {
+  font-size: vw(13px);
+}
+.fs-14 {
+  font-size: vw(14px);
+}
+.fs-15 {
+  font-size: vw(15px);
+}
+.fs-16 {
+  font-size: vw(16px);
+}
+.fs-17 {
+  font-size: vw(17px);
+}
+.fs-18 {
+  font-size: vw(18px);
+}
+.fs-20 {
+  font-size: vw(20px);
+}
+.fs-22 {
+  font-size: vw(22px);
+}
+.fs-24 {
+  font-size: vw(24px);
+}
+.fs-28 {
+  font-size: vw(28px);
+}
+.fs-32 {
+  font-size: vw(32px);
+}
+.fs-36 {
+  font-size: vw(36px);
+}
+.fs-40 {
+  font-size: vw(40px);
+}
+.fs-60 {
+  font-size: vw(60px);
+}
+/* 폰트 타이포 */
+.notoMid {
+  font-family: "NotoSansMedium";
+}
+
+.notoBold {
+  font-family: "NotoSansBold";
+}
+
+.notoReg {
+  font-family: "NotoSansRegular";
+}
+
+.notoBlack {
+  font-family: "NotoSansBlack";
+}
+
+.notoThin {
+  font-family: "NotoSansThin";
+}
+
+.notoLight {
+  font-family: "NotoSansLight";
+}
+
+.roThin {
+  font-family: "RobotoThin";
+}
+
+.roLight {
+  font-family: "RobotoLight";
+}
+
+.roReg {
+  font-family: "RobotoRegular";
+}
+
+.roMid {
+  font-family: "RobotoMedium";
+}
+
+.roBold {
+  font-family: "RobotoBold";
+}
+
+@media screen and (max-width: $TABLET-VW) {
+  .fs-10 {
+    font-size: vw-t(10px);
+  }
+  .fs-11 {
+    font-size: vw-t(11px);
+  }
+  .fs-12 {
+    font-size: vw-t(12px);
+  }
+  .fs-13 {
+    font-size: vw-t(13px);
+  }
+  .fs-14 {
+    font-size: vw-t(14px);
+  }
+  .fs-15 {
+    font-size: vw-t(15px);
+  }
+  .fs-16 {
+    font-size: vw-t(16px);
+  }
+  .fs-17 {
+    font-size: vw-t(17px);
+  }
+  .fs-18 {
+    font-size: vw-t(18px);
+  }
+  .fs-20 {
+    font-size: vw-t(20px);
+  }
+  .fs-22 {
+    font-size: vw-t(22px);
+  }
+  .fs-24 {
+    font-size: vw-t(24px);
+  }
+  .fs-28 {
+    font-size: vw-t(28px);
+  }
+  .fs-32 {
+    font-size: vw-t(32px);
+  }
+  .fs-36 {
+    font-size: vw-t(36px);
+  }
+  .fs-40 {
+    font-size: vw-t(40px);
+  }
+  .fs-60 {
+    font-size: vw-t(60px);
+  }
+}
+@media screen and (max-width: $PHONE-VW) {
+  .fs-10 {
+    font-size: vw-p(10px);
+  }
+  .fs-11 {
+    font-size: vw-p(11px);
+  }
+  .fs-12 {
+    font-size: vw-p(12px);
+  }
+  .fs-13 {
+    font-size: vw-p(13px);
+  }
+  .fs-14 {
+    font-size: vw-p(14px);
+  }
+  .fs-15 {
+    font-size: vw-p(15px);
+  }
+  .fs-16 {
+    font-size: vw-p(16px);
+  }
+  .fs-17 {
+    font-size: vw-p(17px);
+  }
+  .fs-18 {
+    font-size: vw-p(18px);
+  }
+  .fs-20 {
+    font-size: vw-p(20px);
+  }
+  .fs-22 {
+    font-size: vw-p(22px);
+  }
+  .fs-24 {
+    font-size: vw-p(24px);
+  }
+  .fs-28 {
+    font-size: vw-p(28px);
+  }
+  .fs-32 {
+    font-size: vw-p(32px);
+  }
+  .fs-36 {
+    font-size: vw-p(36px);
+  }
+  .fs-40 {
+    font-size: vw-p(40px);
+  }
+  .fs-60 {
+    font-size: vw-p(60px);
+  }
+}

@@ -1,0 +1,147 @@
+#study-list {
+  padding: 0 vw(130px);
+  .banner {
+    margin-bottom: vw(65px);
+
+    width: vw(1170px);
+    height: vw(360px);
+
+    background-color: $GRAY-CB;
+
+    color: $WHITE;
+    font-size: vw(128px); //__fix
+  }
+  .condition {
+    margin-bottom: vw(33px);
+    width: vw(1170px);
+    height: vw(371px);
+
+    border-top: 2px solid $PINK-SUB;
+    border-bottom: 2px solid $PINK-SUB;
+
+    @mixin conditionBox {
+      display: flex;
+      align-items: center;
+
+      font-size: vw(20px);
+      color: $GRAY-61;
+
+      border-bottom: 1px solid $GRAY-DB;
+
+      .options {
+        flex-wrap: wrap;
+      }
+
+      .title {
+        min-width: vw(173px);
+        font-family: "NotoSansMedium";
+
+        margin-left: vw(28px);
+      }
+      label {
+        margin-right: vw(15px);
+        white-space: nowrap;
+
+        input {
+          vertical-align: text-top;
+        }
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        margin-right: vw(8px);
+
+        width: vw(17px);
+        height: vw(17px);
+
+        accent-color: $PINK-SUB;
+      }
+    }
+
+    &__place {
+      @include conditionBox();
+      height: vw(78px);
+    }
+
+    &__category {
+      @include conditionBox();
+      height: vw(120px);
+
+      .options {
+        height: vw(60px);
+      }
+    }
+
+    &__period {
+      @include conditionBox();
+      height: vw(78px);
+
+      input[type="date"] {
+        font-size: vw(15px);
+        color: $GRAY-61;
+      }
+
+      .tilde {
+        margin: 0 vw(20px);
+      }
+    }
+
+    &__search {
+      height: vw(92px);
+
+      &__icon {
+        margin-left: vw(28px);
+        margin-right: vw(23.5px);
+
+        width: vw(38px);
+        height: vw(38px);
+      }
+      &__input {
+        width: vw(950px);
+        color: $GRAY-9E;
+      }
+
+      &__btn {
+        margin-right: vw(28px);
+        margin-left: auto;
+
+        width: vw(80px);
+        height: vw(42px);
+        border-radius: 4px;
+
+        color: $WHITE;
+        background-color: $PINK-SUB;
+      }
+    }
+  }
+  .list-up {
+    header {
+      margin-bottom: vw(36px);
+    }
+    color: $GRAY-61;
+    &__icon {
+      width: vw(32px);
+      height: vw(32px);
+    }
+    &__title {
+      margin-left: vw(9px);
+      margin-right: vw(14px);
+      min-width: vw(148px);
+
+      border-right: 1px solid $GRAY-CB;
+    }
+    &__cnt {
+      margin-right: vw(6px);
+    }
+    &__cnt--emp {
+      margin-right: vw(6px);
+      color: $PINK-SUB;
+    }
+
+    &__selector {
+      margin-left: auto;
+      color: $GRAY-61;
+      border: none;
+    }
+  }
+}

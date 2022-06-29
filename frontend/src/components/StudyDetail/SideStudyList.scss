@@ -1,0 +1,31 @@
+#side-study-list {
+  width: vw(242px);
+  // height: vw(283px);
+
+  header {
+    padding-bottom: vw(13px);
+    margin-bottom: vw(22px);
+    border-bottom: 2px solid $PINK_SUB;
+
+    .dot {
+      margin-left: vw(1px);
+      width: vw(15px);
+      height: vw(15px);
+
+      border-radius: 50%;
+
+      background-color: $PINK_SUB;
+    }
+    p {
+      margin-left: vw(10px);
+    }
+    .title {
+      margin-top: vw(-9px); //fix__
+      margin-bottom: vw(5px);
+    }
+  }
+
+  li {
+    margin-bottom: vw(8px);
+  }
+}

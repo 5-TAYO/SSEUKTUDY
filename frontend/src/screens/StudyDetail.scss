@@ -1,0 +1,144 @@
+#study-detail {
+  padding-left: vw(170px);
+  padding-top: vw(100px);
+
+  .back-btn {
+    width: vw(24px);
+    height: vw(24px);
+  }
+
+  article {
+    margin: 0 vw(145px) vw(262px) vw(41px);
+
+    width: vw(670px);
+
+    .header {
+      .title {
+        line-height: vw(35px);
+      }
+      .info {
+        margin-top: vw(18px);
+        padding-bottom: vw(25px);
+        justify-content: space-between;
+
+        border-bottom: 1px solid $GRAY-DB;
+
+        color: $GRAY-61;
+        .user {
+          &__img {
+            margin-right: vw(8px);
+
+            width: vw(30px);
+            height: vw(30px);
+          }
+        }
+      }
+    }
+
+    main {
+      padding: vw(37px) vw(15px) vw(11px) vw(15px);
+
+      border-bottom: 1px solid $GRAY-DB;
+
+      .study-info-title {
+        margin-bottom: vw(8px);
+      }
+      .study-info {
+        &-title {
+          line-height: vw(29px);
+        }
+        .info-line {
+          line-height: vw(20px);
+          &__title {
+            margin-right: vw(22px);
+            color: $GRAY-9E;
+          }
+          &__data {
+            color: $GRAY-61;
+          }
+          & + .info-line {
+            margin-top: vw(8px);
+          }
+        }
+      }
+      .study-detail {
+        margin-top: vw(29px);
+        margin-bottom: vw(151px);
+
+        line-height: vw(22px);
+        word-wrap: break-word;
+      }
+      .regist-btn {
+        margin-bottom: vw(15px);
+
+        width: vw(159px);
+        height: vw(48px);
+
+        border-radius: 4px;
+
+        color: $WHITE;
+        background-color: $PINK-SUB;
+      }
+
+      .icon-container {
+        .icon {
+          margin-right: vw(4px);
+
+          width: vw(20px);
+          height: vw(20px);
+        }
+
+        .icon-cnt {
+          margin-right: vw(16px);
+
+          color: $GRAY-9E;
+        }
+      }
+    }
+    footer {
+      .title {
+        margin: vw(46px) 0 vw(47px) vw(15px);
+      }
+      .comment {
+        margin-bottom: vw(57px); // 89-32
+        &__user-img {
+          margin-right: vw(20px);
+
+          width: vw(42px);
+          height: vw(42px);
+        }
+
+        &__input {
+          margin-right: vw(20px);
+          padding: vw(8px);
+
+          resize: none;
+          width: vw(508px);
+          height: vw(42px);
+
+          border: 1px solid $GRAY-DB;
+          border-radius: 4px;
+          outline: none;
+        }
+
+        &__input:focus {
+          border: 1px solid $PINK-SUB;
+          box-shadow: 0px 0px 4px $PINK-SUB;
+        }
+
+        &__regist-btn {
+          width: vw(80px);
+          height: vw(42px);
+
+          border-radius: 4px;
+          color: $WHITE;
+          background-color: $PINK-MAIN;
+        }
+      }
+    }
+  }
+
+  #side-study-list {
+    margin-bottom: vw(88px);
+  }
+}
