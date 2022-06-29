@@ -20,7 +20,7 @@
         where study_id = #{studyId}
     </update>
 
-    <delete id="deleteStudy" parameterType="StudyDeleteDto">
+    <delete id="deleteStudy" parameterType="StudyUserIdDto">
         delete from study
         where study_id=#{studyId}
     </delete>

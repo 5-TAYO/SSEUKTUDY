@@ -74,8 +74,8 @@ public class StudyServiceImpl implements StudyService{
     }
 
     @Override
-    public int deleteStudy(StudyDeleteDto studyDeleteDto) {
-        return studyMapper.deleteStudy(studyDeleteDto);
+    public int deleteStudy(StudyUserIdDto studyUserIdDto) {
+        return studyMapper.deleteStudy(studyUserIdDto);
     }
 
     @Override

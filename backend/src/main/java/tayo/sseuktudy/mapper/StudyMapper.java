@@ -13,7 +13,7 @@ public interface StudyMapper {
 
     public int joinStudy(MemberJoinDto memberJoinDto);
     public int modifyStudy(StudyModifyDto studyModifyDto);
-    public int deleteStudy(StudyDeleteDto studyDeleteDto);
+    public int deleteStudy(StudyUserIdDto studyUserIdDto);
     public List<StudyInfoDto> getStudyByFilter(StudyFilterDto studyFilterDto);
     public int likeStudy(StudyUserIdDto studyUserIdDto);
     public int leaderCheck(StudyUserIdDto studyUserIdDto);
