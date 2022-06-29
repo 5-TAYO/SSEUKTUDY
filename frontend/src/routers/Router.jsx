@@ -16,11 +16,13 @@ import NewPw from "@screens/login/NewPw";
 import StudyDetail from "@screens/StudyDetail";
 import MainNavBar from "@components/common/MainNavBar";
 import StudyRegistForm from "@screens/common/StudyRegistForm";
+import StudyForm from "../screens/common/StudyCreateForm";
 
 function Router() {
   return (
     <>
       <MainNavBar />
+
       <Routes>
         {/* 홈 & 메인 */}
         <Route path="/" element={<Home />} />
@@ -32,9 +34,10 @@ function Router() {
           <Route path="detail/:id" element={<StudyDetail />} />
           <Route path="join/:id" element={<StudyRegistForm type="regist" />} />
           <Route
-            path="join/read/:id" // fix__ 진합이형이 라우팅해주세요
+            path="join/read/:id"
             element={<StudyRegistForm type="read" />}
           />
+          <Route path="regist" element={<StudyForm type="create" />} />
         </Route>
 
         {/* 로그인 */}
