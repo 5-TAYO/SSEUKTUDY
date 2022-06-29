@@ -4,6 +4,19 @@
   grid-template-columns: 1fr 4fr 10fr 5fr;
   color: $GRAY-9E;
   border-bottom: 1px solid $GRAY-DB;
+<<<<<<< HEAD
+=======
+  cursor: pointer;
+  .content {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+  }
+  &:hover {
+    background-color: $GRAY-ED;
+  }
+>>>>>>> F10_FE_최진합
   & > * {
     padding: vw(5px);
     padding-left: vw(10px);
