@@ -5,6 +5,7 @@ import tayo.sseuktudy.dto.*;
 import tayo.sseuktudy.dto.user.*;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 @Mapper
@@ -13,7 +14,9 @@ public interface UserMapper {
     int registUserMain(UserMainRegistDto userMainRegistDto)throws Exception;
 
     int modifyUser(UserModifyDto userDeleteDto)throws Exception;
-
+    int deleteUserCategory(String userId)throws Exception;
+    int insertUserCategory(UserModifyDto userModifyDto) throws Exception;
+    List<UserCategoryDto> getUserCategory(String userId) throws Exception;
     int deleteUser(String userId)throws Exception;
     int searchUser(MailDto mailDto) throws Exception;
     int loginUser(UserLoginDto request) throws Exception;

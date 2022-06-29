@@ -11,11 +11,24 @@
         update user set user_pw = #{userPw}, user_nickname = #{userNickname}, user_age = #{userAge}, user_address = #{userAddress}
         where user_id = #{userId};
     </update>
-
+    <delete id="deleteUserCategory" parameterType="String">
+        delete
+        from user_like_category
+        where user_id = #{userId};
+    </delete>
+    <insert id="insertUserCategory" parameterType="UserModifyDto">
+        insert into user_like_category (user_id, category_id)values
+        <foreach collection="userCategorys" item="userCategory"  separator="," >   (#{userId}, #{userCategory})</foreach>
+    </insert>
     <delete id="deleteUser" parameterType="String">
         delete from user
         where user_id = #{userId} ;
     </delete>
+    <select id="getUserCategory" parameterType="String" resultType="UserCategoryDto">
+        SELECT category_id categoryId, category_name categoryName from category where category_id IN ( select category_id
+                                                      from user_like_category
+                                                      where user_id = 'ssafy')
+    </select>
     <select id="searchUser" parameterType="MailDto" resultType="int">
         select COUNT(user_id) from user
         where user_id = #{userId};
@@ -23,10 +36,10 @@
     <select id="loginUser" parameterType="UserLoginDto" resultType="int">
         select COUNT(user_id)
         from user
-        where user_id = #{user_id} and user_pw = #{user_pw}
+        where user_id = #{userId} and user_pw = #{userPw}
     </select>
     <select id="userInfo" parameterType="String" resultType="userInfoDto">
-        select user_id, user_pw, user_nickname, user_age, user_address, user_social
+        select user_id userId, user_pw userPw, user_nickname userNickname, user_age userAge, user_address userAddress, user_social userSocial
         from user
         where user_id = #{userId}
     </select>

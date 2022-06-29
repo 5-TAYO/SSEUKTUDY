@@ -2,11 +2,16 @@ package tayo.sseuktudy.service;
 
 import tayo.sseuktudy.dto.user.*;
 
+import java.util.List;
+
 public interface UserService {
 
     int registUserMain(UserMainRegistDto userMainRegistDto) throws Exception;
 
     int modifyUser(UserModifyDto userModifyDto) throws Exception;
+    int deleteUserCategory(String userId) throws Exception;
+    int insertUserCategory(UserModifyDto userModifyDto) throws Exception;
+    List<UserCategoryDto> getUserCategory(String userId) throws Exception;
     int deleteUser(String userId) throws Exception;
     int loginUser(UserLoginDto request) throws Exception;
     UserInfoDto userInfo(String userid) throws Exception;
