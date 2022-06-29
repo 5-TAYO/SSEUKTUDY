@@ -1,5 +1,5 @@
 .study-card-list {
-  margin-bottom: vw(64px);
+  // margin-bottom: vw(64px);
 
   .title {
     margin-bottom: vw(32px);
@@ -9,6 +9,9 @@
     align-content: space-between;
     justify-content: space-between;
     width: vw(1170px);
-    height: vw(430px);
+    // height: vw(430px);
+    .card {
+      margin-bottom: vw(30px);
+    }
   }
 }
