@@ -9,7 +9,8 @@ import "./Letter.scss";
 
 function Letter({ letter: { id, name, content, date, isRead } }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const openModal = () => {
+  const openModal = e => {
+    e.stopPropagation();
     setModalOpen(true);
   };
   const closeModal = () => {
@@ -21,7 +22,7 @@ function Letter({ letter: { id, name, content, date, isRead } }) {
         onClick={openModal}
         className={`letter ${isRead === "0" ? "unread" : ""} notoReg fs-13`}
       >
-        <div>
+        <div onClick={e => e.stopPropagation()}>
           <input type="checkbox" />
         </div>
         <p>{name}</p>
