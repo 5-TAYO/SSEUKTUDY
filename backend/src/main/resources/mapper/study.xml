@@ -54,6 +54,11 @@
 
     </select>
 
+    <insert id="likeStudy" parameterType="StudyLikeDto">
+        insert into user_like_study(user_id, study_id)
+        values(#{userId}, #{studyId})
+    </insert>
+
 
 
 

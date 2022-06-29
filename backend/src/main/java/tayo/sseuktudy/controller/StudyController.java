@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tayo.sseuktudy.dto.study.*;
+import tayo.sseuktudy.service.JwtService;
 import tayo.sseuktudy.service.study.StudyService;
 import tayo.sseuktudy.service.study.StudyServiceImpl;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,12 +21,15 @@ import java.util.Map;
 public class StudyController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-
     private final StudyServiceImpl studyService;
-
+    private final JwtService jwtService;
+    private final String ACCESS_TOKEN_TIMEOUT = "access token timeout";
+    private final int SERVICE_RETURN_OKAY = 1;
     @Autowired
-    StudyController(StudyServiceImpl studyService){
+    StudyController(StudyServiceImpl studyService, JwtService jwtService){
+
         this.studyService = studyService;
+        this.jwtService = jwtService;
     }
 
     @PostMapping("/study/regist")
@@ -107,6 +112,37 @@ public class StudyController {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
 
+        return new ResponseEntity<>(resultMap, status);
+    }
+
+    @GetMapping("/study/like")
+    public ResponseEntity<Map<String, Object>> likeStudy(@RequestParam int studyId, HttpServletRequest request){
+        logger.info("스터디 좋아요 API 실행");
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+
+        String decodeUserId = jwtService.decodeToken(request.getHeader("access-token"));
+        if(!decodeUserId.equals(ACCESS_TOKEN_TIMEOUT)){
+            logger.info("사용 가능한 토큰!!!");
+            try{
+                StudyLikeDto studyLikeDto = new StudyLikeDto();
+                studyLikeDto.setUserId(decodeUserId);
+                studyLikeDto.setStudyId(studyId);
+
+                studyService.likeStudy(studyLikeDto);
+                resultMap.put("message","SUCCESS");
+                status = HttpStatus.ACCEPTED;
+
+            }catch(Exception e){
+                logger.error("예외 발생", e);
+                resultMap.put("message", "FAIL");
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        }else{
+            logger.error("사용 불가능 토큰!!!");
+            resultMap.put("message","FAIL");
+            status = HttpStatus.UNAUTHORIZED;
+        }
         return new ResponseEntity<>(resultMap, status);
     }
 

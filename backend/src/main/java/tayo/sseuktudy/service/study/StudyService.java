@@ -9,4 +9,5 @@ public interface StudyService {
     public int modifyStudy(StudyModifyDto studyModifyDto);
     public int deleteStudy(StudyDeleteDto studyDeleteDto);
     public List<StudyInfoDto>  getStudyByFilter(StudyFilterDto studyFilterDto);
+    public int likeStudy(StudyLikeDto studyLikeDto);
 }
