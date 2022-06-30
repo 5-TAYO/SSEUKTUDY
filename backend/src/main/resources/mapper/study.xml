@@ -3,8 +3,8 @@
 
 <mapper namespace="tayo.sseuktudy.mapper.StudyMapper">
     <insert id="registStudy" parameterType="StudyRegistDto" useGeneratedKeys="true" keyProperty="studyId">
-        insert into study (study_title, study_leader_id, study_status, study_introduction, study_startdate, study_enddate, study_goals, study_type, study_user_min, study_user_max, study_content, study_place, study_category_id, study_view)
-            value (#{studyTitle}, #{studyLeaderId}, #{studyStatus}, #{studyIntroduction}, #{studyStartdate}, #{studyEnddate}, #{studyGoals}, #{studyType}, #{studyUserMin}, #{studyUserMax},#{studyContent}, #{studyPlace},#{studyCategoryId}, #{studyView});
+        insert into study (study_title, study_leader_id, study_status, study_introduction, study_startdate, study_enddate, study_goals, study_type, study_user_min, study_user_max, study_content, study_place, study_category_id, study_view, study_registdate)
+            value (#{studyTitle}, #{studyLeaderId}, #{studyStatus}, #{studyIntroduction}, #{studyStartdate}, #{studyEnddate}, #{studyGoals}, #{studyType}, #{studyUserMin}, #{studyUserMax},#{studyContent}, #{studyPlace},#{studyCategoryId}, #{studyView}, #{studyRegistdate});
     </insert>
 
     <insert id="joinStudy" parameterType="MemberJoinDto">
@@ -20,7 +20,7 @@
         where study_id = #{studyId}
     </update>
 
-    <delete id="deleteStudy" parameterType="StudyDeleteDto">
+    <delete id="deleteStudy" parameterType="StudyUserIdDto">
         delete from study
         where study_id=#{studyId}
     </delete>
@@ -54,12 +54,15 @@
 
     </select>
 
-    <insert id="likeStudy" parameterType="StudyLikeDto">
+    <insert id="likeStudy" parameterType="StudyUserIdDto">
         insert into user_like_study(user_id, study_id)
         values(#{userId}, #{studyId})
     </insert>
 
-
+    <select id="leaderCheck" parameterType="StudyUserIdDto" resultType="int">
+        select count(*) from study
+        where study_id = #{studyId} and study_leader_id = #{userId}
+    </select>
 
 
 </mapper>

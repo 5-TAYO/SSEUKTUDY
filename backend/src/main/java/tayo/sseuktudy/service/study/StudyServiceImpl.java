@@ -74,8 +74,8 @@ public class StudyServiceImpl implements StudyService{
     }
 
     @Override
-    public int deleteStudy(StudyDeleteDto studyDeleteDto) {
-        return studyMapper.deleteStudy(studyDeleteDto);
+    public int deleteStudy(StudyUserIdDto studyUserIdDto) {
+        return studyMapper.deleteStudy(studyUserIdDto);
     }
 
     @Override
@@ -84,8 +84,13 @@ public class StudyServiceImpl implements StudyService{
     }
 
     @Override
-    public int likeStudy(StudyLikeDto studyLikeDto) {
-        return studyMapper.likeStudy(studyLikeDto);
+    public int likeStudy(StudyUserIdDto studyUserIdDto) {
+        return studyMapper.likeStudy(studyUserIdDto);
+    }
+
+    @Override
+    public int leaderCheck(StudyUserIdDto studyUserIdDto) {
+        return studyMapper.leaderCheck(studyUserIdDto);
     }
 
 
