@@ -51,7 +51,7 @@ public class CommentController {
             }
         }else{
             resultMap.put("message", ACCESS_TOKEN_TIMEOUT);
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            status = HttpStatus.UNAUTHORIZED;
         }
 
         return new ResponseEntity<>(resultMap, status);
@@ -100,7 +100,7 @@ public class CommentController {
             }
         }else{
             resultMap.put("message", ACCESS_TOKEN_TIMEOUT);
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            status = HttpStatus.UNAUTHORIZED;
         }
 
 
@@ -127,7 +127,7 @@ public class CommentController {
             }
         }else{
             resultMap.put("message", ACCESS_TOKEN_TIMEOUT);
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            status = HttpStatus.UNAUTHORIZED;
         }
 
 
