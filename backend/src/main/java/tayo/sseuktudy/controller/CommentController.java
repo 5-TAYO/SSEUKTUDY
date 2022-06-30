@@ -99,7 +99,7 @@ public class CommentController {
                 status = HttpStatus.INTERNAL_SERVER_ERROR;
             }
         }else{
-            resultMap.put("message", "access token timeout");
+            resultMap.put("message", ACCESS_TOKEN_TIMEOUT);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
 
@@ -126,7 +126,7 @@ public class CommentController {
                 status = HttpStatus.INTERNAL_SERVER_ERROR;
             }
         }else{
-            resultMap.put("message", "access token timeout");
+            resultMap.put("message", ACCESS_TOKEN_TIMEOUT);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
 
