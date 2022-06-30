@@ -27,16 +27,16 @@
 
     <select id="getStudyByFilter" parameterType="StudyFilterDto" resultType="StudyInfoDto">
 
-            select study_title studyTitle, study_leader_id studyLeaderId, study_status studyStatus, study_introduction studyIntroduction, study_startdate studyStartdate,
-        study_enddate studyEnddate, study_goals studyGoals, study_type studyType , study_user_min studyUserMin, study_user_max studyUserMax, study_content studyContent,
-        study_place studyPlace, study_category_id studyCategoryId
-            from study
+            select s.study_id studyId, study_title studyTitle, study_leader_id studyLeaderId, study_status studyStatus, study_introduction studyIntroduction, study_startdate studyStartdate,
+        study_enddate studyEnddate, study_registdate studyRegistdate, study_goals studyGoals, study_type studyType , study_user_min studyUserMin, study_user_max studyUserMax, study_content studyContent,
+        study_place studyPlace, study_category_id studyCategoryId, count(uls.study_id) as studyLike
+            from study s left join user_like_study uls on s.study_id = uls.study_id
             <trim prefix="where" prefixOverrides="and | or">
                 <if test="studyType != null">
-                    study_type = #{studyType}
+                    s.study_type = #{studyType}
                 </if>
                 <if test="studyCategoryId != null">
-                    and study_category_id in
+                    and s.study_category_id in
                         <foreach collection="studyCategoryId" item="item" open="(" close=")" separator=",">
                             #{item}
                         </foreach>
@@ -44,13 +44,26 @@
                 </if>
                 <if test="studyStartdate != null and studyEnddate != null">
                     <![CDATA[
-                    and study_startdate >= #{studyStartdate} and study_enddate <= #{studyEnddate}
+                    and s.study_startdate >= #{studyStartdate} and s.study_enddate <= #{studyEnddate}
                      ]]>
                 </if>
                 <if test="studyTitle != null">
-                    and study_title like concat("*", #{studyTitle}, "*")
+                    and s.study_title like concat("*", #{studyTitle}, "*")
                 </if>
             </trim>
+            group by s.study_id
+            <trim prefix="order by">
+                <if test="orderType == 'studyRegistdate'">
+                    studyRegistdate desc
+                </if>
+                <if test="orderType == 'studyLike'">
+                    studyLike desc
+                </if>
+                <if test="orderType == 'studyView'">
+                    studyView desc
+                </if>
+            </trim>
+            limit #{startItem}, #{itemCnt}
 
     </select>
 
