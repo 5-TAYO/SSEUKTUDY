@@ -10,7 +10,10 @@
     <select id="listComment" parameterType="CommentInfoDto" resultType="CommentInfoDto">
         select comment_id commentId, user_id userId, (select user_nickname from user where user_id = userId)
                     userNickname, comment_detail commentDetail, create_time createTime, up_comment_id upCommentId
-        from comment where study_id = #{studyId}
+        from comment where study_id = #{studyId};
     </select>
-
+    <delete id="deleteComment" parameterType="CommentDeleteDto" >
+       delete from comment
+        where user_id = #{userId} and (comment_id = #{commentId} or up_comment_id = #{commentId});
+    </delete>
     </mapper>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tayo.sseuktudy.dto.Comment.CommentDeleteDto;
 import tayo.sseuktudy.dto.Comment.CommentInfoDto;
 import tayo.sseuktudy.dto.Comment.CommentRegistDto;
 import tayo.sseuktudy.service.CommentServiceImpl;
@@ -42,8 +43,8 @@ public class CommentController {
                 resultMap.put("message", "SUCCESS");
                 status = HttpStatus.ACCEPTED;
             } catch (Exception e) {
-                logger.error("로그아웃 실패 : {}", e);
-                resultMap.put("message", e.getMessage());
+                logger.error("댓글 생성 실패");
+                resultMap.put("message", "FAIL");
                 status = HttpStatus.INTERNAL_SERVER_ERROR;
             }
         }else{
@@ -60,7 +61,6 @@ public class CommentController {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
             try {
-                System.out.println(studyId);
                 CommentInfoDto commentInfoDto = new CommentInfoDto();
                 commentInfoDto.setStudyId(studyId);
                 List<CommentInfoDto> commentList = commentServiceImpl.listComment(commentInfoDto);
@@ -68,10 +68,33 @@ public class CommentController {
                 resultMap.put("data",commentList);
                 status = HttpStatus.ACCEPTED;
             } catch (Exception e) {
-                logger.error("쪽지 조회 실패 : {}", e);
-                resultMap.put("message", e.getMessage());
+                logger.error("댓글 조회 실패 : {}", e);
+                resultMap.put("message", "FAIL");
                 status = HttpStatus.INTERNAL_SERVER_ERROR;
             }
+
+        return new ResponseEntity<>(resultMap, status);
+
+    }
+    @DeleteMapping("/comment/{commentId}")
+    public ResponseEntity<?> deleteComment(@PathVariable("commentId")int commentId, HttpServletRequest request){
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+        String accessToken = request.getHeader("access-token");
+        String decodeUserId = jwtService.decodeToken(accessToken);
+        try {
+            CommentDeleteDto commentDeleteDto = new CommentDeleteDto();
+            commentDeleteDto.setCommentId(commentId);
+            commentDeleteDto.setUserId(decodeUserId);
+            commentServiceImpl.deleteComment(commentDeleteDto);
+            resultMap.put("message", "SUCCESS");
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            logger.error("댓글 삭제 실패 : {}", e);
+            resultMap.put("message", "FAIL");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
 
         return new ResponseEntity<>(resultMap, status);
 
