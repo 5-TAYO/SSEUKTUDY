@@ -18,8 +18,10 @@ public class StudyInfoDto {
     int studyUserMin;
     String studyStartdate;
     String studyEnddate;
+    String studyRegistdate;
     String studyStatus;
     String studyLeaderId;
     String studyContent;
     int studyView;
+    String studyLike;
 }

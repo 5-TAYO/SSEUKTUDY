@@ -13,4 +13,7 @@ public class StudyFilterDto {
     String studyStartdate;
     String studyEnddate;
     String studyTitle;
+    String orderType;
+    int startItem;
+    int itemCnt;
 }
