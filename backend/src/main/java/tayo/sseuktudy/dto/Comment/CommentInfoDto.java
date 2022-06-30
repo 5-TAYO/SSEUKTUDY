@@ -16,6 +16,7 @@ public class CommentInfoDto {
     String userId;
     String userNickname;
     String commentDetail;
-    String createTime;
+    String registTime;
+    String modifyTime;
     List<CommentInfoDto> downComment;
 }

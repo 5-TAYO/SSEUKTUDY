@@ -5,9 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tayo.sseuktudy.dto.Comment.CommentDeleteDto;
 import tayo.sseuktudy.dto.Comment.CommentInfoDto;
+import tayo.sseuktudy.dto.Comment.CommentModifyDto;
 import tayo.sseuktudy.dto.Comment.CommentRegistDto;
 import tayo.sseuktudy.service.CommentServiceImpl;
 import tayo.sseuktudy.service.JwtService;
@@ -83,18 +85,51 @@ public class CommentController {
         HttpStatus status;
         String accessToken = request.getHeader("access-token");
         String decodeUserId = jwtService.decodeToken(accessToken);
-        try {
-            CommentDeleteDto commentDeleteDto = new CommentDeleteDto();
-            commentDeleteDto.setCommentId(commentId);
-            commentDeleteDto.setUserId(decodeUserId);
-            commentServiceImpl.deleteComment(commentDeleteDto);
-            resultMap.put("message", "SUCCESS");
-            status = HttpStatus.ACCEPTED;
-        } catch (Exception e) {
-            logger.error("댓글 삭제 실패 : {}", e);
-            resultMap.put("message", "FAIL");
+        if(!decodeUserId.equals(ACCESS_TOKEN_TIMEOUT)){
+            try {
+                CommentDeleteDto commentDeleteDto = new CommentDeleteDto();
+                commentDeleteDto.setCommentId(commentId);
+                commentDeleteDto.setUserId(decodeUserId);
+                commentServiceImpl.deleteComment(commentDeleteDto);
+                resultMap.put("message", "SUCCESS");
+                status = HttpStatus.ACCEPTED;
+            } catch (Exception e) {
+                logger.error("댓글 삭제 실패 : {}", e);
+                resultMap.put("message", "FAIL");
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        }else{
+            resultMap.put("message", "access token timeout");
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
+
+
+        return new ResponseEntity<>(resultMap, status);
+
+    }
+    @PatchMapping("/comment")
+    public ResponseEntity<?> modifyComment(@RequestBody @Validated  CommentModifyDto commentModifyDto, HttpServletRequest request){
+
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+        String accessToken = request.getHeader("access-token");
+        String decodeUserId = jwtService.decodeToken(accessToken);
+        if(!decodeUserId.equals(ACCESS_TOKEN_TIMEOUT)){
+            try {
+                commentModifyDto.setUserId(decodeUserId);
+                commentServiceImpl.modifyComment(commentModifyDto);
+                resultMap.put("message", "SUCCESS");
+                status = HttpStatus.ACCEPTED;
+            } catch (Exception e) {
+                logger.error("댓글 수정 실패 : {}", e);
+                resultMap.put("message", "FAIL");
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        }else{
+            resultMap.put("message", "access token timeout");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+
 
         return new ResponseEntity<>(resultMap, status);
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tayo.sseuktudy.dto.Comment.CommentDeleteDto;
 import tayo.sseuktudy.dto.Comment.CommentInfoDto;
+import tayo.sseuktudy.dto.Comment.CommentModifyDto;
 import tayo.sseuktudy.dto.Comment.CommentRegistDto;
 import tayo.sseuktudy.mapper.CommentMapper;
 import tayo.sseuktudy.mapper.NoteMapper;
@@ -23,6 +24,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public int resgistComment(CommentRegistDto commentRegistDto){
         return commentMapper.registComment(commentRegistDto);
+    }
+    @Override
+    public int modifyComment(CommentModifyDto commentModifyDto){
+        return commentMapper.modifyComment(commentModifyDto);
     }
     @Override
     public int deleteComment(CommentDeleteDto commentDeleteDto){
