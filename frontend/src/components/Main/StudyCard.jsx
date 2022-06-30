@@ -4,10 +4,12 @@ import ViewIcon from "@images/View.svg";
 import RedLikeIcon from "@images/Like_Red.svg";
 import getCounts from "@utils/getCounts";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-function StudyCard({ data: { category, title, desc, like, view } }) {
+function StudyCard({ data: { category, title, desc, like, view, id } }) {
+  const url = `/study/detail/${id}`;
   return (
-    <div className="card flex column">
+    <Link className="card flex column" to={url}>
       <p className="card-category notoMid fs-12">{category}</p>
       <p className="card-title notoMid fs-22">{title}</p>
       <p className="card-desc notoReg fs-16">{desc}</p>
@@ -17,7 +19,7 @@ function StudyCard({ data: { category, title, desc, like, view } }) {
         <img className="icon" src={RedLikeIcon} alt="좋아요수" />
         <div className="icon-cnt">{getCounts(like)}</div>
       </div>
-    </div>
+    </Link>
   );
 }
 StudyCard.propTypes = {
