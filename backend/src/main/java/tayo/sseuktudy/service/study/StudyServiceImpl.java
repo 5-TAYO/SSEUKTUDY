@@ -84,6 +84,11 @@ public class StudyServiceImpl implements StudyService{
     }
 
     @Override
+    public List<StudyInfoDto> getStudyByUserId(StudyUserFilterDto studyUserFilterDto){
+        return studyMapper.getStudyByUserId(studyUserFilterDto);
+    }
+
+    @Override
     public int likeStudy(StudyUserIdDto studyUserIdDto) {
         return studyMapper.likeStudy(studyUserIdDto);
     }

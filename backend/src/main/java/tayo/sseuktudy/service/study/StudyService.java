@@ -9,6 +9,7 @@ public interface StudyService {
     public int modifyStudy(StudyModifyDto studyModifyDto);
     public int deleteStudy(StudyUserIdDto studyUserIdDto);
     public List<StudyInfoDto>  getStudyByFilter(StudyFilterDto studyFilterDto);
+    public List<StudyInfoDto> getStudyByUserId(StudyUserFilterDto studyUserFilterDto);
     public int likeStudy(StudyUserIdDto studyUserIdDto);
     public int leaderCheck(StudyUserIdDto studyUserIdDto);
 }
