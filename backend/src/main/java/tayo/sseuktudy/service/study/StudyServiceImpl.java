@@ -84,8 +84,8 @@ public class StudyServiceImpl implements StudyService{
     }
 
     @Override
-    public List<StudyInfoDto> getStudyByUserId(String userId){
-        return studyMapper.getStudyByUserId(userId);
+    public List<StudyInfoDto> getStudyByUserId(StudyUserFilterDto studyUserFilterDto){
+        return studyMapper.getStudyByUserId(studyUserFilterDto);
     }
 
     @Override

@@ -68,7 +68,7 @@
 
     </select>
 
-    <select id="getStudyByUserId" parameterType="String" resultType="StudyInfoDto">
+    <select id="getStudyByUserId" parameterType="StudyUserFilterDto" resultType="StudyInfoDto">
         select s.study_id studyId, study_title studyTitle, study_leader_id studyLeaderId, study_status studyStatus, study_introduction studyIntroduction, study_startdate studyStartdate,
                study_enddate studyEnddate, study_registdate studyRegistdate, study_goals studyGoals, study_type studyType , study_user_min studyUserMin, study_user_max studyUserMax, study_content studyContent,
                study_place studyPlace, study_category_id studyCategoryId, count(uls.study_id) as studyLike
@@ -77,6 +77,7 @@
             left join user_join_study ujs on s.study_id = ujs.study_id
         where ujs.user_id = #{userId}
         group by s.study_id
+        limit #{startItem}, #{itemCnt}
     </select>
 
     <insert id="likeStudy" parameterType="StudyUserIdDto">

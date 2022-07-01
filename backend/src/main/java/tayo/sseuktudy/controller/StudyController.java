@@ -158,7 +158,7 @@ public class StudyController {
     }
 
     @GetMapping("/study/user")
-    public ResponseEntity<Map<String, Object>> getStudyByUserId(HttpServletRequest request){
+    public ResponseEntity<Map<String, Object>> getStudyByUserId(@RequestParam int startItem, @RequestParam int itemCnt, HttpServletRequest request){
         Map<String, Object> resultMap = new HashMap<>();
 
         HttpStatus status = null;
@@ -168,7 +168,12 @@ public class StudyController {
         if(!decodeUserId.equals(ACCESS_TOKEN_TIMEOUT)){
             logger.info("사용 가능한 토큰!!!");
             try{
-                List<StudyInfoDto> result = studyService.getStudyByUserId(decodeUserId);
+                StudyUserFilterDto studyUserFilterDto = new StudyUserFilterDto();
+                studyUserFilterDto.setUserId(decodeUserId);
+                studyUserFilterDto.setStartItem(startItem);
+                studyUserFilterDto.setItemCnt(itemCnt);
+
+                List<StudyInfoDto> result = studyService.getStudyByUserId(studyUserFilterDto);
                 resultMap.put("message", "SUCCESS");
                 resultMap.put("data", result);
                 status = HttpStatus.ACCEPTED;
