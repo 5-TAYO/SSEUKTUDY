@@ -34,8 +34,8 @@ public class CommentServiceImpl implements CommentService {
         return commentMapper.deleteComment(commentDeleteDto);
     }
     @Override
-    public List<CommentInfoDto> listComment(CommentInfoDto commentInfoDto){
-        List<CommentInfoDto> listComment = commentMapper.listComment(commentInfoDto);
+    public List<CommentInfoDto> listComment(int studyId){
+        List<CommentInfoDto> listComment = commentMapper.listComment(studyId);
         List<CommentInfoDto> result = new ArrayList<>();
         for (int i = 0; i < listComment.size(); i++) {
             if(listComment.get(i).getUpCommentId() == 0){ //상위 댓글이 본인이라면

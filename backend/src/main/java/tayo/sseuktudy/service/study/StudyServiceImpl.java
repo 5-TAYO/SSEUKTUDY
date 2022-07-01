@@ -3,10 +3,12 @@ package tayo.sseuktudy.service.study;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tayo.sseuktudy.dto.Comment.CommentInfoDto;
 import tayo.sseuktudy.dto.member.MemberJoinDto;
 import tayo.sseuktudy.dto.question.QuestionModifyDto;
 import tayo.sseuktudy.dto.question.QuestionRegistDto;
 import tayo.sseuktudy.dto.study.*;
+import tayo.sseuktudy.mapper.CommentMapper;
 import tayo.sseuktudy.mapper.QuestionMapper;
 import tayo.sseuktudy.mapper.StudyMapper;
 
@@ -17,11 +19,12 @@ public class StudyServiceImpl implements StudyService{
 
     private final StudyMapper studyMapper;
     private final QuestionMapper questionMapper;
-
+    private final CommentMapper commentMapper;
     @Autowired
-    public StudyServiceImpl(StudyMapper studyMapper, QuestionMapper questionMapper){
+    public StudyServiceImpl(StudyMapper studyMapper, QuestionMapper questionMapper, CommentMapper commentMapper){
         this.studyMapper = studyMapper;
         this.questionMapper = questionMapper;
+        this.commentMapper = commentMapper;
     }
 
 
@@ -86,6 +89,18 @@ public class StudyServiceImpl implements StudyService{
     @Override
     public List<StudyInfoDto> getStudyByUserId(StudyUserFilterDto studyUserFilterDto){
         return studyMapper.getStudyByUserId(studyUserFilterDto);
+    }
+
+    @Override
+    public StudyDetailDto getStudyByStudyId(int studyId) {
+        StudyInfoDto studyInfoDto = studyMapper.getStudyByStudyId(studyId);
+        List<CommentInfoDto> commentInfoList = commentMapper.listComment(studyId);
+
+        StudyDetailDto studyDetailDto = new StudyDetailDto();
+        studyDetailDto.setStudyInfoDto(studyInfoDto);
+        studyDetailDto.setCommentInfoList(commentInfoList);
+
+        return studyDetailDto;
     }
 
     @Override

@@ -65,7 +65,7 @@ public class CommentController {
             try {
                 CommentInfoDto commentInfoDto = new CommentInfoDto();
                 commentInfoDto.setStudyId(studyId);
-                List<CommentInfoDto> commentList = commentServiceImpl.listComment(commentInfoDto);
+                List<CommentInfoDto> commentList = commentServiceImpl.listComment(studyId);
                 resultMap.put("message", "SUCCESS");
                 resultMap.put("data",commentList);
                 status = HttpStatus.ACCEPTED;

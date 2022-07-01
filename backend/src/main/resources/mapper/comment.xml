@@ -7,7 +7,7 @@
         insert into comment (user_id, study_id, comment_detail, regist_time, up_comment_id)
             value (#{userId}, #{studyId},#{commentDetail}, now(), #{upCommentId});
     </insert>
-    <select id="listComment" parameterType="CommentInfoDto" resultType="CommentInfoDto">
+    <select id="listComment" parameterType="int" resultType="CommentInfoDto">
         select comment_id commentId, user_id userId, (select user_nickname from user where user_id = userId)
                     userNickname, comment_detail commentDetail, regist_time registTime, modify_time modifyTime, up_comment_id upCommentId
         from comment where study_id = #{studyId};

@@ -13,5 +13,5 @@ public interface CommentService {
     int deleteComment(CommentDeleteDto commentDeleteDto);
     int modifyComment(CommentModifyDto commentModifyDto);
 
-    List<CommentInfoDto> listComment(CommentInfoDto commandInfoDto);
+    List<CommentInfoDto> listComment(int studyId);
 }
