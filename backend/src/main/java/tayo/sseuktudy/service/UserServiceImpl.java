@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserCategoryDto> getUserCategory(String userId) throws Exception{
         return userMapper.getUserCategory(userId);
+
     }
     @Override
     public int deleteUser(String userId) throws Exception{

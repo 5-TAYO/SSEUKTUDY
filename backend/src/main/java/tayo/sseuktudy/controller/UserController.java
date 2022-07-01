@@ -132,6 +132,7 @@ public class UserController {
                 UserInfoDto userInfoDto = userService.userInfo(decodeUserId);
                 List<UserCategoryDto> userCategoryDto = userService.getUserCategory(decodeUserId);
                 resultMap.put("userCategory", userCategoryDto);
+
                 resultMap.put("userInfo", userInfoDto);
                 resultMap.put("message", "SUCCESS");
                 status = HttpStatus.ACCEPTED;

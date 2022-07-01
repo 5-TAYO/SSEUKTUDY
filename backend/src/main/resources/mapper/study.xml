@@ -3,8 +3,8 @@
 
 <mapper namespace="tayo.sseuktudy.mapper.StudyMapper">
     <insert id="registStudy" parameterType="StudyRegistDto" useGeneratedKeys="true" keyProperty="studyId">
-        insert into study (study_title, study_leader_id, study_status, study_introduction, study_startdate, study_enddate, study_goals, study_type, study_user_min, study_user_max, study_content, study_place, study_category_id, study_view)
-            value (#{studyTitle}, #{studyLeaderId}, #{studyStatus}, #{studyIntroduction}, #{studyStartdate}, #{studyEnddate}, #{studyGoals}, #{studyType}, #{studyUserMin}, #{studyUserMax},#{studyContent}, #{studyPlace},#{studyCategoryId}, #{studyView});
+        insert into study (study_title, study_leader_id, study_status, study_introduction, study_startdate, study_enddate, study_goals, study_type, study_user_min, study_user_max, study_content, study_place, study_category_id, study_view, study_registdate)
+            value (#{studyTitle}, #{studyLeaderId}, #{studyStatus}, #{studyIntroduction}, #{studyStartdate}, #{studyEnddate}, #{studyGoals}, #{studyType}, #{studyUserMin}, #{studyUserMax},#{studyContent}, #{studyPlace},#{studyCategoryId}, #{studyView}, #{studyRegistdate});
     </insert>
 
     <insert id="joinStudy" parameterType="MemberJoinDto">
@@ -20,11 +20,62 @@
         where study_id = #{studyId}
     </update>
 
-    <delete id="deleteStudy" parameterType="StudyDeleteDto">
+    <delete id="deleteStudy" parameterType="StudyUserIdDto">
         delete from study
         where study_id=#{studyId}
     </delete>
 
+    <select id="getStudyByFilter" parameterType="StudyFilterDto" resultType="StudyInfoDto">
+
+            select s.study_id studyId, study_title studyTitle, study_leader_id studyLeaderId, study_status studyStatus, study_introduction studyIntroduction, study_startdate studyStartdate,
+        study_enddate studyEnddate, study_registdate studyRegistdate, study_goals studyGoals, study_type studyType , study_user_min studyUserMin, study_user_max studyUserMax, study_content studyContent,
+        study_place studyPlace, study_category_id studyCategoryId, count(uls.study_id) as studyLike
+            from study s left join user_like_study uls on s.study_id = uls.study_id
+            <trim prefix="where" prefixOverrides="and | or">
+                <if test="studyType != null">
+                    s.study_type = #{studyType}
+                </if>
+                <if test="studyCategoryId != null">
+                    and s.study_category_id in
+                        <foreach collection="studyCategoryId" item="item" open="(" close=")" separator=",">
+                            #{item}
+                        </foreach>
+
+                </if>
+                <if test="studyStartdate != null and studyEnddate != null">
+                    <![CDATA[
+                    and s.study_startdate >= #{studyStartdate} and s.study_enddate <= #{studyEnddate}
+                     ]]>
+                </if>
+                <if test="studyTitle != null">
+                    and s.study_title like concat("*", #{studyTitle}, "*")
+                </if>
+            </trim>
+            group by s.study_id
+            <trim prefix="order by">
+                <if test="orderType == 'studyRegistdate'">
+                    studyRegistdate desc
+                </if>
+                <if test="orderType == 'studyLike'">
+                    studyLike desc
+                </if>
+                <if test="orderType == 'studyView'">
+                    studyView desc
+                </if>
+            </trim>
+            limit #{startItem}, #{itemCnt}
+
+    </select>
+
+    <insert id="likeStudy" parameterType="StudyUserIdDto">
+        insert into user_like_study(user_id, study_id)
+        values(#{userId}, #{studyId})
+    </insert>
+
+    <select id="leaderCheck" parameterType="StudyUserIdDto" resultType="int">
+        select count(*) from study
+        where study_id = #{studyId} and study_leader_id = #{userId}
+    </select>
 
 
 </mapper>

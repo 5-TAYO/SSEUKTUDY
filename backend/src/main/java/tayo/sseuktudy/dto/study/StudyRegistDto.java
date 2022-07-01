@@ -24,4 +24,5 @@ public class StudyRegistDto {
     String studyContent;
     List<String> studyPrequestion;
     int studyView;
+    String studyRegistdate;
 }
