@@ -212,9 +212,9 @@ public class StudyController {
     }
 
 
-    @GetMapping("/study/like")
+    @PostMapping("/study/like")
     public ResponseEntity<Map<String, Object>> likeStudy(@RequestParam int studyId, HttpServletRequest request){
-        logger.info("스터디 좋아요 API 실행");
+        logger.info("스터디 좋아요 누르기 API 실행");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
 

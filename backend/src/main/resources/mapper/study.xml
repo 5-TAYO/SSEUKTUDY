@@ -100,5 +100,4 @@
         where study_id = #{studyId} and study_leader_id = #{userId}
     </select>
 
-
 </mapper>
