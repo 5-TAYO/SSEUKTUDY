@@ -191,9 +191,30 @@ public class StudyController {
         return new ResponseEntity<>(resultMap, status);
     }
 
-    @GetMapping("/study/like")
+    @GetMapping("/study/item")
+    public ResponseEntity<Map<String, Object>> getStudyByStudyId(@RequestParam int studyId){
+        Map<String, Object> resultMap = new HashMap<>();
+
+        HttpStatus status = null;
+        logger.info("스터디 상세조회 요청 API");
+
+        StudyDetailDto result = studyService.getStudyByStudyId(studyId);
+        if(result != null){
+            resultMap.put("message", "SUCCESS");
+            resultMap.put("data", result);
+            status = HttpStatus.ACCEPTED;
+        }else{
+            resultMap.put("message","FAIL");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+
+        return new ResponseEntity<>(resultMap, status);
+    }
+
+
+    @PostMapping("/study/like")
     public ResponseEntity<Map<String, Object>> likeStudy(@RequestParam int studyId, HttpServletRequest request){
-        logger.info("스터디 좋아요 API 실행");
+        logger.info("스터디 좋아요 누르기 API 실행");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
 

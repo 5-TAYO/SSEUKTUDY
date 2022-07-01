@@ -14,5 +14,5 @@ public interface CommentMapper {
     int deleteComment(CommentDeleteDto commentDeleteDto);
     int modifyComment(CommentModifyDto commentModifyDto);
 
-    List<CommentInfoDto> listComment(CommentInfoDto commentInfoDto);
+    List<CommentInfoDto> listComment(int studyId);
 }
