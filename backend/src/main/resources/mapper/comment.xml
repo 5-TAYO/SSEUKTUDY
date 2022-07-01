@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="tayo.sseuktudy.mapper.CommentMapper">
+
+    <insert id="registComment" parameterType="CommentRegistDto">
+        insert into comment (user_id, study_id, comment_detail, regist_time, up_comment_id)
+            value (#{userId}, #{studyId},#{commentDetail}, now(), #{upCommentId});
+    </insert>
+    <select id="listComment" parameterType="CommentInfoDto" resultType="CommentInfoDto">
+        select comment_id commentId, user_id userId, (select user_nickname from user where user_id = userId)
+                    userNickname, comment_detail commentDetail, regist_time registTime, modify_time modifyTime, up_comment_id upCommentId
+        from comment where study_id = #{studyId};
+    </select>
+    <update id="modifyComment">
+        update comment set comment_detail = #{commentDetail}, modify_time = now()
+        where user_id = #{userId} and comment_id = #{commentId}
+    </update>
+    <delete id="deleteComment" parameterType="CommentDeleteDto" >
+       delete from comment
+        where comment_id = #{commentId} and user_id = #{userId}  or up_comment_id = #{commentId};
+    </delete>
+    </mapper>
