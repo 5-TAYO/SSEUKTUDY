@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./StudyList.scss";
-import InfinityStudyCardList from "@components/Main/InfinityStudyCardList";
+import CarouselStudyList from "@components/Main/CarouselStudyList";
 import SearchIcon from "@images/Search.svg";
 import StudyListUpIcon from "@images/StudyListUp.svg";
 
@@ -145,7 +145,7 @@ function StudyList() {
             <option value="regDate">등록일순</option>
           </select>
         </header>
-        <InfinityStudyCardList />
+        <CarouselStudyList />
       </div>
     </div>
   );

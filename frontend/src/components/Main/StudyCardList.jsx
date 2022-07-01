@@ -19,12 +19,15 @@ function StudyCardList({ title }) {
     <div className="study-card-list fs-32 notoBold">
       {title && <p className="title">{title}</p>}
       <div className="card-container flex">
-        <StudyCard data={dummy} />
-        <StudyCard data={dummy} />
-        <StudyCard data={dummy} />
-        <StudyCard data={dummy} />
-        <StudyCard data={dummy} />
-        <StudyCard data={dummy} />
+        <StudyCard data={{ ...dummy, id: 1 }} />
+        <StudyCard data={{ ...dummy, id: 2 }} />
+        <StudyCard data={{ ...dummy, id: 3 }} />
+        <StudyCard data={{ ...dummy, id: 4 }} />
+        <StudyCard data={{ ...dummy, id: 5 }} />
+        <StudyCard data={{ ...dummy, id: 6 }} />
+        <StudyCard data={{ ...dummy, id: 4 }} />
+        <StudyCard data={{ ...dummy, id: 5 }} />
+        <StudyCard data={{ ...dummy, id: 6 }} />
       </div>
     </div>
   );
