@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./StudyList.scss";
 import CarouselStudyList from "@components/Main/CarouselStudyList";
 import SearchIcon from "@images/Search.svg";
 import StudyListUpIcon from "@images/StudyListUp.svg";
 
 function StudyList() {
-  const [listUpCon, setListUpcon] = useState("likes");
-  const placeList = ["전체 ", "온라인", "오프라인", "온/오프라인"];
+  const placeList = ["전체 ", "온라인", "오프라인"];
   const categoryList = [
     "개발",
     "어학",
@@ -21,29 +20,46 @@ function StudyList() {
     "SNS",
     "기타"
   ];
-  const [searchCategory, setSearchCategory] = useState(categoryList);
-  const handleListUpCon = e => {
-    console.log(listUpCon);
-    setListUpcon(e.target.value);
+  const [searchConditions, setSearchConditions] = useState({
+    studyCategoryId: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    orderType: "studyLike",
+    itemCnt: 9
+  });
+  const [categorys, setCategorys] = useState(categoryList);
+
+  const handleSearchConditions = (type, value) => {
+    const newCondition = {};
+    newCondition[type] = value;
+    if (type === "studyType" && value === "전체 ") newCondition[type] = null;
+    if (JSON.stringify(searchConditions[type]) === JSON.stringify(value))
+      return;
+    setSearchConditions({ ...searchConditions, ...newCondition });
   };
 
   const handleSetCategory = e => {
     if (e.target.checked) {
-      setSearchCategory([...searchCategory, e.target.value]);
+      setCategorys([...categorys, e.target.value]);
     } else {
-      setSearchCategory(
-        searchCategory.filter(category => category !== e.target.value)
-      );
+      setCategorys(categorys.filter(category => category !== e.target.value));
     }
   };
 
   const handleAllCategory = e => {
     if (e.target.checked) {
-      setSearchCategory([...categoryList]);
+      setCategorys([...categoryList]);
     } else {
-      setSearchCategory([]);
+      setCategorys([]);
     }
   };
+
+  useEffect(() => {
+    let newCategoryIndex = categorys.map(val => {
+      if (categoryList.includes(val)) return categoryList.indexOf(val);
+      return null;
+    });
+    if (newCategoryIndex.length === 0) newCategoryIndex = [13];
+    handleSearchConditions("studyCategoryId", newCategoryIndex);
+  }, [categorys]);
 
   const showCalPicker = e => {
     e.target.showPicker();
@@ -56,16 +72,19 @@ function StudyList() {
         <div className="condition__place flex">
           <p className="title">온/오프라인</p>
           <div className="options flex align-center">
-            {placeList.map(place => (
-              <label htmlFor={place} key={place}>
+            {placeList.map(item => (
+              <label htmlFor={item} key={item}>
                 <input
-                  id={place}
-                  value={place}
+                  id={item}
+                  value={item}
                   name="place"
                   type="radio"
-                  defaultChecked={place === "전체 "}
+                  defaultChecked={item === "전체 "}
+                  onChange={e =>
+                    handleSearchConditions("studyType", e.target.value)
+                  }
                 />
-                {place}
+                {item}
               </label>
             ))}
           </div>
@@ -80,9 +99,7 @@ function StudyList() {
                 name="category"
                 type="checkbox"
                 checked={
-                  searchCategory.length === 0
-                    ? false
-                    : searchCategory.length === 12
+                  categorys.length === 0 ? false : categorys.length === 12
                 }
                 onChange={handleAllCategory}
               />
@@ -95,7 +112,7 @@ function StudyList() {
                   value={category}
                   name="category"
                   type="checkbox"
-                  checked={searchCategory.includes(category)}
+                  checked={categorys.includes(category)}
                   onChange={handleSetCategory}
                 />
                 {category}
@@ -105,9 +122,19 @@ function StudyList() {
         </div>
         <div className="condition__period">
           <p className="title">스터디기간</p>
-          <input type="date" onClick={showCalPicker} />
+          <input
+            type="date"
+            onClick={showCalPicker}
+            onChange={e => handleSearchConditions("startDate", e.target.value)}
+            value={searchConditions.startDate}
+          />
           <p className="tilde">~</p>
-          <input type="date" onClick={showCalPicker} />
+          <input
+            type="date"
+            onClick={showCalPicker}
+            onChange={e => handleSearchConditions("endDate", e.target.value)}
+            value={searchConditions.endDate}
+          />
         </div>
         <div className="condition__search flex align-center">
           <img
@@ -119,6 +146,8 @@ function StudyList() {
             type="text"
             className="condition__search__input notoMid fs-20"
             placeholder="스터디를 찾아보세요"
+            onChange={e => handleSearchConditions("keyword", e.target.value)}
+            value={searchConditions.keyword}
           />
           <button
             type="button"
@@ -138,14 +167,15 @@ function StudyList() {
           <select
             className="list-up__selector notoMid fs-16"
             name="selector"
-            onChange={handleListUpCon}
+            onChange={e => handleSearchConditions("orderType", e.target.value)}
+            value={searchConditions.order}
           >
-            <option value="likes">좋아요순</option>
-            <option value="views">조회수순</option>
-            <option value="regDate">등록일순</option>
+            <option value="studyLike">좋아요순</option>
+            <option value="studyView">조회수순</option>
+            <option value="studyRegistdate">등록일순</option>
           </select>
         </header>
-        <CarouselStudyList />
+        <CarouselStudyList searchConditions={searchConditions} />
       </div>
     </div>
   );
