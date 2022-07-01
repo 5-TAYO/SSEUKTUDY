@@ -49,6 +49,7 @@
                 </if>
                 <if test="studyTitle != null">
                     and s.study_title like concat("%", #{studyTitle}, "%")
+
                 </if>
             </trim>
             group by s.study_id
