@@ -68,6 +68,17 @@
 
     </select>
 
+    <select id="getStudyByUserId" parameterType="String" resultType="StudyInfoDto">
+        select s.study_id studyId, study_title studyTitle, study_leader_id studyLeaderId, study_status studyStatus, study_introduction studyIntroduction, study_startdate studyStartdate,
+               study_enddate studyEnddate, study_registdate studyRegistdate, study_goals studyGoals, study_type studyType , study_user_min studyUserMin, study_user_max studyUserMax, study_content studyContent,
+               study_place studyPlace, study_category_id studyCategoryId, count(uls.study_id) as studyLike
+        from study s
+            left join user_like_study uls on s.study_id = uls.study_id
+            left join user_join_study ujs on s.study_id = ujs.study_id
+        where ujs.user_id = #{userId}
+        group by s.study_id
+    </select>
+
     <insert id="likeStudy" parameterType="StudyUserIdDto">
         insert into user_like_study(user_id, study_id)
         values(#{userId}, #{studyId})

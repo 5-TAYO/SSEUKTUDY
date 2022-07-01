@@ -137,7 +137,7 @@ public class StudyController {
         return new ResponseEntity<>(resultMap, status);
     }
 
-    @GetMapping("/study/list")
+    @PostMapping("/study/list")
     public ResponseEntity<Map<String, Object>> getStudyByFilter(@RequestBody StudyFilterDto studyFilterDto){
         Map<String, Object> resultMap = new HashMap<>();
 
@@ -154,6 +154,35 @@ public class StudyController {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
 
+        return new ResponseEntity<>(resultMap, status);
+    }
+
+    @GetMapping("/study/user")
+    public ResponseEntity<Map<String, Object>> getStudyByUserId(HttpServletRequest request){
+        Map<String, Object> resultMap = new HashMap<>();
+
+        HttpStatus status = null;
+        logger.info("유저가 가입한 스터디조회 요청");
+
+        String decodeUserId = jwtService.decodeToken(request.getHeader("access-token"));
+        if(!decodeUserId.equals(ACCESS_TOKEN_TIMEOUT)){
+            logger.info("사용 가능한 토큰!!!");
+            try{
+                List<StudyInfoDto> result = studyService.getStudyByUserId(decodeUserId);
+                resultMap.put("message", "SUCCESS");
+                resultMap.put("data", result);
+                status = HttpStatus.ACCEPTED;
+
+            }catch(Exception e){
+                logger.error("예외 발생", e);
+                resultMap.put("message", "FAIL");
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        }else{
+            logger.error("사용 불가능 토큰!!!");
+            resultMap.put("message","FAIL");
+            status = HttpStatus.UNAUTHORIZED;
+        }
         return new ResponseEntity<>(resultMap, status);
     }
 
