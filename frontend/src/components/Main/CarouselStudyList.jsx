@@ -60,7 +60,7 @@ function CarouselStudyList({ searchConditions }) {
 
 CarouselStudyList.propTypes = {
   searchConditions: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.number])
   ).isRequired
 };
 
