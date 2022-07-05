@@ -5,6 +5,7 @@ import RedLikeIcon from "@images/Like_Red.svg";
 import getCounts from "@utils/getCounts";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { categoryList } from "@utils/studyConditions";
 
 function StudyCard({
   studyInfo: {
@@ -17,20 +18,6 @@ function StudyCard({
     dummy
   }
 }) {
-  const categoryList = [
-    "개발",
-    "어학",
-    "자격증",
-    "공시",
-    "입시",
-    "편입",
-    "취준",
-    "면접",
-    "취미",
-    "독서",
-    "SNS",
-    "기타"
-  ];
   const url = `/study/detail/${id}`;
   return dummy ? (
     <div className="card dummy" />
