@@ -147,8 +147,7 @@ function StudyList() {
             type="text"
             className="condition__search__input notoMid fs-20"
             placeholder="스터디를 찾아보세요"
-            onChange={e => handleSearchConditions("keyword", e.target.value)}
-            value={searchConditions.keyword}
+            onChange={e => handleSearchConditions("studyTitle", e.target.value)}
           />
           <button
             type="button"
