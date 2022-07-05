@@ -1,0 +1,30 @@
+#carousel-study-list {
+  position: relative;
+  .carousel-wrapper {
+    overflow: hidden;
+    .study-card-list {
+      padding: vw(5px);
+      // margin-right: vw(1180px);
+    }
+  }
+  @mixin slideBtn {
+    position: absolute;
+    top: 50%;
+    width: vw(50px);
+    height: vw(50px);
+    img {
+      width: vw(50px);
+      height: vw(50px);
+    }
+  }
+  .prevBtn {
+    @include slideBtn();
+    left: vw(-60px);
+    transform: rotate(180deg);
+  }
+
+  .nextBtn {
+    @include slideBtn();
+    right: vw(-60px);
+  }
+}
