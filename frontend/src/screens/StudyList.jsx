@@ -21,7 +21,7 @@ function StudyList() {
     "기타"
   ];
   const [searchConditions, setSearchConditions] = useState({
-    studyCategoryId: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    studyCategoryId: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     orderType: "studyLike",
     itemCnt: 9
   });
@@ -55,7 +55,7 @@ function StudyList() {
 
   useEffect(() => {
     let newCategoryIndex = categorys.map(val => {
-      if (categoryList.includes(val)) return categoryList.indexOf(val);
+      if (categoryList.includes(val)) return categoryList.indexOf(val) + 1;
       return null;
     });
     if (newCategoryIndex.length === 0) newCategoryIndex = [13];
