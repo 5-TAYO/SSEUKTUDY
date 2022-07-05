@@ -15,7 +15,11 @@ function StudyCardList({
   useEffect(() => {
     async function getAndSetStudyList() {
       const data = await getStudyList(searchConditions);
-      setStudyList(data.studyInfoList);
+      const { studyInfoList } = data;
+      if (studyInfoList.length % 3 === 2) {
+        studyInfoList.push({ dummy: true });
+      }
+      setStudyList(studyInfoList);
       console.log(data);
       if (handleStudyCount) {
         handleStudyCount(data.studyCnt);

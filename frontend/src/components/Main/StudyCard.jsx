@@ -13,7 +13,8 @@ function StudyCard({
     studyIntroduction: desc,
     studyLike: like,
     studyView: view,
-    studyId: id
+    studyId: id,
+    dummy
   }
 }) {
   const categoryList = [
@@ -31,7 +32,9 @@ function StudyCard({
     "기타"
   ];
   const url = `/study/detail/${id}`;
-  return (
+  return dummy ? (
+    <div className="card dummy" />
+  ) : (
     <Link className="card flex column" to={url}>
       <p className="card-category notoMid fs-12">{categoryList[category]}</p>
       <p className="card-title notoMid fs-22">{title}</p>
