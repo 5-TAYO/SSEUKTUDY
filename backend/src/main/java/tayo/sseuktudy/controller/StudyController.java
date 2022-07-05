@@ -144,7 +144,7 @@ public class StudyController {
         HttpStatus status = null;
         logger.info("스터디 조회 요청");
 
-        List<StudyInfoDto> result = studyService.getStudyByFilter(studyFilterDto);
+        StudyInfoListDto result = studyService.getStudyByFilter(studyFilterDto);
         if(result != null){
             resultMap.put("message", "SUCCESS");
             resultMap.put("data", result);

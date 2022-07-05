@@ -68,6 +68,33 @@
 
     </select>
 
+    <select id="getStudyCntByFilter" parameterType="StudyFilterDto" resultType="int">
+
+        select count(*)
+        from study
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="studyType != null">
+                study_type = #{studyType}
+            </if>
+            <if test="studyCategoryId != null">
+                and study_category_id in
+                <foreach collection="studyCategoryId" item="item" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+
+            </if>
+            <if test="studyStartdate != null and studyEnddate != null">
+                <![CDATA[
+                    and study_startdate >= #{studyStartdate} and study_enddate <= #{studyEnddate}
+                     ]]>
+            </if>
+            <if test="studyTitle != null">
+                and study_title like concat("%", #{studyTitle}, "%")
+            </if>
+        </trim>
+
+    </select>
+
     <select id="getStudyByUserId" parameterType="StudyUserFilterDto" resultType="StudyInfoDto">
         select s.study_id studyId, study_title studyTitle, study_leader_id studyLeaderId, study_status studyStatus, study_introduction studyIntroduction, study_startdate studyStartdate,
                study_enddate studyEnddate, study_registdate studyRegistdate, study_goals studyGoals, study_type studyType , study_user_min studyUserMin, study_user_max studyUserMax, study_content studyContent,
