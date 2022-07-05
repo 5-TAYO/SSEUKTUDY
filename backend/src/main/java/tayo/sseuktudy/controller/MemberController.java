@@ -70,8 +70,8 @@ public class MemberController {
         return new ResponseEntity<>(resultMap, status);
     }
 
-    @GetMapping("/member/list/{studyId}")
-    public ResponseEntity<Map<String, Object>> getMembers(@PathVariable int studyId, HttpServletRequest request){
+    @GetMapping("/member/list")
+    public ResponseEntity<Map<String, Object>> getMembers(@RequestParam int studyId, HttpServletRequest request){
         logger.info("스터디 멤버 전체조회 API 실행");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.UNAUTHORIZED;
