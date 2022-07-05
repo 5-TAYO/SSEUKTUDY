@@ -126,14 +126,18 @@ function StudyList() {
           <input
             type="date"
             onClick={showCalPicker}
-            onChange={e => handleSearchConditions("startDate", e.target.value)}
+            onChange={e =>
+              handleSearchConditions("studyStartdate", e.target.value)
+            }
             value={searchConditions.startDate}
           />
           <p className="tilde">~</p>
           <input
             type="date"
             onClick={showCalPicker}
-            onChange={e => handleSearchConditions("endDate", e.target.value)}
+            onChange={e =>
+              handleSearchConditions("studyEnddate", e.target.value)
+            }
             value={searchConditions.endDate}
           />
         </div>
