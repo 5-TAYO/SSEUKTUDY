@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./SideStudyList.scss";
 import PropTypes from "prop-types";
+import { getStudyList } from "@apis/study";
+import { categoryList } from "@utils/studyConditions";
 import { Link } from "react-router-dom";
 
-function SideStudyList({ data: { title, studyList } }) {
+function SideStudyList({ title }) {
+  const [studyList, setStudyList] = useState();
+
+  useEffect(() => {
+    const searchConditions = {
+      startItem: 0,
+      itemCnt: 9,
+      orderType: "studyLike"
+    };
+    if (categoryList.includes(title)) {
+      searchConditions.studyCategoryId = [categoryList.indexOf(title)];
+    }
+    async function getStudys() {
+      const data = await getStudyList(searchConditions);
+      setStudyList(data.studyInfoList);
+    }
+    getStudys();
+  }, []);
+
   return (
     <div id="side-study-list">
       <header>
@@ -12,27 +32,19 @@ function SideStudyList({ data: { title, studyList } }) {
         <p className="notoReg fs-17"> 인기 스터디를 모아봤어요!</p>
       </header>
       <ul>
-        {studyList.map(({ id, name }, ind) => (
-          <li className="notoMid fs-12 ellipsis" key={id}>
-            <Link to={`/study/detail/${id}`}>
-              {ind + 1}. {name}
-            </Link>
-          </li>
-        ))}
+        {studyList &&
+          studyList.map(({ studyId, studyTitle }, ind) => (
+            <li className="notoMid fs-12 ellipsis" key={studyId}>
+              <Link to={`/study/detail/${studyId}`}>
+                {ind + 1}. {studyTitle}
+              </Link>
+            </li>
+          ))}
       </ul>
     </div>
   );
 }
 SideStudyList.propTypes = {
-  data: PropTypes.objectOf(
-    PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.arrayOf(
-        PropTypes.objectOf(
-          PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-        )
-      )
-    ])
-  ).isRequired
+  title: PropTypes.string.isRequired
 };
 export default SideStudyList;

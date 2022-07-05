@@ -22,13 +22,12 @@ function StudyDetail() {
   useEffect(() => {
     async function getStudyInfo() {
       const data = await getStudyDetail(studyId);
-      console.log(data.studyInfoDto);
-      // const { studyInfoDto } = data;
+
       setStudyInfo(data.studyInfoDto);
     }
     getStudyInfo();
     // 초기에 정보 받아오기
-  }, []);
+  }, [studyId]);
 
   const autoResizeTextarea = () => {
     if (commentInput) {
@@ -52,37 +51,6 @@ function StudyDetail() {
       userName: "정민",
       regDate: "2022-04-27 18:55:31",
       desc: "예?"
-    }
-  ];
-  const sideDummy = [
-    {
-      title: "개발",
-      studyList: [
-        { id: 1, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
-        { id: 2, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
-        { id: 3, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
-        { id: 4, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
-        { id: 5, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
-        { id: 6, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
-        { id: 7, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
-        {
-          id: 8,
-          name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?11132131111321311113213111132131"
-        }
-      ]
-    },
-    {
-      title: "최근 가장",
-      studyList: [
-        { id: 1, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
-        { id: 2, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
-        { id: 3, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
-        { id: 4, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
-        { id: 5, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
-        { id: 6, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
-        { id: 7, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" },
-        { id: 8, name: "네이버 갈까요? 토스 갈까요? 카카오 갈까요?" }
-      ]
     }
   ];
   return (
@@ -207,9 +175,12 @@ function StudyDetail() {
         </footer>
       </article>
       <aside>
-        {sideDummy.map(studyDummy => (
-          <SideStudyList data={studyDummy} key={uuid()} />
-        ))}
+        {studyInfo && (
+          <>
+            <SideStudyList title={categoryList[studyInfo.studyCategoryId]} />
+            <SideStudyList title="가장" />
+          </>
+        )}
       </aside>
     </div>
   );
