@@ -26,6 +26,7 @@ function StudyList() {
     itemCnt: 9
   });
   const [categorys, setCategorys] = useState(categoryList);
+  const [studyCount, setStudyCount] = useState();
 
   const handleSearchConditions = (type, value) => {
     const newCondition = {};
@@ -162,7 +163,7 @@ function StudyList() {
           <img className="list-up__icon" src={StudyListUpIcon} alt="" />
           <p className="list-up__title fs-20">스터디 모아보기</p>
           <p className="list-up__cnt fs-16 notoMid">총</p>
-          <p className="list-up__cnt--emp fs-16 notoMid">27859603</p>
+          <p className="list-up__cnt--emp fs-16 notoMid">{studyCount}</p>
           <p className="list-up__cnt fs-16 notoMid">개</p>
           <select
             className="list-up__selector notoMid fs-16"
@@ -175,7 +176,10 @@ function StudyList() {
             <option value="studyRegistdate">등록일순</option>
           </select>
         </header>
-        <CarouselStudyList searchConditions={searchConditions} />
+        <CarouselStudyList
+          searchConditions={searchConditions}
+          handleStudyCount={setStudyCount}
+        />
       </div>
     </div>
   );

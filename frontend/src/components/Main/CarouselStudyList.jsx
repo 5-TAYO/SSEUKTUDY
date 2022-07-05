@@ -4,8 +4,9 @@ import StudyCardList from "@components/Main/StudyCardList";
 import RightArrowIcon from "@images/RightArrow.svg";
 import PropTypes from "prop-types";
 
-function CarouselStudyList({ searchConditions }) {
+function CarouselStudyList({ searchConditions, handleStudyCount }) {
   const [nowPage, setNowPage] = useState(0);
+  const [maxPage, setMaxPage] = useState(0);
   const [conditionList, setConditionList] = useState([]);
   const slideRef = useRef(null);
 
@@ -42,7 +43,11 @@ function CarouselStudyList({ searchConditions }) {
         <div className="card-container flex" ref={slideRef}>
           {conditionList &&
             conditionList.map(condition => (
-              <StudyCardList searchConditions={condition} />
+              <StudyCardList
+                searchConditions={condition}
+                handleStudyCount={handleStudyCount}
+                handleStudyMaxPage={setMaxPage}
+              />
             ))}
         </div>
       </div>
@@ -51,9 +56,11 @@ function CarouselStudyList({ searchConditions }) {
           <img src={RightArrowIcon} alt="오른쪽버튼" />
         </button>
       )}
-      <button type="button" onClick={nextSlide} className="nextBtn">
-        <img src={RightArrowIcon} alt="오른쪽버튼" />
-      </button>
+      {nowPage !== maxPage && (
+        <button type="button" onClick={nextSlide} className="nextBtn">
+          <img src={RightArrowIcon} alt="오른쪽버튼" />
+        </button>
+      )}
     </div>
   );
 }
@@ -61,7 +68,8 @@ function CarouselStudyList({ searchConditions }) {
 CarouselStudyList.propTypes = {
   searchConditions: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.number])
-  ).isRequired
+  ).isRequired,
+  handleStudyCount: PropTypes.func.isRequired
 };
 
 export default CarouselStudyList;
