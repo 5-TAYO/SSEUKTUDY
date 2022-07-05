@@ -26,25 +26,23 @@ public class MailService {
 
     public int mailSend(MailDto mailDto) throws Exception {
         int result = 0;
-        if(userMapper.searchUser(mailDto) == 0){ //유저 정보가 존재하지 않다면 메일 발송
+        if(userMapper.searchUser(mailDto) == 0) { //유저 정보가 존재하지 않다면 메일 발송
             String authKey = makeAuthNumber();
             SimpleMailMessage message = new SimpleMailMessage();
-            String subText = "회원 가입을 위한 인증번호 입니다. \n 인증번호 : "+ authKey;
+            String subText = "회원 가입을 위한 인증번호 입니다. \n 인증번호 : " + authKey;
             message.setTo(mailDto.getUserId());
             message.setFrom(MailService.FROM_ADDRESS);
             message.setSubject("[인증번호] SSEUKTUDY");
             message.setText(subText);
 
-            try{
+            try {
                 javaMailSender.send(message); //메일 전송
                 mailDto.setAuthKey(authKey);
                 mailMapper.mailDelete(mailDto);
                 result = mailMapper.mailSend(mailDto);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else{
-            result = 2;
         }
         return result;
     }

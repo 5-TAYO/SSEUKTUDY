@@ -4,7 +4,7 @@
     <mapper namespace="tayo.sseuktudy.mapper.MailMapper">
 
     <insert id="mailSend" parameterType="MailDto">
-        insert into mail (user_id, auth_key, delete_date)
+        insert into mail (user_id, auth_key, generate_date)
             value (#{userId}, #{authKey}, now());
     </insert>
     <delete id="mailDelete" parameterType="MailDto">
@@ -14,7 +14,7 @@
     <select id="mailCheck" parameterType="MailDto" resultType="int">
         <![CDATA[
         select COUNT(user_id) from mail
-         where TIMESTAMPDIFF(SECOND, delete_date, now()) < 180 and user_id = #{userId} and auth_key = #{authKey} ;
+         where TIMESTAMPDIFF(SECOND, generate_date, now()) < 180 and user_id = #{userId} and auth_key = #{authKey} ;
         ]]>
 
     </select>
