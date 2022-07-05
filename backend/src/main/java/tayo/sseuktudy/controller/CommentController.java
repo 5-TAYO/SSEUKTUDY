@@ -57,27 +57,6 @@ public class CommentController {
         return new ResponseEntity<>(resultMap, status);
 
     }
-    @GetMapping("/comment/{studyId}")
-    public ResponseEntity<?> listComment(@PathVariable("studyId")int studyId, HttpServletRequest request){
-
-        Map<String, Object> resultMap = new HashMap<>();
-        HttpStatus status;
-            try {
-                CommentInfoDto commentInfoDto = new CommentInfoDto();
-                commentInfoDto.setStudyId(studyId);
-                List<CommentInfoDto> commentList = commentServiceImpl.listComment(studyId);
-                resultMap.put("message", "SUCCESS");
-                resultMap.put("data",commentList);
-                status = HttpStatus.ACCEPTED;
-            } catch (Exception e) {
-                logger.error("댓글 조회 실패 : {}", e);
-                resultMap.put("message", "FAIL");
-                status = HttpStatus.INTERNAL_SERVER_ERROR;
-            }
-
-        return new ResponseEntity<>(resultMap, status);
-
-    }
     @DeleteMapping("/comment/{commentId}")
     public ResponseEntity<?> deleteComment(@PathVariable("commentId")int commentId, HttpServletRequest request){
 
