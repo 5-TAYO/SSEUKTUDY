@@ -163,7 +163,7 @@ function StudyDetail() {
             <div className="flex justify-center">
               <Link
                 className="regist-btn flex align-center justify-center notoMid fs-16"
-                to="/study/regist"
+                to={`/study/join/${studyInfo.studyId}`}
               >
                 신청하기
               </Link>
