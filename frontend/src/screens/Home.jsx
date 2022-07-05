@@ -22,7 +22,7 @@ function Home() {
           </Link>
           <Link
             className="banner__btn notoMid flex align-center justify-center fs-18"
-            to="/study"
+            to="/study/list"
           >
             스터디 구경하기
           </Link>
