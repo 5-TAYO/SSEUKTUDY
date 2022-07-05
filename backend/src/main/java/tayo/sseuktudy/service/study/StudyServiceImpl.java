@@ -82,8 +82,11 @@ public class StudyServiceImpl implements StudyService{
     }
 
     @Override
-    public List<StudyInfoDto> getStudyByFilter(StudyFilterDto studyFilterDto) {
-        return studyMapper.getStudyByFilter(studyFilterDto);
+    public StudyInfoListDto getStudyByFilter(StudyFilterDto studyFilterDto) {
+        StudyInfoListDto studyInfoListDto = new StudyInfoListDto();
+        studyInfoListDto.setStudyInfoList(studyMapper.getStudyByFilter(studyFilterDto));
+        studyInfoListDto.setStudyCnt(studyMapper.getStudyCntByFilter(studyFilterDto));
+        return studyInfoListDto;
     }
 
     @Override
