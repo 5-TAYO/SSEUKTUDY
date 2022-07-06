@@ -112,7 +112,6 @@ public class StudyServiceImpl implements StudyService{
                         if(result.get(j).getDownComment() != null) {
                             for (int k = 0; k < result.get(j).getDownComment().size(); k++) {
                                 temp.add(result.get(j).getDownComment().get(k));
-
                             }
                         }
                         temp.add(commentInfoList.get(i));
