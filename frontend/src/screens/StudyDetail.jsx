@@ -19,16 +19,6 @@ function StudyDetail() {
   const { id: studyId } = useParams();
   const commentInput = useRef();
 
-  useEffect(() => {
-    async function getStudyInfo() {
-      const data = await getStudyDetail(studyId);
-
-      setStudyInfo(data.studyInfoDto);
-    }
-    getStudyInfo();
-    // 초기에 정보 받아오기
-  }, [studyId]);
-
   const autoResizeTextarea = () => {
     if (commentInput) {
       commentInput.current.style.height = 0;
@@ -36,6 +26,22 @@ function StudyDetail() {
       commentInput.current.style.height = `${height + 2}px`; // fix__
     }
   };
+
+  useEffect(() => {
+    async function getStudyInfo() {
+      const data = await getStudyDetail(studyId);
+
+      setStudyInfo(data.studyInfoDto);
+    }
+    getStudyInfo();
+    if (commentInput.current.value !== "") {
+      commentInput.current.value = "";
+      autoResizeTextarea();
+    }
+
+    // 초기에 정보 받아오기
+  }, [studyId]);
+
   const dummy = [
     {
       userName: "정민",
