@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./StudyDetail.scss";
 import LeftArrowIcon from "@images/Left-Arrow.svg";
 import UserDuumyIcon from "@images/Profile.svg";
@@ -10,55 +10,26 @@ import Comment from "@components/StudyDetail/Comment";
 import { v4 as uuid } from "uuid";
 import { getStudyDetail } from "@apis/study";
 import { categoryList } from "@utils/studyConditions";
-import SideStudyList from "../components/StudyDetail/SideStudyList";
+import SideStudyList from "@components/StudyDetail/SideStudyList";
+import CommentInput from "@components/StudyDetail/CommentInput";
 
 function StudyDetail() {
   const [studyInfo, setStudyInfo] = useState();
-
+  const [commentInfoList, setCommentInfoList] = useState();
   const navi = useNavigate();
   const { id: studyId } = useParams();
-  const commentInput = useRef();
 
-  const autoResizeTextarea = () => {
-    if (commentInput) {
-      commentInput.current.style.height = 0;
-      const height = commentInput.current.scrollHeight;
-      commentInput.current.style.height = `${height + 2}px`; // fix__
-    }
+  const getStudyInfo = async () => {
+    const data = await getStudyDetail(studyId);
+    setStudyInfo(data.studyInfoDto);
+    setCommentInfoList(data.commentInfoList);
   };
 
   useEffect(() => {
-    async function getStudyInfo() {
-      const data = await getStudyDetail(studyId);
-
-      setStudyInfo(data.studyInfoDto);
-    }
     getStudyInfo();
-    if (commentInput.current.value !== "") {
-      commentInput.current.value = "";
-      autoResizeTextarea();
-    }
-
     // 초기에 정보 받아오기
   }, [studyId]);
 
-  const dummy = [
-    {
-      userName: "정민",
-      regDate: "2022-04-27 18:31:31",
-      desc: "혹시 모집완료됐나요?"
-    },
-    {
-      userName: "정민",
-      regDate: "2022-04-27 18:35:13",
-      desc: "혹시 모집완료됐나요?혹시 모집완료됐나요?혹시 모집완료됐나요?혹시 모집완료됐나요?혹시 모집완료됐나요?혹시 모집완료됐나요?혹시 모집완료됐나요?혹시 모집완료됐나요?혹시 모집완료됐나요?혹시 모집완료됐나요?"
-    },
-    {
-      userName: "정민",
-      regDate: "2022-04-27 18:55:31",
-      desc: "예?"
-    }
-  ];
   return (
     <div id="study-detail" className="flex">
       <aside>
@@ -154,31 +125,28 @@ function StudyDetail() {
             </div>
           </main>
         )}
-
-        <footer>
-          <p className="title notoBold fs-16">2222개의 댓글이 있습니다.</p>
-          <div className="comment flex">
-            <img
-              src={UserDuumyIcon}
-              alt="유저더미"
-              className="comment__user-img"
+        {commentInfoList && (
+          <footer>
+            <p className="title notoBold fs-16">
+              {studyInfo.studyCommentCount}개의 댓글이 있습니다.
+            </p>
+            <CommentInput
+              studyId={studyInfo.studyId}
+              getStudyInfo={getStudyInfo}
             />
-            <textarea
-              onChange={autoResizeTextarea}
-              className="comment__input fs-16 notoMid"
-              ref={commentInput}
-            />
-            <button
-              type="button"
-              className="comment__regist-btn notoBold fs-16 "
-            >
-              등록
-            </button>
-          </div>
-          {dummy.map(comment => (
-            <Comment data={comment} key={uuid()} />
-          ))}
-        </footer>
+            <div>
+              {commentInfoList.map(comment => (
+                <>
+                  <Comment data={comment} key={uuid()} />
+                  {comment.downComment &&
+                    comment.downComment.map(recomment => (
+                      <Comment data={recomment} key={uuid()} />
+                    ))}
+                </>
+              ))}
+            </div>
+          </footer>
+        )}
       </article>
       <aside>
         {studyInfo && (
