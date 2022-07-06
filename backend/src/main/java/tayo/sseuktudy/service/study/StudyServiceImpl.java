@@ -112,6 +112,7 @@ public class StudyServiceImpl implements StudyService{
                         if(result.get(j).getDownComment() != null) {
                             for (int k = 0; k < result.get(j).getDownComment().size(); k++) {
                                 temp.add(result.get(j).getDownComment().get(k));
+
                             }
                         }
                         temp.add(commentInfoList.get(i));
@@ -123,8 +124,8 @@ public class StudyServiceImpl implements StudyService{
         }
         StudyDetailDto studyDetailDto = new StudyDetailDto();
         studyDetailDto.setStudyInfoDto(studyInfoDto);
-        studyDetailDto.setCommentInfoList(commentInfoList);
-        studyInfoDto.setStudyCommentCount(commentInfoList.size()+1);
+        studyDetailDto.setCommentInfoList(result);
+        studyInfoDto.setStudyCommentCount(commentInfoList.size());
         return studyDetailDto;
     }
 
