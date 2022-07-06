@@ -24,4 +24,5 @@ public class StudyInfoDto {
     String studyContent;
     int studyView;
     String studyLike;
+    int studyCommentCount;
 }

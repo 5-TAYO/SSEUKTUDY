@@ -123,8 +123,8 @@ public class StudyServiceImpl implements StudyService{
         }
         StudyDetailDto studyDetailDto = new StudyDetailDto();
         studyDetailDto.setStudyInfoDto(studyInfoDto);
-        studyDetailDto.setCommentInfoList(commentInfoList);
-
+        studyDetailDto.setCommentInfoList(result);
+        studyInfoDto.setStudyCommentCount(commentInfoList.size());
         return studyDetailDto;
     }
 
