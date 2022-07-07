@@ -136,18 +136,19 @@ function StudyDetail() {
             />
             <div>
               {commentInfoList.map(comment => (
-                <>
-                  <Comment data={comment} key={uuid()} />
+                <div key={uuid()}>
+                  <Comment data={{ ...comment, getStudyInfo }} key={uuid()} />
                   {comment.downComment &&
                     comment.downComment.map(recomment => (
                       <Comment data={recomment} key={uuid()} />
                     ))}
-                </>
+                </div>
               ))}
             </div>
           </footer>
         )}
       </article>
+
       <aside>
         {studyInfo && (
           <>

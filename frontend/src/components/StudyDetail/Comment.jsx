@@ -5,11 +5,26 @@ import "./Comment.scss";
 import UserDuumyIcon from "@images/Profile.svg";
 import PropTypes from "prop-types";
 import ReCommentArrow from "@images/ReCommentArrow.svg";
+import CommentIcon from "@images/Comment.svg";
+import CommentInput from "@components/StudyDetail/CommentInput";
+import SendLetterModal from "@components/Letters/SendLetterModal";
 
 function Comment({
-  data: { upCommentId, userNickname, modifyTime, registTime, commentDetail }
+  data: {
+    upCommentId,
+    userNickname,
+    modifyTime,
+    registTime,
+    commentDetail,
+    studyId,
+    getStudyInfo,
+    commentId,
+    userId
+  }
 }) {
   const [tooltipVisible, setTooltipVisible] = useState(false);
+  const [openInput, setOpenInput] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const tooltipRef = useRef();
 
   const clickUserInfo = e => {
@@ -50,13 +65,37 @@ function Comment({
           </div>
         </header>
         <p className="desc notoMid fs-15">{commentDetail}</p>
-        <div
+        {upCommentId === 0 && (
+          <button
+            type="button"
+            className="reply-btn fs-15 notoMid flex align-center"
+            onClick={() => setOpenInput(!openInput)}
+          >
+            <img src={CommentIcon} alt="답글달기" /> 답글 달기
+          </button>
+        )}
+
+        {openInput && (
+          <CommentInput
+            studyId={studyId}
+            upCommentId={commentId}
+            getStudyInfo={getStudyInfo}
+          />
+        )}
+        <button
           id="tooltip"
+          type="button"
           className="flex align-center justify-center notoMid fs-14"
           ref={tooltipRef}
+          onClick={() => setOpenModal(true)}
         >
           쪽지보내기
-        </div>
+        </button>
+        <SendLetterModal
+          open={openModal}
+          close={() => setOpenModal(false)}
+          target={userId}
+        />
       </div>
     </div>
   );
@@ -64,7 +103,12 @@ function Comment({
 
 Comment.propTypes = {
   data: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.func,
+      PropTypes.array
+    ])
   ).isRequired
 };
 export default Comment;

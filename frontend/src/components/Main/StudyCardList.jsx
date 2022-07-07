@@ -51,7 +51,7 @@ StudyCardList.defaultProps = {
 StudyCardList.propTypes = {
   title: PropTypes.string,
   searchConditions: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.number])
   ).isRequired,
   handleStudyCount: PropTypes.func,
   handleStudyMaxPage: PropTypes.func

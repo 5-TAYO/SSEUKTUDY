@@ -33,6 +33,16 @@
 
     color: $GRAY-61;
   }
+
+  .reply-btn {
+    padding: 0;
+    img {
+      margin: 0 vw(5px) 0 vw(5px);
+      width: vw(15px);
+      height: vw(15px);
+    }
+  }
+
   #tooltip {
     display: none;
     position: absolute;

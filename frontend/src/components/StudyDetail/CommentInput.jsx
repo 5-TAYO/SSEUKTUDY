@@ -59,13 +59,14 @@ function CommentInput({ studyId, upCommentId, getStudyInfo }) {
 }
 
 CommentInput.defaultProps = {
-  upCommentId: null
+  upCommentId: null,
+  getStudyInfo: null
 };
 
 CommentInput.propTypes = {
   studyId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  upCommentId: PropTypes.string,
-  getStudyInfo: PropTypes.func.isRequired
+  upCommentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  getStudyInfo: PropTypes.func
 };
 
 export default CommentInput;
