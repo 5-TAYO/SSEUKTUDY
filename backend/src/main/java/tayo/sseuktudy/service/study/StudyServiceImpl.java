@@ -95,8 +95,10 @@ public class StudyServiceImpl implements StudyService{
         return studyMapper.getStudyByUserId(studyUserFilterDto);
     }
 
+    @Transactional
     @Override
     public StudyDetailDto getStudyByStudyId(int studyId) {
+        studyMapper.raiseStudyView(studyId);
         StudyInfoDto studyInfoDto = studyMapper.getStudyByStudyId(studyId);
         List<CommentInfoDto> commentInfoList = commentMapper.listComment(studyId);
 
@@ -121,6 +123,9 @@ public class StudyServiceImpl implements StudyService{
                 }
             }
         }
+
+
+
         StudyDetailDto studyDetailDto = new StudyDetailDto();
         studyDetailDto.setStudyInfoDto(studyInfoDto);
         studyDetailDto.setCommentInfoList(result);
