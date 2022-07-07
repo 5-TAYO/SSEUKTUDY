@@ -128,6 +128,13 @@
         values(#{userId}, #{studyId})
     </insert>
 
+    <select id="getLikeStudyIdByUserId" parameterType="String" resultType="int">
+        select study_id studyId
+        from user_like_study
+        where user_id = #{userId}
+
+    </select>
+
     <select id="leaderCheck" parameterType="StudyUserIdDto" resultType="int">
         select count(*) from study
         where study_id = #{studyId} and study_leader_id = #{userId}

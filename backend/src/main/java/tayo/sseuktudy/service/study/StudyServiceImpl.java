@@ -82,10 +82,24 @@ public class StudyServiceImpl implements StudyService{
         return studyMapper.deleteStudy(studyUserIdDto);
     }
 
+    @Transactional
     @Override
     public StudyInfoListDto getStudyByFilter(StudyFilterDto studyFilterDto) {
+        List<StudyInfoDto> studyInfoDtoList = studyMapper.getStudyByFilter(studyFilterDto);
+
+        if(studyFilterDto.getUserId() != "") {
+            System.out.println(studyFilterDto.getUserId());
+            List<Integer> userLikeStudyId = studyMapper.getLikeStudyIdByUserId(studyFilterDto.getUserId());
+
+            for(StudyInfoDto studyInfoDto : studyInfoDtoList){
+                if(userLikeStudyId.contains(studyInfoDto.getStudyId())){
+                    studyInfoDto.setStudyLiked(true);
+                }
+            }
+        }
+
         StudyInfoListDto studyInfoListDto = new StudyInfoListDto();
-        studyInfoListDto.setStudyInfoList(studyMapper.getStudyByFilter(studyFilterDto));
+        studyInfoListDto.setStudyInfoList(studyInfoDtoList);
         studyInfoListDto.setStudyCnt(studyMapper.getStudyCntByFilter(studyFilterDto));
         return studyInfoListDto;
     }

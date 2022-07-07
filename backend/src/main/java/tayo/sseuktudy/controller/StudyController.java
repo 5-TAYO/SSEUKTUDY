@@ -54,7 +54,7 @@ public class StudyController {
             }
         }else{
             logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message","FAIL");
+            resultMap.put("message",ACCESS_TOKEN_TIMEOUT);
             status = HttpStatus.UNAUTHORIZED;
         }
         return new ResponseEntity<>(resultMap, status);
@@ -92,7 +92,7 @@ public class StudyController {
             }
         }else{
             logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message","FAIL");
+            resultMap.put("message",ACCESS_TOKEN_TIMEOUT);
             status = HttpStatus.UNAUTHORIZED;
         }
         return new ResponseEntity<>(resultMap, status);
@@ -131,27 +131,56 @@ public class StudyController {
             }
         }else{
             logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message","FAIL");
+            resultMap.put("message",ACCESS_TOKEN_TIMEOUT);
             status = HttpStatus.UNAUTHORIZED;
         }
         return new ResponseEntity<>(resultMap, status);
     }
 
     @PostMapping("/study/list")
-    public ResponseEntity<Map<String, Object>> getStudyByFilter(@RequestBody StudyFilterDto studyFilterDto){
+    public ResponseEntity<Map<String, Object>> getStudyByFilter(@RequestBody StudyFilterDto studyFilterDto, HttpServletRequest request){
         Map<String, Object> resultMap = new HashMap<>();
 
         HttpStatus status = null;
         logger.info("스터디 조회 요청");
 
-        StudyInfoListDto result = studyService.getStudyByFilter(studyFilterDto);
-        if(result != null){
-            resultMap.put("message", "SUCCESS");
-            resultMap.put("data", result);
-            status = HttpStatus.ACCEPTED;
+        // 토큰이 있으면 (유저 로그인 상태이면)스터디 좋아요 상태 표시
+        if(request.getHeader("access-token")!=""){
+            String decodeUserId = jwtService.decodeToken(request.getHeader("access-token"));
+            if(!decodeUserId.equals(ACCESS_TOKEN_TIMEOUT)) {
+                logger.info("사용 가능한 토큰!!!");
+                try {
+                    studyFilterDto.setUserId(decodeUserId);
+                    StudyInfoListDto result = studyService.getStudyByFilter(studyFilterDto);
+                    if(result != null){
+                        resultMap.put("message", "SUCCESS");
+                        resultMap.put("data", result);
+                        status = HttpStatus.ACCEPTED;
+                    }else{
+                        resultMap.put("message","FAIL");
+                        status = HttpStatus.INTERNAL_SERVER_ERROR;
+                    }
+                } catch (Exception e) {
+                    logger.error("예외 발생", e);
+                    resultMap.put("message", "FAIL");
+                    status = HttpStatus.INTERNAL_SERVER_ERROR;
+                }
+            }else{
+                logger.error("사용 불가능 토큰!!!");
+                resultMap.put("message",ACCESS_TOKEN_TIMEOUT);
+                status = HttpStatus.UNAUTHORIZED;
+
+            }
         }else{
-            resultMap.put("message","FAIL");
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            StudyInfoListDto result = studyService.getStudyByFilter(studyFilterDto);
+            if(result != null){
+                resultMap.put("message", "SUCCESS");
+                resultMap.put("data", result);
+                status = HttpStatus.ACCEPTED;
+            }else{
+                resultMap.put("message","FAIL");
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
         }
 
         return new ResponseEntity<>(resultMap, status);
@@ -185,7 +214,7 @@ public class StudyController {
             }
         }else{
             logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message","FAIL");
+            resultMap.put("message",ACCESS_TOKEN_TIMEOUT);
             status = HttpStatus.UNAUTHORIZED;
         }
         return new ResponseEntity<>(resultMap, status);
@@ -237,7 +266,7 @@ public class StudyController {
             }
         }else{
             logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message","FAIL");
+            resultMap.put("message",ACCESS_TOKEN_TIMEOUT);
             status = HttpStatus.UNAUTHORIZED;
         }
         return new ResponseEntity<>(resultMap, status);
