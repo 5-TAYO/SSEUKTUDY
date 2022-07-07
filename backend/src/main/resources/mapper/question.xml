@@ -18,5 +18,10 @@
         values (#{userId}, #{studyId}, #{questionId}, #{questionAnswer})
     </insert>
 
+    <select id="getQuestionInfo" parameterType="int" resultType="QuestionInfoDto">
+        select question_id questionId, study_id studyId, question_content questionContent
+        from question
+        where study_id = #{studyId}
+    </select>
 
 </mapper>

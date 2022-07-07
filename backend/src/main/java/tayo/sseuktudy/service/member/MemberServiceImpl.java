@@ -9,6 +9,7 @@ import tayo.sseuktudy.dto.question.QuestionAnswerRegistDto;
 import tayo.sseuktudy.dto.member.MemberJoinDto;
 import tayo.sseuktudy.dto.member.MemberInfoDto;
 
+import tayo.sseuktudy.dto.question.QuestionInfoDto;
 import tayo.sseuktudy.mapper.MemberMapper;
 import tayo.sseuktudy.mapper.QuestionMapper;
 
@@ -49,6 +50,11 @@ public class MemberServiceImpl implements MemberService {
         memberJoinDto.setUserIntroduction(memberApplyDto.getUserIntroduction());
         memberJoinDto.setUserNickname(memberApplyDto.getUserNickname());
         return memberMapper.applyStudy(memberJoinDto);
+    }
+
+    @Override
+    public List<QuestionInfoDto> getQuestionInfo(int studyId) {
+        return questionMapper.getQuestionInfo(studyId);
     }
 
     @Override
