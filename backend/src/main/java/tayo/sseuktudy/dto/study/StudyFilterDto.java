@@ -16,4 +16,5 @@ public class StudyFilterDto {
     String orderType;
     int startItem;
     int itemCnt;
+    String userId;
 }

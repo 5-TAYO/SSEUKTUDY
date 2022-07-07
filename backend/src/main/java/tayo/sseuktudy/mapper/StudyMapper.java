@@ -19,6 +19,7 @@ public interface StudyMapper {
     public int getStudyCntByFilter(StudyFilterDto studyFilterDto);
     public StudyInfoDto getStudyByStudyId(int studyId);
     public int likeStudy(StudyUserIdDto studyUserIdDto);
+    public List<Integer> getLikeStudyIdByUserId(String userId);
     public int leaderCheck(StudyUserIdDto studyUserIdDto);
 
 }
