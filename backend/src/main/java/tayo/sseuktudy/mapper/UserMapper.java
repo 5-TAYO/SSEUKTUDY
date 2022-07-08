@@ -19,7 +19,7 @@ public interface UserMapper {
     List<UserCategoryDto> getUserCategory(String userId) throws Exception;
     int deleteUser(String userId)throws Exception;
     int searchUser(MailDto mailDto) throws Exception;
-    int loginUser(UserLoginDto request) throws Exception;
+    String loginUser(UserLoginDto request) throws Exception;
     UserInfoDto userInfo(String userId) throws SQLException;
     int saveRefreshToken(Map<String, String> map) throws SQLException;
     int deleteRefreshToken(Map<String, String> map) throws SQLException;
