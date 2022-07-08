@@ -48,22 +48,6 @@
     background-color: $GRAY-DB;
   }
 
-  .self-intro {
-    padding: vw(12px) vw(14px) 0 vw(14px);
-    margin-bottom: vw(16px);
-
-    width: 100%;
-    height: vw(200px);
-    resize: none;
-  }
-
-  .self-intro-cnt {
-    margin-right: vw(10px);
-    margin-bottom: vw(16px);
-
-    margin-left: auto;
-  }
-
   input:focus,
   textarea:focus {
     outline: none;
