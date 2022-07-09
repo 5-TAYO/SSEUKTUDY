@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { getStudyList } from "@apis/study";
 import PropTypes from "prop-types";
 import StudyCard from "./StudyCard";
 import "./StudyCardList.scss";
-import { getStudyList } from "../../apis/study";
 
 function StudyCardList({
   title,
@@ -51,7 +51,7 @@ StudyCardList.defaultProps = {
 StudyCardList.propTypes = {
   title: PropTypes.string,
   searchConditions: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.number])
   ).isRequired,
   handleStudyCount: PropTypes.func,
   handleStudyMaxPage: PropTypes.func

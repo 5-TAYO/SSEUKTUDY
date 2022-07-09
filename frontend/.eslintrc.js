@@ -26,7 +26,8 @@ module.exports = {
           ["@screens", "./src/screens"],
           ["@styles", "./src/assets/styles"],
           ["@images", "./src/assets/images"],
-          ["@utils", "./src/utils"]
+          ["@utils", "./src/utils"],
+          ["@apis", "./src/apis"]
         ],
         extensions: [".ts", ".js", ".jsx", ".json", ".svg"]
       }
