@@ -3,25 +3,11 @@ import "./StudyList.scss";
 import CarouselStudyList from "@components/Main/CarouselStudyList";
 import SearchIcon from "@images/Search.svg";
 import StudyListUpIcon from "@images/StudyListUp.svg";
+import { categoryList, placeList } from "../utils/studyConditions";
 
 function StudyList() {
-  const placeList = ["전체 ", "온라인", "오프라인"];
-  const categoryList = [
-    "개발",
-    "어학",
-    "자격증",
-    "공시",
-    "입시",
-    "편입",
-    "취준",
-    "면접",
-    "취미",
-    "독서",
-    "SNS",
-    "기타"
-  ];
   const [searchConditions, setSearchConditions] = useState({
-    studyCategoryId: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    studyCategoryId: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     orderType: "studyLike",
     itemCnt: 9
   });
@@ -100,25 +86,28 @@ function StudyList() {
                 name="category"
                 type="checkbox"
                 checked={
-                  categorys.length === 0 ? false : categorys.length === 12
+                  categorys.length === 0 ? false : categorys.length === 13
                 }
                 onChange={handleAllCategory}
               />
               전체
             </label>
-            {categoryList.map(category => (
-              <label htmlFor={category} key={category}>
-                <input
-                  id={category}
-                  value={category}
-                  name="category"
-                  type="checkbox"
-                  checked={categorys.includes(category)}
-                  onChange={handleSetCategory}
-                />
-                {category}
-              </label>
-            ))}
+            {categoryList.map(category => {
+              if (category === "") return null;
+              return (
+                <label htmlFor={category} key={category}>
+                  <input
+                    id={category}
+                    value={category}
+                    name="category"
+                    type="checkbox"
+                    checked={categorys.includes(category)}
+                    onChange={handleSetCategory}
+                  />
+                  {category}
+                </label>
+              );
+            })}
           </div>
         </div>
         <div className="condition__period">
