@@ -1,5 +1,6 @@
 package tayo.sseuktudy.controller;
 
+import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -217,6 +218,25 @@ public class UserController {
 
     }
 
+    @GetMapping("/emailCheck")
+    public ResponseEntity<?> emailCheck(@RequestParam(value = "userId")String userId) throws Exception {
+        MailDto mailDto = new MailDto(userId);
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+        try{
+            if(mailService.mailCheck(mailDto)==1){
+                resultMap.put("message","JOINED");
+            }else{
+                resultMap.put("message","SUCCESS");
+            }
+            status = HttpStatus.ACCEPTED;
+        }catch (Exception e){
+            resultMap.put("message","FAIL");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(resultMap,status);
+
+    }
 
     @PostMapping("/email")
     public ResponseEntity<?> mailSend(@RequestBody @Validated MailDto mailDto) throws Exception{

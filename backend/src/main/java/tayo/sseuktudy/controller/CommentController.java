@@ -45,7 +45,7 @@ public class CommentController {
                 resultMap.put("message", "SUCCESS");
                 status = HttpStatus.ACCEPTED;
             } catch (Exception e) {
-                logger.error("댓글 생성 실패");
+                logger.error("댓글 생성 실패 ");
                 resultMap.put("message", "FAIL");
                 status = HttpStatus.INTERNAL_SERVER_ERROR;
             }
