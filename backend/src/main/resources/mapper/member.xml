@@ -8,15 +8,11 @@
     </insert>
 
     <select id="getMembers" parameterType="int" resultType="MemberInfoDto">
-        select ujs.user_id userId, ujs.study_id studyId, ujs.user_status userStatus, ujs.user_introduction userIntroduction, ujs.user_nickname userNickname, q.question_id questionId , q.question_content questionContent, uaq.question_answer questionAnswer
+        select ujs.user_id userId, ujs.study_id studyId, ujs.user_status userStatus, ujs.user_introduction userIntroduction, ujs.user_nickname userNickname
         from user_join_study ujs
-                 left join question q
-                            on ujs.study_id = q.study_id
-                 left join user_answer_question uaq
-                            on q.question_id = uaq.question_id
         where ujs.study_id = #{studyId}
-        order by ujs.user_id, q.question_id;
     </select>
+
 
     <update id="acceptMember" parameterType="MemberStatusChangeDto">
         update user_join_study set user_status = "member"

@@ -1,10 +1,8 @@
 package tayo.sseuktudy.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import tayo.sseuktudy.dto.question.QuestionAnswerRegistDto;
-import tayo.sseuktudy.dto.question.QuestionInfoDto;
-import tayo.sseuktudy.dto.question.QuestionModifyDto;
-import tayo.sseuktudy.dto.question.QuestionRegistDto;
+import tayo.sseuktudy.dto.question.*;
+import tayo.sseuktudy.dto.study.StudyUserIdDto;
 
 import java.util.List;
 import java.util.Map;
@@ -15,4 +13,5 @@ public interface QuestionMapper {
     public int modifyQuestion(QuestionModifyDto questionModifyDto);
     public int registQuestionAnswer(QuestionAnswerRegistDto questionAnswerRegistDto);
     public List<QuestionInfoDto> getQuestionInfo(int studyId);
+    public List<QuestionInfoAnswerDto> getQuestionInfoAnswer(StudyUserIdDto studyUserIdDto);
 }
