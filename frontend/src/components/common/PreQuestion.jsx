@@ -2,7 +2,14 @@ import React, { useRef } from "react";
 import "./PreQuestion.scss";
 import PropTypes from "prop-types";
 
-function PreQuestion({ order, questionId, question, type, setAnswer }) {
+function PreQuestion({
+  order,
+  questionId,
+  question,
+  type,
+  setAnswer,
+  questionAnswer
+}) {
   const answerInput = useRef(null);
   const autoResizeTextarea = () => {
     if (answerInput) {
@@ -27,15 +34,22 @@ function PreQuestion({ order, questionId, question, type, setAnswer }) {
         ref={answerInput}
         onChange={onChangeTextArea}
         readOnly={type === "read"}
+        defaultValue={questionAnswer}
       />
     </div>
   );
 }
+
+PreQuestion.defaultProps = {
+  questionAnswer: ""
+};
+
 PreQuestion.propTypes = {
   question: PropTypes.string.isRequired,
   order: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
   questionId: PropTypes.number.isRequired,
-  setAnswer: PropTypes.func.isRequired
+  setAnswer: PropTypes.func.isRequired,
+  questionAnswer: PropTypes.string
 };
 export default React.memo(PreQuestion);

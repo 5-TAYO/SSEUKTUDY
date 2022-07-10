@@ -9,5 +9,10 @@ export const joinStudy = async body => {
   const res = await API.post("/member/apply", body);
   return res.data.message;
 };
+
+export const getStudyMembers = async studyId => {
+  const res = await API.get(`/member/list?studyId=${studyId}`);
+  return res.data.data;
+};
 // 린트때문에 하나만 있으면 default 붙여야해서 넣어둡니다.
 export const ex = () => {};

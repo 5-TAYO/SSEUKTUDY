@@ -6,14 +6,14 @@ import UserDuumyIcon from "@images/Profile.svg";
 // import { v4 as uuid } from "uuid";
 import PropTypes from "prop-types";
 import { getUserInfo } from "@apis/user";
-import { getStudyPreQuestions, joinStudy } from "@apis/member";
+import { getStudyPreQuestions, joinStudy, getStudyMembers } from "@apis/member";
 import PreQuestion from "../../components/common/PreQuestion";
 import LimitedTextarea from "../../components/common/LimitedTextarea";
 
 function StudyRegistForm({ type }) {
   const navi = useNavigate();
-  const { id: studyId } = useParams();
-
+  const { studyId } = useParams();
+  const { userId } = useParams();
   const [form, setForm] = useState({});
   const [preQuestions, setPreQuestions] = useState();
 
@@ -45,7 +45,7 @@ function StudyRegistForm({ type }) {
     }
   };
   useEffect(() => {
-    async function getUserDate() {
+    async function getUserData() {
       const { userInfo } = await getUserInfo();
       return userInfo;
     }
@@ -55,7 +55,7 @@ function StudyRegistForm({ type }) {
     }
 
     async function joinInit() {
-      const res = await Promise.all([getUserDate(), getPreQ()]);
+      const res = await Promise.all([getUserData(), getPreQ()]);
       const [userInfo, studyPreQuestions] = res;
       const initAnswers = {};
       studyPreQuestions.forEach(preQ => {
@@ -64,12 +64,32 @@ function StudyRegistForm({ type }) {
       setForm({
         ...form,
         studyId,
+        userId: userInfo.userId,
         userNickname: userInfo.userNickname,
         preQuestions: initAnswers
       });
       setPreQuestions(studyPreQuestions);
     }
-    joinInit();
+
+    async function readInit() {
+      const res = await getStudyMembers(studyId);
+      const data = res.find(
+        member => member.userId === userId && member.studyId === studyId * 1
+      );
+      setForm({
+        ...form,
+        userId: data.userId,
+        userNickname: data.userNickname,
+        userIntroduction: data.userIntroduction
+      });
+      setPreQuestions(data.questionInfoAnswerDtos);
+    }
+
+    if (type === "regist") {
+      joinInit();
+    } else {
+      readInit();
+    }
   }, []);
 
   return (
@@ -84,7 +104,7 @@ function StudyRegistForm({ type }) {
         <img src={UserDuumyIcon} alt="유저더미" className="user__img" />
         <div className="user__name notoBold fs-24">{form.userNickname}</div>
       </div>
-      <p className="type notoBold fs-16">이메일</p>
+      <p className="type notoBold fs-16">아이디</p>
       <input
         className="notoReg fs-15"
         type="text"
@@ -105,6 +125,7 @@ function StudyRegistForm({ type }) {
         readOnly={type === "read"}
         maxCnt={30}
         setIntro={handleIntro}
+        initValue={form.userIntroduction}
       />
       <p className="type question-title notoBold fs-16">사전 질문 답변</p>
       {preQuestions &&
@@ -116,6 +137,7 @@ function StudyRegistForm({ type }) {
             questionId={ques.questionId}
             type={type}
             setAnswer={handleAnswers}
+            questionAnswer={ques.questionAnswer}
           />
         ))}
       {type === "read" ? (
