@@ -3,13 +3,12 @@ package tayo.sseuktudy.service.member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tayo.sseuktudy.dto.member.MemberApplyDto;
-import tayo.sseuktudy.dto.member.MemberStatusChangeDto;
+import tayo.sseuktudy.dto.member.*;
 import tayo.sseuktudy.dto.question.QuestionAnswerRegistDto;
-import tayo.sseuktudy.dto.member.MemberJoinDto;
-import tayo.sseuktudy.dto.member.MemberInfoDto;
 
+import tayo.sseuktudy.dto.question.QuestionInfoAnswerDto;
 import tayo.sseuktudy.dto.question.QuestionInfoDto;
+import tayo.sseuktudy.dto.study.StudyUserIdDto;
 import tayo.sseuktudy.mapper.MemberMapper;
 import tayo.sseuktudy.mapper.QuestionMapper;
 
@@ -57,9 +56,26 @@ public class MemberServiceImpl implements MemberService {
         return questionMapper.getQuestionInfo(studyId);
     }
 
+    @Transactional
     @Override
     public List<MemberInfoDto> getMembers(int studyId) {
-        return  memberMapper.getMembers(studyId);
+
+        MemberInfoListDto memberInfoListDto = new MemberInfoListDto();
+        List<MemberInfoDto> memberInfoDtos = memberMapper.getMembers(studyId);
+
+        for(MemberInfoDto memberInfoDto : memberInfoDtos){
+            String userId = memberInfoDto.getUserId();
+
+            StudyUserIdDto studyUserIdDto = new StudyUserIdDto();
+            studyUserIdDto.setUserId(userId);
+            studyUserIdDto.setStudyId(studyId);
+
+            List<QuestionInfoAnswerDto> questionInfoAnswerDtos = questionMapper.getQuestionInfoAnswer(studyUserIdDto);
+
+            memberInfoDto.setQuestionInfoAnswerDtos(questionInfoAnswerDtos);
+        }
+
+        return  memberInfoDtos;
     }
 
     @Override

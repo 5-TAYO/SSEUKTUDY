@@ -24,4 +24,11 @@
         where study_id = #{studyId}
     </select>
 
+    <select id="getQuestionInfoAnswer" parameterType="StudyUserIdDto" resultType="QuestionInfoAnswerDto">
+        select q.study_id studyId, q.question_id questionId, q.question_content questionContent, uaq.question_answer questionAnswer
+        from question q
+                 left join user_answer_question uaq
+                           on q.question_id = uaq.question_id
+        where q.study_id = #{studyId} and uaq.user_id = #{userId};
+    </select>
 </mapper>
