@@ -14,5 +14,7 @@ public class MailDto {
         this.userId = userId;
         this.authKey = authKey;
     }
-
+    public MailDto(String userId) {
+        this.userId = userId;
+    }
 }

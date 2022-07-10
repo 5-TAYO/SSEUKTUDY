@@ -47,7 +47,7 @@ public class MailService {
         return result;
     }
     public int mailCheck(MailDto mailDto) throws Exception{
-        return mailMapper.mailCheck(mailDto);
+        return userMapper.searchUser(mailDto);
     }
     public String makeAuthNumber(){
         Random random = new Random();
