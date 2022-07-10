@@ -31,9 +31,12 @@ function Router() {
         <Route path="study/*">
           <Route path="list" element={<StudyList />} />
           <Route path="detail/:id" element={<StudyDetail />} />
-          <Route path="join/:id" element={<StudyRegistForm type="regist" />} />
           <Route
-            path="join/read/:id"
+            path="join/:studyId"
+            element={<StudyRegistForm type="regist" />}
+          />
+          <Route
+            path="join/read/:studyId/:userId"
             element={<StudyRegistForm type="read" />}
           />
           <Route path="regist" element={<StudyForm type="create" />} />

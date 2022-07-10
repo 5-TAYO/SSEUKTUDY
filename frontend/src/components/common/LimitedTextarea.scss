@@ -1,0 +1,19 @@
+#limited-textarea {
+  width: 100%;
+
+  .self-intro {
+    padding: vw(12px) vw(14px) 0 vw(14px);
+    margin-bottom: vw(16px);
+
+    width: 100%;
+    height: vw(200px);
+    resize: none;
+  }
+
+  .self-intro-cnt {
+    margin-bottom: vw(16px);
+    margin-right: vw(10px);
+
+    text-align: end;
+  }
+}
