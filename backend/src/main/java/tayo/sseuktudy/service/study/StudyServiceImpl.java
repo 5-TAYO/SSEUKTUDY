@@ -163,6 +163,11 @@ public class StudyServiceImpl implements StudyService{
     }
 
     @Override
+    public List<StudyInfoDto> getLikeStudy(String userId) {
+        return studyMapper.getLikeStudy(userId);
+    }
+
+    @Override
     public int leaderCheck(StudyUserIdDto studyUserIdDto) {
         return studyMapper.leaderCheck(studyUserIdDto);
     }

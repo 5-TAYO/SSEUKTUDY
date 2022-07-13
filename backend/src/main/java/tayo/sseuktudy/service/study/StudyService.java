@@ -13,5 +13,6 @@ public interface StudyService {
     public List<StudyInfoDto> getStudyByLeader(String userId);
     public StudyDetailDto getStudyByStudyId(int studyId);
     public int likeStudy(StudyUserIdDto studyUserIdDto);
+    public List<StudyInfoDto> getLikeStudy(String userId);
     public int leaderCheck(StudyUserIdDto studyUserIdDto);
 }
