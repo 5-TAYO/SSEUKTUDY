@@ -223,15 +223,15 @@ public class UserController {
         MailDto mailDto = new MailDto(userId, authKey);
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        if(mailService.mailCheck(mailDto) == SERVICE_RETURN_OKAY){
+        try{
+            mailService.mailCheck(mailDto);
             resultMap.put("message","SUCCESS");
             status = HttpStatus.ACCEPTED;
-        }else{
+        }catch (Exception e){
             resultMap.put("message","FAIL");
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<>(resultMap,status);
-
     }
 
     @GetMapping("/emailCheck")
