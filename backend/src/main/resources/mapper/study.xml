@@ -113,6 +113,21 @@
         limit #{startItem}, #{itemCnt}
     </select>
 
+    <select id="getStudyCntByUserId" parameterType="StudyUserFilterDto" resultType="int">
+        select count(*)
+        from study s
+        left join user_like_study uls on s.study_id = uls.study_id
+        left join user_join_study ujs on s.study_id = ujs.study_id
+        where ujs.user_id = #{userId}
+        <if test="isJoin == false">
+            and ujs.user_status ="non member"
+        </if>
+        <if test="isJoin == true">
+            and ujs.user_status = "member"
+        </if>
+        group by s.study_id
+    </select>
+
     <select id="getStudyByStudyId" parameterType="int" resultType="StudyInfoDto">
         select s.study_id studyId, study_title studyTitle, study_leader_id studyLeaderId, study_status studyStatus, study_introduction studyIntroduction, study_startdate studyStartdate, study_view studyView,
                study_enddate studyEnddate, study_registdate studyRegistdate, study_goals studyGoals, study_type studyType , study_user_min studyUserMin, study_user_max studyUserMax, study_content studyContent,

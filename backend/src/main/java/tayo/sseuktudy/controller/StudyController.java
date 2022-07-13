@@ -203,7 +203,7 @@ public class StudyController {
                 studyUserFilterDto.setJoin(isJoin);
                 studyUserFilterDto.setItemCnt(itemCnt);
 
-                List<StudyInfoDto> result = studyService.getStudyByUserId(studyUserFilterDto);
+                StudyInfoListDto result = studyService.getStudyByUserId(studyUserFilterDto);
                 resultMap.put("message", "SUCCESS");
                 resultMap.put("data", result);
                 status = HttpStatus.ACCEPTED;
