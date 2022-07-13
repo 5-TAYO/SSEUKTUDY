@@ -1,5 +1,6 @@
 package tayo.sseuktudy.service;
 
+import tayo.sseuktudy.dto.Comment.CommentInfoDto;
 import tayo.sseuktudy.dto.MailDto;
 import tayo.sseuktudy.dto.user.*;
 
@@ -13,6 +14,7 @@ public interface UserService {
     int deleteUserCategory(String userId) throws Exception;
     int insertUserCategory(UserModifyDto userModifyDto) throws Exception;
     List<UserCategoryDto> getUserCategory(String userId) throws Exception;
+    List<CommentInfoDto>  getUserCommnet(String userId) throws Exception;
     int deleteUser(String userId) throws Exception;
     int loginUser(UserLoginDto request) throws Exception;
     UserInfoDto userInfo(String userid) throws Exception;

@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import tayo.sseuktudy.dto.Comment.CommentInfoDto;
 import tayo.sseuktudy.dto.MailDto;
 import tayo.sseuktudy.dto.user.*;
 import tayo.sseuktudy.mapper.UserMapper;
@@ -48,6 +49,10 @@ public class UserServiceImpl implements UserService {
     public List<UserCategoryDto> getUserCategory(String userId) throws Exception{
         return userMapper.getUserCategory(userId);
 
+    }
+    @Override
+    public List<CommentInfoDto>  getUserCommnet(String userId) throws Exception{
+        return userMapper.getUserComment(userId);
     }
     @Override
     public int deleteUser(String userId) throws Exception{
