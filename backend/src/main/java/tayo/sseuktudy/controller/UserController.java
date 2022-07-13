@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tayo.sseuktudy.dto.*;
+import tayo.sseuktudy.dto.Comment.CommentInfoDto;
 import tayo.sseuktudy.dto.user.*;
 import tayo.sseuktudy.service.JwtService;
 import tayo.sseuktudy.service.UserService;
@@ -188,7 +189,22 @@ public class UserController {
         return new ResponseEntity<>(resultMap,status);
 
     }
-
+    @GetMapping("/user/comment")
+    public ResponseEntity<?> userCommnet(HttpServletRequest request) throws Exception{
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+        String decodeUserId = jwtService.decodeToken(request.getHeader("access-token"));
+        try{
+            List<CommentInfoDto> commentInfos = userService.getUserCommnet(decodeUserId);
+            resultMap.put("data",commentInfos);
+            resultMap.put("message","SUCCESS");
+            status = HttpStatus.ACCEPTED;
+        }catch (Exception e) {
+            resultMap.put("message", "FAIL");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(resultMap,status);
+    }
     @DeleteMapping("/user/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable("userId") String userId, HttpServletRequest request) throws Exception{
         Map<String, Object> resultMap = new HashMap<>();

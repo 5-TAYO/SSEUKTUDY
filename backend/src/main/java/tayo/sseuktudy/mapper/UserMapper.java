@@ -2,6 +2,7 @@ package tayo.sseuktudy.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import tayo.sseuktudy.dto.*;
+import tayo.sseuktudy.dto.Comment.CommentInfoDto;
 import tayo.sseuktudy.dto.user.*;
 
 import java.sql.SQLException;
@@ -24,7 +25,5 @@ public interface UserMapper {
     int saveRefreshToken(Map<String, String> map) throws SQLException;
     int deleteRefreshToken(Map<String, String> map) throws SQLException;
     String getRefreshToken(String userId) throws SQLException;
-
-
-
+    List<CommentInfoDto> getUserComment(String userId);
 }
