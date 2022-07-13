@@ -241,6 +241,36 @@ public class StudyController {
         return new ResponseEntity<>(resultMap, status);
     }
 
+    @GetMapping("/study/leader")
+    public ResponseEntity<Map<String, Object>> getStudyByLeader(HttpServletRequest request){
+        Map<String, Object> resultMap = new HashMap<>();
+
+        HttpStatus status = null;
+        logger.info("내가 만든 스터디 정보 API");
+
+        String decodeUserId = jwtService.decodeToken(request.getHeader("access-token"));
+        if(!decodeUserId.equals(ACCESS_TOKEN_TIMEOUT)){
+            logger.info("사용 가능한 토큰!!!");
+            try{
+
+                List<StudyInfoDto> result = studyService.getStudyByLeader(decodeUserId);
+                resultMap.put("message", "SUCCESS");
+                resultMap.put("data", result);
+                status = HttpStatus.ACCEPTED;
+
+            }catch(Exception e){
+                logger.error("예외 발생", e);
+                resultMap.put("message", "FAIL");
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        }else{
+            logger.error("사용 불가능 토큰!!!");
+            resultMap.put("message",ACCESS_TOKEN_TIMEOUT);
+            status = HttpStatus.UNAUTHORIZED;
+        }
+        return new ResponseEntity<>(resultMap, status);
+    }
+
 
     @PostMapping("/study/like")
     public ResponseEntity<Map<String, Object>> likeStudy(@RequestParam int studyId, HttpServletRequest request){
@@ -257,6 +287,35 @@ public class StudyController {
                 studyUserIdDto.setStudyId(studyId);
 
                 studyService.likeStudy(studyUserIdDto);
+                resultMap.put("message","SUCCESS");
+                status = HttpStatus.ACCEPTED;
+
+            }catch(Exception e){
+                logger.error("예외 발생", e);
+                resultMap.put("message", "FAIL");
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        }else{
+            logger.error("사용 불가능 토큰!!!");
+            resultMap.put("message",ACCESS_TOKEN_TIMEOUT);
+            status = HttpStatus.UNAUTHORIZED;
+        }
+        return new ResponseEntity<>(resultMap, status);
+    }
+
+    @GetMapping("/study/like")
+    public ResponseEntity<Map<String, Object>> getLikeStudy(HttpServletRequest request){
+        logger.info("내가 좋아요 한 스터디 API");
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+
+        String decodeUserId = jwtService.decodeToken(request.getHeader("access-token"));
+        if(!decodeUserId.equals(ACCESS_TOKEN_TIMEOUT)){
+            logger.info("사용 가능한 토큰!!!");
+            try{
+
+                List<StudyInfoDto> result = studyService.getLikeStudy(decodeUserId);
+                resultMap.put("data", result);
                 resultMap.put("message","SUCCESS");
                 status = HttpStatus.ACCEPTED;
 

@@ -114,6 +114,11 @@ public class StudyServiceImpl implements StudyService{
         return studyInfoListDto;
     }
 
+    @Override
+    public List<StudyInfoDto> getStudyByLeader(String userId) {
+        return studyMapper.getStudyByLeader(userId);
+    }
+
     @Transactional
     @Override
     public StudyDetailDto getStudyByStudyId(int studyId) {
@@ -155,6 +160,11 @@ public class StudyServiceImpl implements StudyService{
     @Override
     public int likeStudy(StudyUserIdDto studyUserIdDto) {
         return studyMapper.likeStudy(studyUserIdDto);
+    }
+
+    @Override
+    public List<StudyInfoDto> getLikeStudy(String userId) {
+        return studyMapper.getLikeStudy(userId);
     }
 
     @Override
