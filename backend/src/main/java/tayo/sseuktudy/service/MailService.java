@@ -49,6 +49,9 @@ public class MailService {
     public int mailCheck(MailDto mailDto) throws Exception{
         return userMapper.searchUser(mailDto);
     }
+    public int authCheck(MailDto mailDto) throws Exception{
+        return mailMapper.mailCheck(mailDto);
+    }
     public String makeAuthNumber(){
         Random random = new Random();
         String authKey = String.valueOf(random.nextInt(888888)+111111);
