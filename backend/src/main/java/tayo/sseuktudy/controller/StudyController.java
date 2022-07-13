@@ -187,7 +187,7 @@ public class StudyController {
     }
 
     @GetMapping("/study/user")
-    public ResponseEntity<Map<String, Object>> getStudyByUserId(@RequestParam int startItem, @RequestParam int itemCnt, HttpServletRequest request){
+    public ResponseEntity<Map<String, Object>> getStudyByUserId(@RequestParam int startItem, @RequestParam int itemCnt, @RequestParam boolean isJoin, HttpServletRequest request){
         Map<String, Object> resultMap = new HashMap<>();
 
         HttpStatus status = null;
@@ -200,9 +200,10 @@ public class StudyController {
                 StudyUserFilterDto studyUserFilterDto = new StudyUserFilterDto();
                 studyUserFilterDto.setUserId(decodeUserId);
                 studyUserFilterDto.setStartItem(startItem);
+                studyUserFilterDto.setJoin(isJoin);
                 studyUserFilterDto.setItemCnt(itemCnt);
 
-                List<StudyInfoDto> result = studyService.getStudyByUserId(studyUserFilterDto);
+                StudyInfoListDto result = studyService.getStudyByUserId(studyUserFilterDto);
                 resultMap.put("message", "SUCCESS");
                 resultMap.put("data", result);
                 status = HttpStatus.ACCEPTED;
