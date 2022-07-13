@@ -1,8 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useRef } from "react";
+// import { Link } from "react-router-dom";
 import "./FindPw.scss";
 
 function FindPw() {
+  const emailRef = useRef();
+  const codeRef = useRef();
+
   return (
     <div id="find_pw" className="flex column align-center">
       <div className="pw_text">
@@ -18,6 +21,7 @@ function FindPw() {
           <p className="pw_input_title notoReg fs-16">이메일</p>
           <div className="pw_input_box flex align-center justify-center">
             <input
+              ref={emailRef}
               type="email"
               placeholder="이메일을 입력하세요"
               className="pw_input_email notoReg fs-15"
@@ -30,8 +34,9 @@ function FindPw() {
           <p className="pw_input_title notoReg fs-16">인증코드</p>
           <div className="pw_input_box flex align-center justify-center">
             <input
+              ref={codeRef}
               type="email"
-              placeholder="이메일을 입력하세요"
+              placeholder="인증 코드를 입력하세요"
               className="pw_input_email notoReg fs-15"
             />
           </div>
@@ -48,12 +53,12 @@ function FindPw() {
 
       {/* pw btn start */}
       <div className="flex align-center justify-center">
-        <Link
-          to="/find/newpw"
+        <button
+          type="button"
           className="join_pw_next_btn notoMid fs-15 flex align-center justify-center"
         >
           인증코드 보내기
-        </Link>
+        </button>
       </div>
       {/* pw btn end */}
 

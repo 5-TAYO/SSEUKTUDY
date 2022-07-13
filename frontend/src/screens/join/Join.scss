@@ -65,6 +65,12 @@
     &_title,
     &_failed {
       margin-bottom: vw(14px);
+      &_red {
+        color: $RED;
+      }
+      &_green {
+        color: $BLUE;
+      }
     }
     input {
       border: solid vw(1px) $GRAY-DB;
@@ -80,10 +86,6 @@
 
     &_box {
       margin-bottom: vw(12px);
-    }
-
-    &_failed {
-      color: $RED;
     }
   }
 

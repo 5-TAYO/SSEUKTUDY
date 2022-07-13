@@ -1,11 +1,51 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import "./Join.scss";
 import KakaoIcon from "@images/Kakao.svg";
 import NaverIcon from "@images/Naver.svg";
 import GoogleIcon from "@images/Google.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { duplicateEmail } from "../../apis/join";
 
 function Join() {
+  // 오류메시지 상태 저장
+  const [emailMessage, setEmailMessage] = useState("");
+  const [error, setError] = useState("false");
+  const navigate = useNavigate();
+  const inputRef = useRef();
+
+  // 유효성 검사
+  const checkEmail = e => {
+    const regEmail =
+      /^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    // eslint-disable-next-line no-console
+    if (regEmail.test(e.target.value) === false) {
+      setEmailMessage("잘못된 이메일 형식입니다.");
+      setError(false);
+    } else {
+      setEmailMessage("올바른 이메일 형식입니다.");
+      setError(true);
+    }
+
+    // console.log("이메일 유효성 검사 :: ", regEmail.test(e.target.value));
+  };
+
+  const canJoin = async () => {
+    console.log(inputRef.current.value);
+    const result = await duplicateEmail(inputRef.current.value);
+    // console.log(setEmail);
+
+    // fail succcess
+    if (result === "JOINED") {
+      setEmailMessage("이미 존재하는 이메일입니다.");
+      setError(false);
+    } else if (result === "FAIL") {
+      setEmailMessage("존재하지 않는 이메일 입니다.");
+      setError(false);
+    } else {
+      navigate("/join/mail");
+    }
+  };
+
   return (
     <div id="join" className="flex column">
       <div className="join_text">
@@ -73,28 +113,41 @@ function Join() {
           </p>
           <div className="join_input_box flex align-center justify-center">
             <input
+              ref={inputRef}
               type="email"
               placeholder="이메일을 입력하세요"
               className="join_input_email notoReg fs-15"
+              onChange={checkEmail}
             />
           </div>
         </div>
         {/* 유효성 검사 start */}
-        <div className="join_input_failed notoMid fs-12">
-          이미 존재하는 이메일입니다.
+        <div
+          className={
+            error
+              ? " join_input_failed_green notoMid fs-12"
+              : " join_input_failed_red notoMid fs-12 red"
+          }
+        >
+          {emailMessage}
         </div>
+
         {/* 유효성 검사 end */}
       </div>
+
       {/* site join input end */}
 
       {/* join btn start */}
       <div className="flex align-center justify-center">
-        <Link
-          to="/join/mail"
+        <button
+          type="button"
           className="join_main_next_btn notoMid fs-15 flex align-center justify-center"
+          onClick={() => {
+            canJoin();
+          }}
         >
           다음
-        </Link>
+        </button>
       </div>
       {/* join btn end */}
 
@@ -102,7 +155,7 @@ function Join() {
       <div className="if_text ">
         <div className="if_text_join flex align-center justify-center">
           <p className="if_text_title notoMid fs-12">이미 계정이 있으신가요?</p>
-          <Link to="/login" classname="if_text_login_move">
+          <Link to="/login" className="if_text_login_move">
             <p className="notoMid fs-12"> 로그인</p>
           </Link>
         </div>

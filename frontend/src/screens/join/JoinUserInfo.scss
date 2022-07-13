@@ -38,9 +38,14 @@
     }
 
     &_failed {
-      color: $RED;
       line-height: vw(17px);
       margin-top: vw(8px);
+      &_red {
+        color: $RED;
+      }
+      &_green {
+        color: $BLUE;
+      }
     }
   }
 
