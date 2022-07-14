@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./Login.scss";
 import KakaoIcon from "@images/Kakao.svg";
 import NaverIcon from "@images/Naver.svg";
 import GoogleIcon from "@images/Google.svg";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../store/user";
 
 function Login() {
+  const dispatch = useDispatch();
+  const userIdRef = useRef();
+  const userPwRef = useRef();
   return (
     <div id="login" className="flex column">
       <div className="login_text">
@@ -72,6 +77,7 @@ function Login() {
           <p className="login_input_title notoReg fs-16">이메일</p>
           <div className="login_input_box flex align-center justify-center">
             <input
+              ref={userIdRef}
               type="email"
               placeholder="이메일을 입력하세요"
               className="login_input_email notoReg fs-15"
@@ -98,7 +104,19 @@ function Login() {
 
       {/* login btn start */}
       <div className="flex align-center justify-center">
-        <button type="button" className="login_btn notoMid fs-15">
+        <button
+          type="button"
+          className="login_btn notoMid fs-15"
+          onClick={() => {
+            dispatch(
+              login({
+                userId: userIdRef.current.value,
+                userPw: userPwRef.current.value,
+                userSocial: "normal"
+              })
+            );
+          }}
+        >
           로그인
         </button>
       </div>

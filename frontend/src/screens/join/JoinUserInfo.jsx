@@ -1,11 +1,15 @@
 import React, { useState, useRef } from "react";
 import "./JoinUserInfo.scss";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { join } from "../../apis/join";
+import { finish } from "../../store/join";
 
 function JoinUserInfo() {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate(); // 모두 작성시 회원가입 완료페이지로 이동
-  const userId = "jmlee9707@soongsil.ac.kr"; // 임의 값
+  const userId = useSelector(state => state.join.value.userId); // 임의 값
   const userSocial = "normal";
   const [passMessage, setPassMessage] = useState("");
   const [passAgainMessage, setPassAgainMessage] = useState("");
@@ -29,10 +33,11 @@ function JoinUserInfo() {
   };
   const checkPass = e => {
     // 8 ~ 16자 영문, 숫자 조합
-    const regPass = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
+    const regPass =
+      /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
     // eslint-disable-next-line no-console
     if (regPass.test(e.target.value) === false) {
-      setPassMessage("영문과 숫자를 혼합하여 8~16자리로 입력해주세요.");
+      setPassMessage("문자와 특수문자를 혼합하여 8~16자리로 입력해주세요.");
       setError(false);
     } else {
       setPassMessage(" ");
@@ -66,6 +71,7 @@ function JoinUserInfo() {
 
       console.log(res);
       if (res === "SUCCESS") {
+        dispatch(finish());
         navigate("/join/finish"); // 다음페이지 이동
       }
     } else {

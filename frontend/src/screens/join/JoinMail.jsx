@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./JoinMail.scss";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { sendCodeMail, checkCode } from "../../apis/join";
 
 function JoinMail() {
   // const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const numRef = useRef(); // 인증번호 입력 값
-  const userId = "pwlsghq@naver.com";
+  const userId = useSelector(state => state.join.value.userId);
 
+  // console.log(userId);
   const [sendBefore, setSendBefore] = useState(true); // 인증코드 보내기 전? -> 버튼 메시지 = 인증코드 전송
   const [btnMessage, setBtnMessage] = useState("인증코드 전송"); // 버튼 메시지 설정
   const [visibleTimer, setVisibleTimer] = useState(false);
@@ -29,9 +31,9 @@ function JoinMail() {
 
       // }
     } else {
-      console.log(userId, numRef.current.value);
+      // console.log(userId, numRef.current.value);
       const result = await checkCode(userId, numRef.current.value);
-      console.log(result);
+      // console.log(result);
       if (result.message === "SUCCESS") {
         navigate("/join/userinfo"); // 다음 페이지 이동
       } else {

@@ -4,14 +4,19 @@ import KakaoIcon from "@images/Kakao.svg";
 import NaverIcon from "@images/Naver.svg";
 import GoogleIcon from "@images/Google.svg";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { duplicateEmail } from "../../apis/join";
+import { join } from "../../store/join";
 
 function Join() {
+  const dispatch = useDispatch(); // action qhsorl
+
   // 오류메시지 상태 저장
   const [emailMessage, setEmailMessage] = useState("");
   const [error, setError] = useState("false");
   const navigate = useNavigate();
   const inputRef = useRef();
+  // const userJoin = useSelector(state => state.join.value);
 
   // 유효성 검사
   const checkEmail = e => {
@@ -25,12 +30,11 @@ function Join() {
       setEmailMessage("올바른 이메일 형식입니다.");
       setError(true);
     }
-
     // console.log("이메일 유효성 검사 :: ", regEmail.test(e.target.value));
   };
 
   const canJoin = async () => {
-    console.log(inputRef.current.value);
+    // console.log(inputRef.current.value);
     const result = await duplicateEmail(inputRef.current.value);
     // console.log(setEmail);
 
@@ -42,6 +46,7 @@ function Join() {
       setEmailMessage("존재하지 않는 이메일 입니다.");
       setError(false);
     } else {
+      dispatch(join({ userId: inputRef.current.value }));
       navigate("/join/mail");
     }
   };

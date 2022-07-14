@@ -19,7 +19,7 @@ export const checkCode = async (userId, authKey) => {
 };
 
 export const join = async body => {
-  console.log(body);
+  // console.log(body);
   const res = await API.post("/user/main", body);
   return res.data.message;
 };
