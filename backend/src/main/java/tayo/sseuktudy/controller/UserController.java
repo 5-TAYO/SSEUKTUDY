@@ -16,7 +16,9 @@ import tayo.sseuktudy.service.JwtService;
 import tayo.sseuktudy.service.UserService;
 import tayo.sseuktudy.service.JwtServiceImpl;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +44,7 @@ public class UserController {
         this.mailService = mailService;
     }
     @PostMapping("/user/login")
-    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody UserLoginDto userLoginDto) {
+    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody UserLoginDto userLoginDto, HttpServletResponse response) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
         logger.info("로그인 요청");
@@ -57,10 +59,13 @@ public class UserController {
                     logger.info("refreshtoken 저장 실패");
                 }
 
+                Cookie cookie = new Cookie("refreshtoken",refreshToken);
+                cookie.setHttpOnly(true);
+
+                response.addCookie(cookie);
                 logger.debug("access토큰정보 : {}", accessToken);
                 logger.debug("refresh 토큰정보 : {}", refreshToken);
                 resultMap.put("access-token", accessToken);
-                resultMap.put("refresh-token", refreshToken);
                 resultMap.put("message", "SUCCESS");
                 status = HttpStatus.ACCEPTED;
 
